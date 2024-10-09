@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
@@ -32,7 +33,7 @@ Route::post('/email/verification-notification', function (Request $r) {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'admin'], function () { Voyager::routes(); });
 
@@ -41,6 +42,8 @@ Route::group(['prefix' => 'admin'], function () { Voyager::routes(); });
 | File Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/files', [App\Http\Controllers\HomeController::class, 'posts'])->name('posts');
+Route::get('/files', [HomeController::class, 'posts'])->name('posts');
 
-Route::get('/file/create', [App\Http\Controllers\HomeController::class, 'create'])->name('post.create');
+Route::get('/file/create', [HomeController::class, 'create'])->name('post.create');
+
+Route::get('post/{post}',[HomeController::class, 'show'])->name('post.show');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use TCG\Voyager\Models\Post;
 
 class HomeController extends Controller
 {
@@ -28,7 +29,18 @@ class HomeController extends Controller
 
     public function posts()
     {
-        return view('files.myFiles');
+        $user = auth()->user();
+        $posts = $user->posts;
+        return view('files.myFiles',[
+            'posts' => $posts
+        ]);
+    }
+
+    public function show(Post $post)
+    {
+        return view('files.show',[
+            'post' => $post
+        ]);
     }
 
     public function create()

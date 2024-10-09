@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h2>فایل ها من</h2>
+    <h2>{{ $post->title }}</h2>
     <div class="table-responsive small">
         <table class="table table-striped table-sm">
             <thead>
@@ -16,17 +16,12 @@
             </thead>
 
             <tbody>
-            @foreach ($posts as $post)
                 <tr>
                     <td>{{ $post->id }}</td>
                     <td>
                         <img src="{{url('/') }}/storage/{{ $post->image }}" alt="{{ $post->title }}" style="width:100px"  />
                     </td>
-                    <td>
-                        <a href="{{ route('post.show' , $post) }}">
-                            {{ $post->title }}
-                        </a>
-                    </td>
+                    <td>{{ $post->title }}</td>
                     <td>
                         @php $category = \TCG\Voyager\Models\Category::find($post->category_id); @endphp
                         {{ $category->name }}
@@ -43,7 +38,6 @@
                         @endif
                     </td>
                 </tr>
-            @endforeach
             </tbody>
         </table>
     </div>
