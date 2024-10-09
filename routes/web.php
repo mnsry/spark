@@ -6,21 +6,16 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Welcome Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
+Route::get('/', function () {return view('welcome');})->name('welcome');
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-
-Auth::routes();
-
+/*
+|--------------------------------------------------------------------------
+| Email AND Auth Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/email/verify', function () {
     return view('auth.verify');
 })->middleware('auth')->name('verification.notice');
@@ -35,8 +30,17 @@ Route::post('/email/verification-notification', function (Request $r) {
     return back()->with('resent', 'Verification link sent ');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
+Auth::routes();
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
+Route::group(['prefix' => 'admin'], function () { Voyager::routes(); });
+
+/*
+|--------------------------------------------------------------------------
+| File Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/files', [App\Http\Controllers\HomeController::class, 'posts'])->name('posts');
+
+Route::get('/file/create', [App\Http\Controllers\HomeController::class, 'create'])->name('post.create');

@@ -25,4 +25,14 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function posts()
+    {
+        return view('files.myFiles');
+    }
+
+    public function create()
+    {
+        return view('files.create');
+    }
 }

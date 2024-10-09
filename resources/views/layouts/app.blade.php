@@ -84,7 +84,6 @@
     <main class="form-signin w-100 m-auto">
         @yield('content')
     </main>
-
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>
