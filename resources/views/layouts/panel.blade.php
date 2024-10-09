@@ -32,6 +32,8 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/dashboard.rtl.css') }}" rel="stylesheet">
+
+    @laravelPWA
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
