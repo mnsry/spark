@@ -59,18 +59,18 @@ return [
         ],
         'shortcuts' => [
             [
-                'name' => 'Shortcut Link 1',
-                'description' => 'Shortcut Link 1 Description',
-                'url' => '/shortcutlink1',
+                'name' => 'ورود به سیستم',
+                'description' => 'برای استفاده از سایت لطفا وارد حساب شوید',
+                'url' => '/login',
                 'icons' => [
                     "src" => "/images/icons/icon-72x72.png",
                     "purpose" => "any"
                 ]
             ],
             [
-                'name' => 'Shortcut Link 2',
-                'description' => 'Shortcut Link 2 Description',
-                'url' => '/shortcutlink2'
+                'name' => 'ایجاد حساب',
+                'description' => 'اگر حسابی ندارید لطفا یک حساب جدید ایجاد کنید',
+                'url' => '/register'
             ]
         ],
         'custom' => []
