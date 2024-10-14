@@ -33,6 +33,7 @@
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/dashboard.rtl.css') }}" rel="stylesheet">
 
+    @stack('styles')
     @laravelPWA
 </head>
 <body>
@@ -158,5 +159,7 @@
 </div>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/chart.umd.js') }}"></script>
+@stack('scripts')
+
 </body>
 </html>
