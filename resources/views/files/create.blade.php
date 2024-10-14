@@ -63,11 +63,12 @@
                     <div class="col-12">
                         <label for="country" class="form-label">البلد</label>
                         <select class="form-select" id="country" required>
-                            <option value="">اختر...</option>
-                            <option>الولايات المتحدة الأمريكية</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
                         </select>
                         <div class="invalid-feedback">
-                            يرجى اختيار بلد صحيح.
+                            انتخاب دسته بندی
                         </div>
                     </div>
 
