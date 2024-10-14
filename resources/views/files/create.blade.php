@@ -45,30 +45,30 @@
                 <div class="row g-3">
 
                     <div class="col-12">
-                        <label for="firstName" class="form-label">عنوان فایل</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                            عنوان فایل
+                        <label for="name" class="form-label">عنوان فایل</label>
+                        <input type="text" class="form-control" id="name" placeholder="" value="" required>
+                        <div class="invalid-feedback" role="alert">
+                            @error('name') <strong>{{ $message }}</strong> @enderror
                         </div>
                     </div>
 
                     <div class="col-12">
-                        <label for="firstName" class="form-label">توضیحات</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                            توضیحات
+                        <label for="body" class="form-label">توضیحات</label>
+                        <input type="text" class="form-control" id="body" placeholder="" value="" required>
+                        <div class="invalid-feedback" role="alert">
+                            @error('body') <strong>{{ $message }}</strong> @enderror
                         </div>
                     </div>
 
                     <div class="col-12">
-                        <label for="country" class="form-label">البلد</label>
-                        <select class="form-select" id="country" required>
+                        <label for="category" class="form-label">دسته بندی</label>
+                        <select class="form-select" id="category" required>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
                         <div class="invalid-feedback">
-                            انتخاب دسته بندی
+                            @error('category') <strong>{{ $message }}</strong> @enderror
                         </div>
                     </div>
 
