@@ -2,7 +2,7 @@
     <h1 class="h2">{{ Auth::user()->name }}</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
-            <a class="btn btn-sm btn-outline-success" href="{{ route('post.create') }}">افزودن فایل</a>
+            <a class="btn btn-sm btn-outline-success" href="{{ route('file.create') }}">افزودن فایل</a>
         </div>
     </div>
 </div>

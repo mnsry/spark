@@ -16,29 +16,29 @@
             </thead>
 
             <tbody>
-            @foreach ($posts as $post)
+            @foreach ($files as $file)
                 <tr>
-                    <td>{{ $post->id }}</td>
+                    <td>{{ $file->id }}</td>
                     <td>
-                        <img src="{{url('/') }}/storage/{{ $post->image }}" alt="{{ $post->title }}" style="width:100px"  />
+                        <img src="{{url('/') }}/storage/{{ $file->id }}" alt="{{ $file->id }}" style="width:100px"  />
                     </td>
                     <td>
-                        <a href="{{ route('post.show' , $post) }}">
-                            {{ $post->title }}
+                        <a href="{{ route('file.show' , $file) }}">
+                            {{ $file->id }}
                         </a>
                     </td>
                     <td>
-                        @php $category = \TCG\Voyager\Models\Category::find($post->category_id); @endphp
+                        @php $category = \TCG\Voyager\Models\Category::find($file->id); @endphp
                         {{ $category->name }}
                     </td>
                     <td>
-                        @if ($post->status == 'PUBLISHED')
+                        @if ($file->id == 'PUBLISHED')
                             انتشار
                         @endif
-                        @if ($post->status == 'DRAFT')
+                        @if ($file->id == 'DRAFT')
                             مطلق
                         @endif
-                        @if ($post->status == 'PENDING')
+                        @if ($file->id == 'PENDING')
                             درحال بررسی
                         @endif
                     </td>

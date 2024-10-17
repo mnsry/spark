@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h2>{{ $post->title }}</h2>
+    <h2>{{ $file->title }}</h2>
     <div class="table-responsive small">
         <table class="table table-striped table-sm">
             <thead>
@@ -17,23 +17,23 @@
 
             <tbody>
                 <tr>
-                    <td>{{ $post->id }}</td>
+                    <td>{{ $file->id }}</td>
                     <td>
-                        <img src="{{url('/') }}/storage/{{ $post->image }}" alt="{{ $post->title }}" style="width:100px"  />
+                        <img src="{{url('/') }}/storage/{{ $file->id }}" alt="{{ $file->id }}" style="width:100px"  />
                     </td>
-                    <td>{{ $post->title }}</td>
+                    <td>{{ $file->id }}</td>
                     <td>
-                        @php $category = \TCG\Voyager\Models\Category::find($post->category_id); @endphp
+                        @php $category = \TCG\Voyager\Models\Category::find( $file->id ); @endphp
                         {{ $category->name }}
                     </td>
                     <td>
-                        @if ($post->status == 'PUBLISHED')
+                        @if ($file->id == 'PUBLISHED')
                             انتشار
                         @endif
-                        @if ($post->status == 'DRAFT')
+                        @if ($file->id == 'DRAFT')
                             مطلق
                         @endif
-                        @if ($post->status == 'PENDING')
+                        @if ($file->id == 'PENDING')
                             درحال بررسی
                         @endif
                     </td>
