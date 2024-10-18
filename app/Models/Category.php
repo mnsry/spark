@@ -9,6 +9,11 @@ class Category extends \TCG\Voyager\Models\Category
         return $this->hasMany(self::class, 'parent_id');
     }
 
+    public function orders()
+    {
+        return $this->hasMany(self::class, 'order');
+    }
+
     public function allChildes()
     {
         return collect($this->childes)->pluck('files')->flatten()->unique();

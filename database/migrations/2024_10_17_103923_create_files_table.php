@@ -39,8 +39,6 @@ return new class extends Migration
             $table->foreign('kabinet')->references('parent_id')->on('categories')->onDelete('cascade');
             $table->integer('hot')->unsigned()->nullable()->default(null);
             $table->foreign('hot')->references('parent_id')->on('categories')->onDelete('cascade');
-            $table->integer('emtiyza')->unsigned()->nullable()->default(null);
-            $table->foreign('emtiyza')->references('parent_id')->on('categories')->onDelete('cascade');
             $table->integer('mahal')->unsigned()->nullable()->default(null);
             $table->foreign('mahal')->references('parent_id')->on('categories')->onDelete('cascade');
             // گوگل
@@ -52,6 +50,7 @@ return new class extends Migration
             $table->string('image')->nullable()->default('files/default.png');
             $table->string('video')->nullable()->default('posts/default.mp4');
             $table->string('address')->nullable();
+            $table->string('emtiyza')->nullable();
             // انتخاب آیتم
             $table->enum('status', ['PUBLISHED', 'DRAFT', 'PENDING'])->default('DRAFT');
             // مقدار اعدادی
