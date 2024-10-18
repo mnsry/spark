@@ -17,10 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade' );
             // ایدی دسته بندی
-            $table->unsignedInteger('noe_moamele')->nullable();
-            $table->foreign('noe_moamele')->references('id')->on('categories')->onDelete('cascade');
-            $table->Integer('noe_moamele')->unsigned();
-
+            $table->integer('noe_moamele')->unsigned()->nullable()->default(null);
+            $table->foreign('noe_moamele')->references('parent_id')->on('categories')->onDelete('cascade');
             // مقدار اعدادی
             $table->integer('price')->nullable()->default(0);
             $table->integer('rahn')->nullable()->default(0);
@@ -30,8 +28,8 @@ return new class extends Migration
             $table->integer('shekar')->nullable()->default(0);
             $table->integer('like')->nullable()->default(0);
             // کاراکتر
-            $table->string('image')->nullable()->default('posts/default.png');
-            $table->string('video')->nullable();
+            $table->string('image')->nullable()->default('files/default.png');
+            $table->string('video')->nullable()->default('posts/default.mp4');
             //$table->string('noe_moamele')->nullable();
             $table->string('noe_melk')->nullable();
             $table->string('mahal')->nullable();
