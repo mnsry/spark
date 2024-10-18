@@ -10,7 +10,10 @@ class File extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name',
+        'noe_moamele','noe_melk', 'sen_bana','tabaghe', 'kol_vahed', 'otagh', 'sanad', 'kafpoosh', 'jahat', 'kabinet', 'hot',
+        'emtiyza', 'mahal', 'slug', 'seo_title', 'meta_description', 'meta_keywords', 'image', 'video', 'address', 'status',
+        'price', 'rahn', 'ejare', 'metr', 'metr_zamin', 'shekar', 'like', 'elvator', 'anbari', 'balkon', 'parking', 'farangi',
+        'moaveze', 'bazsazi', 'cooler', 'water_hot',
     ];
 
     public function user()
@@ -18,9 +21,8 @@ class File extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function categories()
+    public function noe_moamele()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsTo(Category::class, 'parent_id');
     }
-
 }
