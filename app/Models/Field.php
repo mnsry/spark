@@ -20,4 +20,9 @@ class Field extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    public function scopeActive($query)
+    {
+        return $query->whereNotNull('parent_id');
+    }
 }

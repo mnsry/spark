@@ -16,7 +16,7 @@ class Category extends \TCG\Voyager\Models\Category
 
     public function scopeActive($query)
     {
-        return $query->whereNull('parent_id');
+        return $query->whereNotNull('parent_id');
     }
 
     public function orders()
