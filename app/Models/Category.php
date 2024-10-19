@@ -11,7 +11,12 @@ class Category extends \TCG\Voyager\Models\Category
 
     public function fields()
     {
-        return $this->belongsToMany(Fields::class);
+        return $this->belongsToMany(Field::class);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->whereNull('parent_id');
     }
 
     public function orders()
