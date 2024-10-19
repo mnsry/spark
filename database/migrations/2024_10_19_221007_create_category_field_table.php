@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('category_field', function (Blueprint $table) {
-            $table->integer('field_id');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->unsignedBigInteger('field_id')->unsigned();
+            $table->foreign('field_id')->references('id')->on('fields');
+            $table->primary(['field_id','category_id']);
+
         });
     }
 
