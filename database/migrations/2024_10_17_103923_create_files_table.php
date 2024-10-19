@@ -51,6 +51,7 @@ return new class extends Migration
             $table->string('video')->nullable()->default('posts/default.mp4');
             $table->string('address')->nullable();
             $table->string('emtiyza')->nullable();
+            $table->string('more')->nullable();
             // انتخاب آیتم
             $table->enum('status', ['PUBLISHED', 'DRAFT', 'PENDING'])->default('DRAFT');
             // مقدار اعدادی

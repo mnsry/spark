@@ -11,7 +11,7 @@ class File extends Model
 
     protected $fillable = [
         'noe_moamele','noe_melk', 'sen_bana','tabaghe', 'kol_vahed', 'otagh', 'sanad', 'kafpoosh', 'jahat', 'kabinet', 'hot',
-        'emtiyza', 'mahal', 'slug', 'seo_title', 'meta_description', 'meta_keywords', 'image', 'video', 'address', 'status',
+        'emtiyza', 'more', 'mahal', 'slug', 'seo_title', 'meta_description', 'meta_keywords', 'image', 'video', 'address', 'status',
         'price', 'rahn', 'ejare', 'metr', 'metr_zamin', 'shekar', 'like', 'elvator', 'anbari', 'balkon', 'parking', 'farangi',
         'moaveze', 'bazsazi', 'cooler', 'water_hot',
     ];
