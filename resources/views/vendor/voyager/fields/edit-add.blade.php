@@ -24,7 +24,26 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-bordered">
-                    <div>یک یا چند زیر مجموعه دسته بندی را متصل به سربرگ فیلد مورد نظر کنید</div>
+
+                    <div class="container">
+                        <div class="col-12">
+                            یک یا چند زیر مجموعه دسته بندی را متصل به سربرگ فیلد مورد نظر کنید
+                            @php $categories = \App\Models\Category::whereNull('parent_id')->get(); @endphp
+                        </div>
+                        <div class="col-12">
+                            @foreach($categories as $category)
+                                <div class="col-12">
+                                    <span class="text-primary">{{$category->name}} : </span>
+                                    <span class="text-primary">{{$category->id}}</span> |
+                                    @foreach($category->childes as $c)
+                                        <span>{{$c->name}}</span> :
+                                        <span class="text-danger">{{$c->id}}</span> |
+                                    @endforeach
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
                     <!-- form start -->
                     <form role="form"
                           class="form-edit-add"
