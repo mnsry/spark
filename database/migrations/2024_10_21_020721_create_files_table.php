@@ -21,25 +21,26 @@ return new class extends Migration
             $table->foreign('noe_moamele')->references('parent_id')->on('categories');
             $table->integer('noe_melk')->unsigned()->nullable()->default(null);
             $table->foreign('noe_melk')->references('parent_id')->on('categories');
-            $table->integer('sen_bana')->unsigned()->nullable()->default(null);
+            // آیدی فیلد
+            $table->unsignedBigInteger('sen_bana')->nullable()->default(null);
             $table->foreign('sen_bana')->references('parent_id')->on('fields');
-            $table->integer('tabaghe')->unsigned()->nullable()->default(null);
+            $table->unsignedBigInteger('tabaghe')->nullable()->default(null);
             $table->foreign('tabaghe')->references('parent_id')->on('fields');
-            $table->integer('kol_vahed')->unsigned()->nullable()->default(null);
+            $table->unsignedBigInteger('kol_vahed')->nullable()->default(null);
             $table->foreign('kol_vahed')->references('parent_id')->on('fields');
-            $table->integer('otagh')->unsigned()->nullable()->default(null);
+            $table->unsignedBigInteger('otagh')->nullable()->default(null);
             $table->foreign('otagh')->references('parent_id')->on('fields');
-            $table->integer('sanad')->unsigned()->nullable()->default(null);
+            $table->unsignedBigInteger('sanad')->nullable()->default(null);
             $table->foreign('sanad')->references('parent_id')->on('fields');
-            $table->integer('kafpoosh')->unsigned()->nullable()->default(null);
+            $table->unsignedBigInteger('kafpoosh')->nullable()->default(null);
             $table->foreign('kafpoosh')->references('parent_id')->on('fields');
-            $table->integer('jahat')->unsigned()->nullable()->default(null);
+            $table->unsignedBigInteger('jahat')->nullable()->default(null);
             $table->foreign('jahat')->references('parent_id')->on('fields');
-            $table->integer('kabinet')->unsigned()->nullable()->default(null);
+            $table->unsignedBigInteger('kabinet')->nullable()->default(null);
             $table->foreign('kabinet')->references('parent_id')->on('fields');
-            $table->integer('hot')->unsigned()->nullable()->default(null);
+            $table->unsignedBigInteger('hot')->nullable()->default(null);
             $table->foreign('hot')->references('parent_id')->on('fields');
-            $table->integer('mahal')->unsigned()->nullable()->default(null);
+            $table->unsignedBigInteger('mahal')->nullable()->default(null);
             $table->foreign('mahal')->references('parent_id')->on('fields');
             // گوگل
             $table->string('slug')->unique()->nullable();
