@@ -13,15 +13,15 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('file.create') }}">
+                            <form action="{{ route('file.select') }}">
                                 <div class="form-group">
-                                    <label for="categories">انتخاب کنید</label>
-                                    <select class="form-select" name="category" aria-label="Default select example">
+                                    <label class="py-3" for="categories">لطفا نوع فایل را مشخص کنید</label>
+                                    <select id="categories" class="form-select" name="category" aria-label="category">
                                         @php
-                                            $category = \App\Models\Category::find(1);
+                                            $categories = \App\Models\Category::whereNull('parent_id')->get();
                                         @endphp
-                                        @foreach($category->childes as $child)
-                                            <option value="{{ $child->id }}">{{ $child->name }}</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -43,5 +43,5 @@ Route::group(['prefix' => 'admin'], function () { Voyager::routes(); });
 | File Routes
 |--------------------------------------------------------------------------
 */
-
+Route::get('/file/select', [FileController::class, 'select'])->name('file.select');
 Route::resource('file', FileController::class);

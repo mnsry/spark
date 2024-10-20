@@ -29,16 +29,23 @@ class FileController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    public function select()
+    {
+        $category_select = Category::find(request()->category);
+
+        return view('file.select', [
+            'category_select' => $category_select,
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        $categories_parentNull = Category::whereNull('parent_id')->get();
         $category_select = Category::find(request()->category);
-        $category_childes_select = Category::where('parent_id', '!=' , 1)->where('order', $category_select->order)->get();
-
         return view('file.create', [
             'category_select' => $category_select,
-            'categories_parentNull' => $categories_parentNull,
-            'category_childes_select' => $category_childes_select
         ]);
     }
 

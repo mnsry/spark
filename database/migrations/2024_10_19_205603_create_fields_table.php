@@ -18,6 +18,9 @@ return new class extends Migration
             $table->integer('order')->default(1);
             $table->string('name');
             $table->string('slug')->unique();
+            $table->enum('form', [
+                'TEXT', 'NUMBER', 'SELECT', 'MULTISELECT', 'CHECKBOX', 'RADIOBUTTON', 'TEXTAREA', 'IMAGE', 'MULTIIMAGE', 'VIDEO', 'FILE'
+            ])->nullable()->default('TEXT');
             $table->timestamps();
         });
     }

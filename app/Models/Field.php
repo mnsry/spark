@@ -16,6 +16,11 @@ class Field extends Model
         return $this->belongsTo(self::class);
     }
 
+    public function childes()
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
+
     public function categories()
     {
         return $this->belongsToMany(Category::class);

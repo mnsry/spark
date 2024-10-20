@@ -4,6 +4,11 @@ namespace App\Models;
 
 class Category extends \TCG\Voyager\Models\Category
 {
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
     public function childes()
     {
         return $this->hasMany(self::class, 'parent_id');
