@@ -15,32 +15,30 @@ return new class extends Migration
             $table->id();
             //ایدی کاربر
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade' );
+            $table->foreign('user_id')->references('id')->on('users');
             // ایدی دسته بندی
-            $table->integer('noe_moamele')->unsigned()->nullable()->default(null);
-            $table->foreign('noe_moamele')->references('parent_id')->on('categories');
-            $table->integer('noe_melk')->unsigned()->nullable()->default(null);
-            $table->foreign('noe_melk')->references('parent_id')->on('categories');
+            $table->integer('category_id')->unsigned()->nullable()->default(null);
+            $table->foreign('category_id')->references('id')->on('categories');
             // آیدی فیلد
-            $table->unsignedBigInteger('sen_bana')->nullable()->default(null);
+            $table->integer('sen_bana')->unsigned()->nullable()->default(null);
             $table->foreign('sen_bana')->references('parent_id')->on('fields');
-            $table->unsignedBigInteger('tabaghe')->nullable()->default(null);
+            $table->integer('tabaghe')->unsigned()->nullable()->default(null);
             $table->foreign('tabaghe')->references('parent_id')->on('fields');
-            $table->unsignedBigInteger('kol_vahed')->nullable()->default(null);
+            $table->integer('kol_vahed')->unsigned()->nullable()->default(null);
             $table->foreign('kol_vahed')->references('parent_id')->on('fields');
-            $table->unsignedBigInteger('otagh')->nullable()->default(null);
+            $table->integer('otagh')->unsigned()->nullable()->default(null);
             $table->foreign('otagh')->references('parent_id')->on('fields');
-            $table->unsignedBigInteger('sanad')->nullable()->default(null);
+            $table->integer('sanad')->unsigned()->nullable()->default(null);
             $table->foreign('sanad')->references('parent_id')->on('fields');
-            $table->unsignedBigInteger('kafpoosh')->nullable()->default(null);
+            $table->integer('kafpoosh')->unsigned()->nullable()->default(null);
             $table->foreign('kafpoosh')->references('parent_id')->on('fields');
-            $table->unsignedBigInteger('jahat')->nullable()->default(null);
+            $table->integer('jahat')->unsigned()->nullable()->default(null);
             $table->foreign('jahat')->references('parent_id')->on('fields');
-            $table->unsignedBigInteger('kabinet')->nullable()->default(null);
+            $table->integer('kabinet')->unsigned()->nullable()->default(null);
             $table->foreign('kabinet')->references('parent_id')->on('fields');
-            $table->unsignedBigInteger('hot')->nullable()->default(null);
+            $table->integer('hot')->unsigned()->nullable()->default(null);
             $table->foreign('hot')->references('parent_id')->on('fields');
-            $table->unsignedBigInteger('mahal')->nullable()->default(null);
+            $table->integer('mahal')->unsigned()->nullable()->default(null);
             $table->foreign('mahal')->references('parent_id')->on('fields');
             // گوگل
             $table->string('slug')->unique()->nullable();

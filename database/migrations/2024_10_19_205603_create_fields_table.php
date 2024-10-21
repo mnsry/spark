@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('fields', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('parent_id')->nullable()->default(null);
-            $table->foreign('parent_id')->references('id')->on('fields');
+            $table->increments('id');
+            $table->integer('parent_id')->unsigned()->nullable()->default(null);
             $table->integer('order')->default(1);
             $table->string('name');
             $table->string('slug')->unique();
@@ -22,6 +21,11 @@ return new class extends Migration
                 'TEXT', 'NUMBER', 'SELECT', 'MULTISELECT', 'CHECKBOX', 'RADIOBUTTON', 'TEXTAREA', 'IMAGE', 'MULTIIMAGE', 'VIDEO', 'FILE'
             ])->nullable()->default('TEXT');
             $table->timestamps();
+            $table
+                ->foreign('parent_id')
+                ->references('id')
+                ->on('fields')
+                ->onDelete('cascade');
         });
     }
 

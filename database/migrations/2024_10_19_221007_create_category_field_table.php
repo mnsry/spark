@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('category_field', function (Blueprint $table) {
             $table->integer('category_id')->unsigned();
+            $table->integer('field_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->unsignedBigInteger('field_id')->unsigned();
             $table->foreign('field_id')->references('id')->on('fields');
-            $table->primary(['field_id','category_id']);
-
+            $table->primary(['category_id','field_id']);
         });
     }
 
