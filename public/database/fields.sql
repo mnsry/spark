@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2024 at 01:10 AM
+-- Generation Time: Oct 21, 2024 at 12:14 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `fields` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `parent_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `parent_id` int(10) UNSIGNED DEFAULT NULL,
   `order` int(11) NOT NULL DEFAULT 1,
   `name` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
@@ -52,7 +52,7 @@ INSERT INTO `fields` (`id`, `parent_id`, `order`, `name`, `slug`, `form`, `creat
 (7, NULL, 7, 'انتخاب جهت', 'jahat', 'TEXT', NULL, NULL),
 (8, NULL, 8, 'انتخاب کابینت', 'kabinet', 'TEXT', NULL, NULL),
 (9, NULL, 9, 'گرمایش', 'hot', 'TEXT', NULL, NULL),
-(10, NULL, 10, 'امتیازات', 'emtiyza', 'TEXT', NULL, NULL),
+(10, NULL, 10, 'امتیازات', 'emtiyza', 'MULTISELECT', NULL, NULL),
 (11, NULL, 11, 'انتخاب محل', 'mahal', 'TEXT', NULL, NULL),
 (12, 1, 1, 'نوساز - صفر', 'sen-no', 'TEXT', NULL, NULL),
 (13, 1, 2, '1', 'seen-1', 'TEXT', NULL, NULL),
@@ -149,7 +149,28 @@ INSERT INTO `fields` (`id`, `parent_id`, `order`, `name`, `slug`, `form`, `creat
 (104, 11, 15, 'شهرک ابوذر', 'loc-15', 'TEXT', NULL, NULL),
 (105, 11, 16, 'اول صبا تا میدان', 'loc-16', 'TEXT', NULL, NULL),
 (106, 11, 17, 'میدان صبا تا پایانه اتوبوسرانی', 'loc-17', 'TEXT', NULL, NULL),
-(107, 11, 18, 'ثامن', 'loc-18', 'TEXT', NULL, NULL);
+(107, 11, 18, 'ثامن', 'loc-18', 'TEXT', NULL, NULL),
+(108, NULL, 1, 'قیمت', 'price', 'NUMBER', '2024-10-21 09:49:15', '2024-10-21 09:49:15'),
+(109, NULL, 1, 'رهن', 'rhn', 'NUMBER', '2024-10-21 09:50:00', '2024-10-21 09:50:00'),
+(110, NULL, 1, 'اجاره', 'ajarh', 'NUMBER', '2024-10-21 09:50:40', '2024-10-21 09:50:40'),
+(111, NULL, 1, 'بالکن', 'bal-n', 'CHECKBOX', '2024-10-21 09:51:54', '2024-10-21 09:51:54'),
+(112, NULL, 1, 'پارکینگ', 'parking', 'CHECKBOX', '2024-10-21 09:52:57', '2024-10-21 09:52:57'),
+(113, NULL, 1, 'توالت فرنگی', 'twalt-frn', 'CHECKBOX', '2024-10-21 09:53:58', '2024-10-21 09:53:58'),
+(114, NULL, 1, 'معاوضه', 'maawdhh', 'CHECKBOX', '2024-10-21 09:54:50', '2024-10-21 09:54:50'),
+(115, NULL, 1, 'عکس', 'pic', 'IMAGE', '2024-10-21 09:56:24', '2024-10-21 09:56:24'),
+(116, NULL, 1, 'ادرس', 'adrs', 'TEXT', '2024-10-21 09:57:23', '2024-10-21 09:57:23'),
+(117, NULL, 1, 'توضیحات', 'twdh-hat', 'TEXTAREA', '2024-10-21 09:58:30', '2024-10-21 09:58:30'),
+(118, NULL, 1, 'متراژ', 'mtra', 'NUMBER', '2024-10-21 09:59:46', '2024-10-21 09:59:46'),
+(119, NULL, 1, 'متراژ زمین', 'mtra-zm-n', 'NUMBER', '2024-10-21 10:00:24', '2024-10-21 10:00:24'),
+(120, NULL, 1, 'آسانسور', 'aasanswr', 'CHECKBOX', '2024-10-21 10:01:04', '2024-10-21 10:01:04'),
+(121, NULL, 1, 'بازسازی', 'bazsaz', 'CHECKBOX', '2024-10-21 10:03:39', '2024-10-21 10:03:39'),
+(122, NULL, 1, 'سرمایش', 'srma-sh', 'TEXT', '2024-10-21 10:09:03', '2024-10-21 10:09:03'),
+(123, 122, 1, 'ندارد', 'ndard', 'TEXT', '2024-10-21 10:09:29', '2024-10-21 10:09:29'),
+(124, 122, 2, 'کولر آبی', 'wlr-aab', 'TEXT', '2024-10-21 10:09:56', '2024-10-21 10:09:56'),
+(125, 122, 3, 'کولر گازی', 'wlr-az', 'TEXT', '2024-10-21 10:10:22', '2024-10-21 10:10:22'),
+(126, NULL, 1, 'آبگرم', 'aab-rm', 'TEXT', '2024-10-21 10:12:01', '2024-10-21 10:12:01'),
+(127, 126, 1, 'آبگرمکن', 'aab-rm-n', 'TEXT', '2024-10-21 10:12:26', '2024-10-21 10:12:26'),
+(128, 126, 2, 'پکیج', 'packge', 'TEXT', '2024-10-21 10:12:52', '2024-10-21 10:12:52');
 
 --
 -- Indexes for dumped tables
@@ -171,7 +192,7 @@ ALTER TABLE `fields`
 -- AUTO_INCREMENT for table `fields`
 --
 ALTER TABLE `fields`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- Constraints for dumped tables
@@ -181,7 +202,7 @@ ALTER TABLE `fields`
 -- Constraints for table `fields`
 --
 ALTER TABLE `fields`
-  ADD CONSTRAINT `fields_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `fields` (`id`);
+  ADD CONSTRAINT `fields_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `fields` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
