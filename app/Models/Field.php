@@ -40,4 +40,9 @@ class Field extends Model
     {
         return $query->whereNull('parent_id');
     }
+
+    public function scopeOrder($query)
+    {
+        return $query->orderBy('order','ASC');
+    }
 }

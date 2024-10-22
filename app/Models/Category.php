@@ -59,4 +59,9 @@ class Category extends \TCG\Voyager\Models\Category
             return Category::backParent($category->parent);
         }
     }
+
+    public function scopeOrder($query)
+    {
+        return $query->orderBy('order','ASC');
+    }
 }
