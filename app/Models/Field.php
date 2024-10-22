@@ -16,6 +16,11 @@ class Field extends Model
         return $this->belongsTo(self::class);
     }
 
+    public function parent_items()
+    {
+        return $this->hasMany(self::class)->whereNull('parent_id');
+    }
+
     public function childes()
     {
         return $this->hasMany(self::class, 'parent_id');
@@ -29,5 +34,10 @@ class Field extends Model
     public function scopeActive($query)
     {
         return $query->whereNotNull('parent_id');
+    }
+
+    public function scopeParentNull($query)
+    {
+        return $query->whereNull('parent_id');
     }
 }
