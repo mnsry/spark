@@ -16,34 +16,76 @@
             |
             <span class="text-primary">  {{ $category_select->name }}</span>
         </h2>
-        <p class="lead">لطفا فیلد های زیر را با دقت پرکنید</p>
+        <p class="lead pt-4">لطفا فیلد های زیر را با دقت پرکنید</p>
     </div>
 
     <div class="row">
-
         <div class="col-12">
             <form action="#" method="post">
-
-                <div class="col-md-4">
-                    <label for="validationCustom01" class="form-label">First name</label>
-                    <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-
                 @foreach($category_select->fields as $field)
-                    <div class="form-group py-3">
+                    @if($field->form == 'TEXT')
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">{{ $field->name }}</span>
+                        <input type="text" class="form-control" placeholder="{{ $field->name }} ... " aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                    @endif
+                    @if($field->form == 'TEXTAREA')
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">{{ $field->name }}</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                    @endif
+                    @if($field->form == 'NUMBER')
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">{{ $field->name }}</span>
+                            <input type="number" class="form-control" placeholder="{{ $field->name }} ... " aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    @endif
+                    @if($field->form == 'SELECT')
+                        <div class="form-group py-3">
+                            <label for="categories">{{ $field->name }}</label>
+                            <select class="form-select" aria-label="Default select example">
+                                @foreach($field->childes as $f_child)
+                                    <option value="{{ $f_child->id }}">{{ $f_child->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
+                    @if($field->form == 'MULTISELECT')
                         <label for="categories">{{ $field->name }}</label>
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" multiple aria-label="Multiple select example">
                             @foreach($field->childes as $f_child)
                                 <option value="{{ $f_child->id }}">{{ $f_child->name }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    @endif
+                    @if($field->form == 'CHECKBOX')
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                                {{ $field->name }}
+                            </label>
+                        </div>
+                    @endif
+                    @if($field->form == 'RADIOBUTTON')
+                        <label for="categories">{{ $field->name }}</label>
+                        @foreach($field->childes as $f_child)
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="021" id="{{ $f_child->name }}" value="option1">
+                                <label class="form-check-label" for="{{ $f_child->name }}">
+                                    {{ $f_child->name }}
+                                </label>
+                            </div>
+                        @endforeach
+                    @endif
+                    @if($field->form == 'IMAGE')
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">{{ $field->name }}</label>
+                            <input class="form-control" type="file" id="formFile">
+                        </div>
+                    @endif
                 @endforeach
             </form>
         </div>
     </div>
-
 @endsection
