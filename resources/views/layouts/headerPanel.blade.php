@@ -2,6 +2,9 @@
     <h1 class="h2">{{ Auth::user()->name }}</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
+            @can('browse_admin')
+                <a class="btn btn-sm btn-outline-success" href="{{ route('voyager.dashboard') }}">Panel</a>
+            @endcan
             <button type="button" class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 ایجاد فایل
             </button>
