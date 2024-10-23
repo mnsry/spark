@@ -11,12 +11,12 @@ class Category extends \TCG\Voyager\Models\Category
 
     public function childes()
     {
-        return $this->hasMany(self::class, 'parent_id');
+        return $this->hasMany(self::class, 'parent_id')->orderBy('order', 'ASC');
     }
 
     public function fields()
     {
-        return $this->belongsToMany(Field::class);
+        return $this->belongsToMany(Field::class)->orderBy('order', 'ASC');
     }
 
     public function allChildes()

@@ -21,7 +21,7 @@
                                     <label class="py-3" for="categories">لطفا نوع فایل را مشخص کنید</label>
                                     <select id="categories" class="form-select" name="category" aria-label="category">
                                         @php
-                                            $categories = \App\Models\Category::whereNull('parent_id')->get();
+                                            $categories = \App\Models\Category::whereNull('parent_id')->orderBy('order', 'ASC')->get();
                                         @endphp
                                         @foreach($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
