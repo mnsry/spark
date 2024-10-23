@@ -17,6 +17,19 @@
                     <p class="panel-title" style="color:#777">{{ __('voyager::generic.drag_drop_info') }}</p>
                 </div>
 
+                <div class="panel-heading">
+
+                    <p class="panel-title" style="color:#777">
+                        @foreach (App\Models\Field::parentNull()->get() as $result)
+                            <a href="{{ route('admin.fields.order.parents') }}">
+                                {{ $result->id }} |  {{ $result->name }}  |  {{ $result->order }}
+                            </a>
+                            <br>
+                        @endforeach
+
+                    </p>
+                </div>
+
                 <div class="panel-body" style="padding:30px;">
                     <div class="dd">
                         <ol class="dd-list">
@@ -24,7 +37,6 @@
                             <li class="dd-item" data-id="{{ $result->getKey() }}">
                                 <div class="dd-handle" style="height:inherit">
                                     @if (isset($dataRow->details->view_order))
-                                        @include($dataRow->details->view_order, ['row' => $dataRow, 'dataType' => $dataType, 'dataTypeContent' => $result, 'view' => 'order', 'content' => $result->{$display_column}])
                                     @elseif (isset($dataRow->details->view))
                                         @include($dataRow->details->view, ['row' => $dataRow, 'dataType' => $dataType, 'dataTypeContent' => $result, 'content' => $result->{$display_column}, 'action' => 'order'])
                                     @elseif($dataRow->type == 'image')

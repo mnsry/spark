@@ -13,9 +13,9 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 Route::get('/', function () {return view('welcome');})->name('welcome');
 
-Route::get('/dev', function () {
-    return 'dev';
-});
+Route::get('/admin/fields/order/parents', function () {
+    return view('orders.fieldOrderParent');
+})->name('admin.fields.order.parents');
 /*
 |--------------------------------------------------------------------------
 | Email AND Auth Routes
