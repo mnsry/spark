@@ -19,49 +19,13 @@ class Category extends \TCG\Voyager\Models\Category
         return $this->belongsToMany(Field::class);
     }
 
-    public function scopeActive($query)
-    {
-        return $query->whereNotNull('parent_id');
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(self::class, 'order');
-    }
-
     public function allChildes()
     {
         return collect($this->childes)->pluck('files')->flatten()->unique();
     }
 
-    public function getAll($categories)
+    public function scopeParentNull($query)
     {
-        $append = collect();
-        foreach ($categories as $category)
-        {
-            if ($category->childes->count())
-            {
-                $append->merge($category->childes);
-            }
-        }
-        if ($append->count())
-        {
-            $append = $this->getAll($append);
-        }
-        return $categories->merge($append);
-    }
-
-    public static function backParent($category)
-    {
-        if ($category->parent_id == null) {
-            return $category;
-        } else {
-            return Category::backParent($category->parent);
-        }
-    }
-
-    public function scopeOrder($query)
-    {
-        return $query->orderBy('order','ASC');
+        return $query->whereNull('parent_id')->orderBy('order', 'ASC');
     }
 }

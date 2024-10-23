@@ -13,6 +13,9 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 Route::get('/', function () {return view('welcome');})->name('welcome');
 
+Route::get('/dev', function () {
+    return 'dev';
+});
 /*
 |--------------------------------------------------------------------------
 | Email AND Auth Routes
