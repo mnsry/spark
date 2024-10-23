@@ -18,7 +18,7 @@ class Field extends Model
 
     public function childes()
     {
-        return $this->hasMany(self::class, 'parent_id');
+        return $this->hasMany(self::class, 'parent_id')->orderBy('order', 'ASC');
     }
 
     public function categories()
