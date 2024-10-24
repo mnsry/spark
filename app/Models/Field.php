@@ -30,4 +30,9 @@ class Field extends Model
     {
         return $query->whereNull('parent_id')->orderBy('order', 'ASC');
     }
+
+    public function scopeParentNotNull($query)
+    {
+        return $query->whereNotNull('parent_id');
+    }
 }

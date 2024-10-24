@@ -28,4 +28,9 @@ class Category extends \TCG\Voyager\Models\Category
     {
         return $query->whereNull('parent_id')->orderBy('order', 'ASC');
     }
+
+    public function scopeParentNotNull($query)
+    {
+        return $query->whereNotNull('parent_id');
+    }
 }

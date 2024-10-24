@@ -3,69 +3,129 @@
 @section('page_title', $dataType->getTranslatedAttribute('display_name_plural') . ' ' . __('voyager::bread.order'))
 
 @section('page_header')
-<h1 class="page-title">
-    <i class="voyager-list"></i>{{ $dataType->getTranslatedAttribute('display_name_plural') }} {{ __('voyager::bread.order') }}
-</h1>
+    <h1 class="page-title">
+        <i class="voyager-list"></i>{{ $dataType->getTranslatedAttribute('display_name_plural') }} {{ __('voyager::bread.order') }}
+        <a href="{{ url()->previous() }}" class="btn btn-success">برگشت</a>
+    </h1>
 @stop
 
-@section('content')
-<div class="page-content container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-bordered">
-                <div class="panel-heading">
-                    <p class="panel-title" style="color:#777">{{ __('voyager::generic.drag_drop_info') }}</p>
-                </div>
+@php
+    $category_parents = \App\Models\Category::parentNull()->get();
+    $category_select = \App\Models\Category::find(request()->category);
+@endphp
 
-                <div class="panel-body" style="padding:30px;">
-                    <div class="dd">
-                        <ol class="dd-list">
-                            @foreach (App\Models\Category::parentNull()->get() as $result)
-                            <li class="dd-item" data-id="{{ $result->getKey() }}">
-                                <div class="dd-handle" style="height:inherit">
-                                    @if (isset($dataRow->details->view_order))
-                                        @include($dataRow->details->view_order, ['row' => $dataRow, 'dataType' => $dataType, 'dataTypeContent' => $result, 'view' => 'order', 'content' => $result->{$display_column}])
-                                    @elseif (isset($dataRow->details->view))
-                                        @include($dataRow->details->view, ['row' => $dataRow, 'dataType' => $dataType, 'dataTypeContent' => $result, 'content' => $result->{$display_column}, 'action' => 'order'])
-                                    @elseif($dataRow->type == 'image')
-                                        <span>
-                                            <img src="@if( !filter_var($result->{$display_column}, FILTER_VALIDATE_URL)){{ Voyager::image( $result->{$display_column} ) }}@else{{ $result->{$display_column} }}@endif" style="height:100px">
+@section('content')
+    <div class="page-content container">
+        <div class="row">
+            <div class="col-12">
+                <div class="panel panel-bordered">
+                    <div class="panel-body">
+                        <form action="">
+                            <select class="form-control select2" name="category">
+                                <option selected disabled>انتخاب زیر مجموعه و مرتب سازی</option>
+                                @foreach ($category_parents as $result)
+                                    <option value="{{ $result->id }}">{{ $result->name }}</option>
+                                @endforeach
+                            </select>
+                            <div style="padding-top:10px;">
+                                <button type="submit" class="btn btn-primary">انتخاب</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="panel panel-bordered">
+                    <div class="panel-heading">
+                        @if(request()->category == null)
+                            <p class="panel-title">مرتب سازی دسته بندی اصلی</p>
+                        @else
+                            <p class="panel-title">مرتب سازی زیر مجموعه دسته بندی |  {{ $category_select->name }} </p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="panel panel-bordered">
+                    <div class="panel-body" style="padding:30px;">
+                        <div class="dd">
+                            <ol class="dd-list">
+                                @if(request()->category == null)
+                                    @foreach ($category_parents as $result)
+                                        <li class="dd-item" data-id="{{ $result->getKey() }}">
+                                            <div class="dd-handle" style="height:inherit">
+                                                @if (isset($dataRow->details->view_order))
+                                                @elseif (isset($dataRow->details->view))
+                                                    @include($dataRow->details->view, ['row' => $dataRow, 'dataType' => $dataType, 'dataTypeContent' => $result, 'content' => $result->{$display_column}, 'action' => 'order'])
+                                                @elseif($dataRow->type == 'image')
+                                                    <span>
+                                            <img
+                                                src="@if( !filter_var($result->{$display_column}, FILTER_VALIDATE_URL)){{ Voyager::image( $result->{$display_column} ) }}@else{{ $result->{$display_column} }}@endif"
+                                                style="height:100px">
                                         </span>
+                                                @else
+                                                    <span>{{ $result->{$display_column} }}</span>
+                                                @endif
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                @else
+                                    @if($category_select->childes->count() == 0)
+                                        <li class="dd-item" data-id="{{ $result->getKey() }}">
+                                            <div class="dd-handle" style="height:inherit">
+                                                زیر مجموعه ای ندارد
+                                            </div>
+                                        </li>
                                     @else
-                                        <span>{{ $result->{$display_column} }}</span>
+                                        @foreach ($category_select->childes as $result)
+                                            <li class="dd-item" data-id="{{ $result->getKey() }}">
+                                                <div class="dd-handle" style="height:inherit">
+                                                    @if (isset($dataRow->details->view_order))
+                                                    @elseif (isset($dataRow->details->view))
+                                                        @include($dataRow->details->view, ['row' => $dataRow, 'dataType' => $dataType, 'dataTypeContent' => $result, 'content' => $result->{$display_column}, 'action' => 'order'])
+                                                    @elseif($dataRow->type == 'image')
+                                                        <span>
+                                            <img
+                                                src="@if( !filter_var($result->{$display_column}, FILTER_VALIDATE_URL)){{ Voyager::image( $result->{$display_column} ) }}@else{{ $result->{$display_column} }}@endif"
+                                                style="height:100px">
+                                        </span>
+                                                    @else
+                                                        <span>{{ $result->{$display_column} }}</span>
+                                                    @endif
+                                                </div>
+                                            </li>
+                                        @endforeach
                                     @endif
-                                </div>
-                            </li>
-                            @endforeach
-                        </ol>
+                                @endif
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 @stop
 
 @section('javascript')
 
-<script>
-$(document).ready(function () {
-    $('.dd').nestable({
-        maxDepth: 1
-    });
+    <script>
+        $(document).ready(function () {
+            $('.dd').nestable({
+                maxDepth: 1
+            });
 
-    /**
-    * Reorder items
-    */
-    $('.dd').on('change', function (e) {
-        $.post('{{ route('voyager.'.$dataType->slug.'.order') }}', {
-            order: JSON.stringify($('.dd').nestable('serialize')),
-            _token: '{{ csrf_token() }}'
-        }, function (data) {
-            toastr.success("{{ __('voyager::bread.updated_order') }}");
+            /**
+             * Reorder items
+             */
+            $('.dd').on('change', function (e) {
+                $.post('{{ route('voyager.'.$dataType->slug.'.order') }}', {
+                    order: JSON.stringify($('.dd').nestable('serialize')),
+                    _token: '{{ csrf_token() }}'
+                }, function (data) {
+                    toastr.success("{{ __('voyager::bread.updated_order') }}");
+                });
+            });
         });
-    });
-});
-</script>
+    </script>
 @stop
