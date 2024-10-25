@@ -1,6 +1,8 @@
 @php
     $edit = !is_null($dataTypeContent->getKey());
     $add  = is_null($dataTypeContent->getKey());
+    $categories = \App\Models\Category::whereNull('parent_id')->get();
+    $fields = \App\Models\Field::whereNull('parent_id')->get();
 @endphp
 
 @extends('voyager::master')
@@ -22,28 +24,38 @@
 @section('content')
     <div class="page-content edit-add container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-12">
                 <div class="panel panel-bordered">
-
-                    <div class="container">
-                        <div class="col-12">
-                            یک یا چند زیر مجموعه دسته بندی را متصل به سربرگ فیلد مورد نظر کنید
-                            @php $categories = \App\Models\Category::whereNull('parent_id')->get(); @endphp
-                        </div>
-                        <div class="col-12">
-                            @foreach($categories as $category)
-                                <div class="col-12">
-                                    <span class="text-primary">{{$category->name}} : </span>
-                                    <span class="text-primary">{{$category->id}}</span> |
-                                    @foreach($category->childes as $c)
-                                        <span>{{$c->name}}</span> :
-                                        <span class="text-danger">{{$c->id}}</span> |
-                                    @endforeach
-                                </div>
+                    <div class="panel-heading">
+                        <div class="container" style="padding-bottom: 25px">
+                            @foreach($fields as $field)
+                                <span class="text-primary"> {{$field->form}} </span>
+                                @foreach($field->categories as $category)
+                                    <span class="text-danger"> {{$category->id}} </span>
+                                @endforeach
+                                <span class="text-primary"> {{$field->name}} </span>
+                                #
                             @endforeach
                         </div>
                     </div>
 
+                    <div class="panel-heading">
+                        <p class="panel-title">
+                            آیدی دسته بندی را متصل به فیلد مورد نظر کنید
+                        </p>
+                        <div class="container" style="padding-bottom: 25px">
+                            @foreach($categories as $category)
+                                <span class="text-primary"> {{$category->name}} = </span>
+                                @foreach($category->childes as $c)
+                                    <span> {{$c->name}} : </span>
+                                    <span class="text-danger"> {{$c->id}} </span> |
+                                @endforeach
+                                <br>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
                     <!-- form start -->
                     <form role="form"
                           class="form-edit-add"
@@ -122,7 +134,6 @@
                             @yield('submit-buttons')
                         </div>
                     </form>
-
                     <div style="display:none">
                         <input type="hidden" id="upload_url" value="{{ route('voyager.upload') }}">
                         <input type="hidden" id="upload_type_slug" value="{{ $dataType->slug }}">

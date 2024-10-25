@@ -40,7 +40,10 @@
                         @if(request()->category == null)
                             <p class="panel-title">مرتب سازی دسته بندی اصلی</p>
                         @else
-                            <p class="panel-title">مرتب سازی زیر مجموعه دسته بندی |  {{ $category_select->name }} </p>
+                            <p class="panel-title">
+                                <span> مرتب سازی زیر مجموعه دسته بندی | </span>
+                                  <i class="text-success"> {{ $category_select->name }} </i>
+                            </p>
                         @endif
                     </div>
                 </div>

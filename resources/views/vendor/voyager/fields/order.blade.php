@@ -40,7 +40,10 @@
                         @if(request()->field == null)
                             <p class="panel-title">مرتب سازی فیلد های اصلی</p>
                         @else
-                            <p class="panel-title">مرتب سازی زیر مجموعه فیلد |  {{ $field_select->name }} </p>
+                            <p class="panel-title">
+                                <span> مرتب سازی زیر مجموعه فیلد | </span>
+                                <i class="text-success"> {{ $field_select->name }} </i>
+                            </p>
                         @endif
                     </div>
                 </div>
