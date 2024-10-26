@@ -5,7 +5,9 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="voyager-list"></i>{{ $dataType->getTranslatedAttribute('display_name_plural') }} {{ __('voyager::bread.order') }}
-        <a href="{{ url()->previous() }}" class="btn btn-success">برگشت</a>
+        @if(request()->field != null)
+            <a href="{{ route('voyager.fields.order') }}" class="btn btn-success">برگشت به سربرگ های اصلی</a>
+        @endif
     </h1>
 @stop
 
@@ -19,7 +21,30 @@
         <div class="row">
             <div class="col-12">
                 <div class="panel panel-bordered">
-                    <div class="panel-body">
+                    <div class="panel-body">                   
+                            @if(request()->field == null)
+                                @foreach ($field_parents as $result)
+                                    ( <span class="text-primary"> {{$result->name}} </span>
+                                    <span class="badge"> {{$result->id}} </span> )
+                                    #
+                                @endforeach
+                            @endif
+                            @if(request()->field != null)
+                                @foreach($field_parents as $result)
+
+                                    @if($field_select->id == $result->id)
+                                        <button class="badge">
+                                            ( <span class="text-primary"> {{$result->name}} </span>
+                                            <span class="badge"> {{$result->id}} </span> )
+                                        </button>
+                                        #
+                                    @else
+                                        ( <span class="text-primary"> {{$result->name}} </span>
+                                        <span class="badge"> {{$result->id}} </span> )
+                                        # 
+                                    @endif
+                                @endforeach
+                            @endif                           
                         <form action="">
                             <select class="form-control select2" name="field">
                                 <option selected disabled>انتخاب زیر مجموعه و مرتب سازی</option>

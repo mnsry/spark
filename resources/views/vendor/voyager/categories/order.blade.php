@@ -5,7 +5,9 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="voyager-list"></i>{{ $dataType->getTranslatedAttribute('display_name_plural') }} {{ __('voyager::bread.order') }}
-        <a href="{{ url()->previous() }}" class="btn btn-success">برگشت</a>
+        @if(request()->category != null)
+            <a href="{{ route('voyager.categories.order') }}" class="btn btn-success">برگشت به سربرگ های اصلی</a>
+        @endif
     </h1>
 @stop
 
@@ -20,20 +22,29 @@
             <div class="col-12">
                 <div class="panel panel-bordered">
                     <div class="panel-body">
-                        @foreach ($category_parents as $result)
+                        @if(request()->category == null)
+                                @foreach ($category_parents as $result)
+                                    ( <span class="text-primary"> {{$result->name}} </span>
+                                    <span class="badge"> {{$result->id}} </span> )
+                                    #
+                                @endforeach
+                            @endif
                             @if(request()->category != null)
-                                @if($category_select->id == $result->id)
-                                    <button class="badge">
+                                @foreach($category_parents as $result)
+
+                                    @if($category_select->id == $result->id)
+                                        <button class="badge">
+                                            ( <span class="text-primary"> {{$result->name}} </span>
+                                            <span class="badge"> {{$result->id}} </span> )
+                                        </button>
+                                        #
+                                    @else
                                         ( <span class="text-primary"> {{$result->name}} </span>
                                         <span class="badge"> {{$result->id}} </span> )
-                                        #
-                                    </button>
-                                @endif
+                                        # 
+                                    @endif
+                                @endforeach
                             @endif
-                            ( <span class="text-primary"> {{$result->name}} </span>
-                            <span class="badge"> {{$result->id}} </span> )
-                            #
-                        @endforeach
                         <form action="">
                             <select class="form-control select2" name="category">
                                 <option selected disabled>انتخاب زیر مجموعه و مرتب سازی</option>
