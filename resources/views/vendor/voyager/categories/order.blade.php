@@ -20,6 +20,20 @@
             <div class="col-12">
                 <div class="panel panel-bordered">
                     <div class="panel-body">
+                        @foreach ($category_parents as $result)
+                            @if(request()->category != null)
+                                @if($category_select->id == $result->id)
+                                    <button class="badge">
+                                        ( <span class="text-primary"> {{$result->name}} </span>
+                                        <span class="badge"> {{$result->id}} </span> )
+                                        #
+                                    </button>
+                                @endif
+                            @endif
+                            ( <span class="text-primary"> {{$result->name}} </span>
+                            <span class="badge"> {{$result->id}} </span> )
+                            #
+                        @endforeach
                         <form action="">
                             <select class="form-control select2" name="category">
                                 <option selected disabled>انتخاب زیر مجموعه و مرتب سازی</option>
