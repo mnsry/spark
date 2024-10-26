@@ -29,12 +29,25 @@
                     <div class="panel-heading">
                         <div class="container" style="padding-bottom: 25px">
                             @foreach($fields as $field)
-                                <span class="text-primary"> {{$field->form}} </span>
-                                @foreach($field->categories as $category)
-                                    <span class="text-danger"> {{$category->id}} </span>
-                                @endforeach
-                                <span class="text-primary"> {{$field->name}} </span>
-                                #
+                                @if ($field->id == preg_replace('/[^0-9]/','',request()->path()))
+                                    <button class="badge">
+                                        ( <span class="text-primary"> {{$field->form}} </span>
+                                        @foreach($field->categories as $category)
+                                            <span class="text-danger"> {{$category->id}} </span>
+                                        @endforeach
+                                        <span class="text-primary"> {{$field->name}} </span>
+                                        <span class="badge"> {{$field->id}} </span> )
+                                    </button>
+                                    #
+                                @else
+                                    ( <span class="text-primary"> {{$field->form}} </span>
+                                    @foreach($field->categories as $category)
+                                        <span class="text-danger"> {{$category->id}} </span>
+                                    @endforeach
+                                    <span class="text-primary"> {{$field->name}} </span>
+                                    <span class="badge"> {{$field->id}} </span> )
+                                    #
+                                @endif
                             @endforeach
                         </div>
                     </div>
