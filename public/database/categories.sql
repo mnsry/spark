@@ -43,8 +43,8 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `parent_id`, `order`, `name`, `slug`, `created_at`, `updated_at`) VALUES
 (1, NULL, 1, 'فروش مسکونی', 'forosh-m', NULL, NULL),
-(2, NULL, 3, 'فروش اداری و تجاری', 'forosh-t', NULL, NULL),
-(3, NULL, 2, 'اجاره مسکونی', 'ejareh-m', NULL, NULL),
+(2, NULL, 2, 'فروش اداری و تجاری', 'forosh-t', NULL, NULL),
+(3, NULL, 3, 'اجاره مسکونی', 'ejareh-m', NULL, NULL),
 (4, NULL, 4, 'اجاره اداری و تجاری', 'ejareh-t', NULL, NULL),
 (5, NULL, 6, 'اجاره کوتاه مدت', 'ejareh-k', NULL, NULL),
 (6, NULL, 5, 'پروژه ساخت و ساز', 'forosh-s', NULL, NULL),
@@ -52,8 +52,8 @@ INSERT INTO `categories` (`id`, `parent_id`, `order`, `name`, `slug`, `created_a
 (8, 1, 2, 'خانه و ویلا', 'f-m-khaneh', NULL, NULL),
 (9, 1, 3, 'باغ و زمین', 'f-m-bagh', NULL, NULL),
 (10, 2, 1, 'مغازه و غرفه', 'f-t-maghaze', NULL, NULL),
-(11, 2, 3, 'دفتر کار، اتاق اداری و مطب', 'f-t-daftar', NULL, NULL),
-(12, 2, 2, 'صنعتی و کشاورزی', 'f-t-sanati', NULL, NULL),
+(11, 2, 2, 'دفتر کار، اتاق اداری و مطب', 'f-t-daftar', NULL, NULL),
+(12, 2, 3, 'صنعتی و کشاورزی', 'f-t-sanati', NULL, NULL),
 (13, 3, 1, 'آپارتمان', 'e-m-aparteman', NULL, NULL),
 (14, 3, 2, 'خانه و ویلا', 'e-m-khaneh', NULL, NULL),
 (15, 4, 1, 'مغازه و غرفه', 'e-t-maghaze', NULL, NULL),
@@ -62,8 +62,8 @@ INSERT INTO `categories` (`id`, `parent_id`, `order`, `name`, `slug`, `created_a
 (18, 5, 1, 'آپارتمان', 'e-k-aparteman', NULL, NULL),
 (19, 5, 2, 'خانه و ویلا', 'e-k-khane', NULL, NULL),
 (20, 5, 3, 'دفترکار و فضا آموزشی', 'e-k-daftar', NULL, NULL),
-(21, 6, 2, 'مشارکت', 'f-s-mosharekat', NULL, NULL),
-(22, 6, 1, 'پیش فروش', 'f-s-pish-forosh', NULL, NULL);
+(21, 6, 1, 'مشارکت', 'f-s-mosharekat', NULL, NULL),
+(22, 6, 2, 'پیش فروش', 'f-s-pish-forosh', NULL, NULL);
 
 --
 -- Indexes for dumped tables
