@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             // ایدی دسته بندی
-            $table->integer('category_id')->unsigned()->nullable()->default(null);
+            $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
             // آیدی فیلد
             $table->integer('sen_bana')->unsigned()->nullable()->default(null);
@@ -53,17 +53,17 @@ return new class extends Migration
             $table->string('image')->nullable()->default('files/default.png');
             $table->string('video')->nullable()->default('posts/default.mp4');
             $table->string('address')->nullable();
-            $table->string('emtiyza')->nullable();
+            $table->text('emtiyza')->nullable();
             $table->string('more')->nullable();
             // انتخاب آیتم
             $table->enum('status', ['PUBLISHED', 'DRAFT', 'PENDING'])->default('DRAFT');
             // مقدار اعدادی
-            $table->integer('price')->nullable()->default(0);
-            $table->integer('rahn')->nullable()->default(0);
-            $table->integer('ejare')->nullable()->default(0);
-            $table->integer('metr')->nullable()->default(0);
-            $table->integer('metr_zamin')->nullable()->default(0);
-            $table->integer('like')->nullable()->default(0);
+            $table->integer('price')->default(0);
+            $table->integer('rahn')->default(0);
+            $table->integer('ejare')->default(0);
+            $table->integer('metr')->default(0);
+            $table->integer('metr_zamin')->default(0);
+            $table->integer('like')->default(0);
             // مقادیر هست و نیست
             $table->boolean('elvator')->default(0);
             $table->boolean('anbari')->default(0);

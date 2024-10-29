@@ -21,7 +21,7 @@
 
     <div class="row">
         <div class="col-12">
-            <form action="{{ route('dev') }}" enctype="multipart/form-data">
+            <form action="{{ route('dev') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @foreach($category_select->fields as $field)
                     @if($field->form == 'TEXT')

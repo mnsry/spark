@@ -16,6 +16,10 @@ class File extends Model
         'parking', 'farangi', 'moaveze', 'bazsazi', 'cooler', 'water_hot',
     ];
 
+    protected $casts = [
+        'emtiyza' => 'array',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
