@@ -21,71 +21,137 @@
 
     <div class="row">
         <div class="col-12">
-            <form action="#" method="post">
+            <form action="{{ route('dev') }}" enctype="multipart/form-data">
+                @csrf
                 @foreach($category_select->fields as $field)
                     @if($field->form == 'TEXT')
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">{{ $field->name }}</span>
-                        <input type="text" class="form-control" placeholder="{{ $field->name }} ... " aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
+                        <div class="form-floating py-3">
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="{{ $field->slug }}"
+                                placeholder="{{ $field->name }}"
+                                name="{{ $field->slug }}"
+                                value="{{ old($field->slug) }}"
+                            >
+                            <label for="{{ $field->slug }}">{{ $field->name }}</label>
+                        </div>
                     @endif
+
                     @if($field->form == 'TEXTAREA')
-                        <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">{{ $field->name }}</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <div class="form-floating py-3">
+                            <textarea
+                                class="form-control"
+                                style="height: 100px"
+                                id="{{ $field->slug }}"
+                                name="{{ $field->slug }}"
+                            >
+                                {{ old($field->slug) }}
+                            </textarea>
+                            <label for="{{ $field->slug }}">{{ $field->name }}</label>
                         </div>
                     @endif
+
                     @if($field->form == 'NUMBER')
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">{{ $field->name }}</span>
-                            <input type="number" class="form-control" placeholder="{{ $field->name }} ... " aria-label="Username" aria-describedby="basic-addon1">
+                        <div class="form-floating py-3">
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="{{ $field->slug }}"
+                                placeholder="{{ $field->name }}"
+                                name="{{ $field->slug }}"
+                                value="{{ old($field->slug) }}"
+                            >
+                            <label for="{{ $field->slug }}">{{ $field->name }}</label>
                         </div>
                     @endif
+
                     @if($field->form == 'SELECT')
-                        <div class="form-group py-3">
-                            <label for="categories">{{ $field->name }}</label>
-                            <select class="form-select" aria-label="Default select example">
+                        <div class="form-floating py-3">
+                            <select
+                                class="form-select"
+                                id="{{ $field->slug }}"
+                                name="{{ $field->slug }}"
+                            >
+                                <option selected disabled>انتخاب کنید</option>
                                 @foreach($field->childes as $f_child)
-                                    <option value="{{ $f_child->id }}">{{ $f_child->name }}</option>
+                                    <option value="{{ $f_child->id }}" @selected(old($field->slug) == $f_child->id)>
+                                        {{ $f_child->name }}
+                                    </option>
                                 @endforeach
                             </select>
+                            <label for="{{ $field->slug }}">{{ $field->name }}</label>
                         </div>
                     @endif
+
                     @if($field->form == 'MULTISELECT')
-                        <label for="categories">{{ $field->name }}</label>
-                        <select class="form-select" multiple aria-label="Multiple select example">
-                            @foreach($field->childes as $f_child)
-                                <option value="{{ $f_child->id }}">{{ $f_child->name }}</option>
-                            @endforeach
-                        </select>
-                    @endif
-                    @if($field->form == 'CHECKBOX')
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">
-                                {{ $field->name }}
-                            </label>
+                        <div class="form-floating py-3">
+                            <select
+                                class="form-select"
+                                style="height: 100px"
+                                id="{{ $field->slug }}"
+                                name="{{ $field->slug }}[]"
+                                multiple
+                            >
+                                <option selected disabled>انتخاب کنید</option>
+                                @foreach($field->childes as $f_child)
+                                    <option value="{{ $f_child->id }}" @selected(old($field->slug) == $f_child->id)>
+                                        {{ $f_child->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <label for="{{ $field->slug }}">{{ $field->name }}</label>
                         </div>
                     @endif
+
+                    @if($field->form == 'CHECKBOX')
+                        <div class="form-check form-switch form-check-inline py-3">
+                            <input
+                                type="checkbox"
+                                class="form-check-input"
+                                id="{{ $field->slug }}"
+                                value="1"
+                                name="{{ $field->slug }}"
+                                {{ old($field->slug) == 1 ? 'checked' : '' }}
+                            >
+                            <label class="form-check-label" for="{{ $field->slug }}">{{ $field->name }}</label>
+                        </div>
+                    @endif
+
                     @if($field->form == 'RADIOBUTTON')
-                        <label for="categories">{{ $field->name }}</label>
+                        <br><p class="form-check form-check-inline"> {{ $field->name }}</p><br>
                         @foreach($field->childes as $f_child)
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="021" id="{{ $f_child->name }}" value="option1">
-                                <label class="form-check-label" for="{{ $f_child->name }}">
-                                    {{ $f_child->name }}
-                                </label>
+                            <div class="form-check form-check-inline">
+                                <input
+                                    type="radio"
+                                    class="form-check-input"
+                                    id="{{ $f_child->slug }}"
+                                    value="{{ $f_child->id }}"
+                                    name="{{ $field->slug }}"
+                                    {{ old($field->slug) == $f_child->id ? 'checked' : '' }}
+                                >
+                                <label class="form-check-label" for="{{ $f_child->slug }}"> {{ $f_child->name }} </label>
                             </div>
                         @endforeach
+                        <br>
                     @endif
+
                     @if($field->form == 'IMAGE')
-                        <div class="mb-3">
-                            <label for="formFile" class="form-label">{{ $field->name }}</label>
-                            <input class="form-control" type="file" id="formFile">
+                        <div class="input-group py-3">
+                            <label class="input-group-text" for="{{ $field->slug }}">{{ $field->name }}</label>
+                            <input
+                                type="file"
+                                class="form-control"
+                                id="{{ $field->slug }}"
+                                name="{{ $field->slug }}"
+                                accept="image/*"
+                            >
                         </div>
                     @endif
                 @endforeach
+                <button type="submit" class="btn btn-primary py-3">ثبت فایل</button>
             </form>
+            <br><br>
         </div>
     </div>
 @endsection

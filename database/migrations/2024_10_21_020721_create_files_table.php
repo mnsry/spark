@@ -40,6 +40,10 @@ return new class extends Migration
             $table->foreign('hot')->references('parent_id')->on('fields');
             $table->integer('mahal')->unsigned()->nullable()->default(null);
             $table->foreign('mahal')->references('parent_id')->on('fields');
+            $table->integer('cooler')->unsigned()->nullable()->default(null);
+            $table->foreign('cooler')->references('parent_id')->on('fields');
+            $table->integer('water_hot')->unsigned()->nullable()->default(null);
+            $table->foreign('water_hot')->references('parent_id')->on('fields');
             // گوگل
             $table->string('slug')->unique()->nullable();
             $table->string('seo_title')->nullable()->default('املاک جرقه');
@@ -59,7 +63,6 @@ return new class extends Migration
             $table->integer('ejare')->nullable()->default(0);
             $table->integer('metr')->nullable()->default(0);
             $table->integer('metr_zamin')->nullable()->default(0);
-            $table->integer('shekar')->nullable()->default(0);
             $table->integer('like')->nullable()->default(0);
             // مقادیر هست و نیست
             $table->boolean('elvator')->default(0);
@@ -69,8 +72,7 @@ return new class extends Migration
             $table->boolean('farangi')->default(0);
             $table->boolean('moaveze')->default(0);
             $table->boolean('bazsazi')->default(0);
-            $table->boolean('cooler')->default(0);
-            $table->boolean('water_hot')->default(0);
+            $table->boolean('shekar')->default(0);
             // زمان ها
             $table->timestamps();
             $table->softDeletes();
