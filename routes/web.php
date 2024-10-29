@@ -13,7 +13,10 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 Route::get('/', function () {return view('welcome');})->name('welcome');
 Route::post('/dev', function () {
-    dd(request()->all());
+    //$file = \App\Models\File::create(request()->all());
+    //$emtiyza = \App\Models\File::find(2);
+    //$field = \App\Models\Field::whereIn('id', $emtiyza->emtiyza)->get();
+    //dd($field);
 })->name('dev');
 /*
 |--------------------------------------------------------------------------

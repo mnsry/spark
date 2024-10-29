@@ -21,7 +21,9 @@
 
     <div class="row">
         <div class="col-12">
-            <form action="{{ route('dev') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('file.store') }}" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="user_id" value="{{ auth()->id() }}" />
+                <input type="hidden" name="category_id" value="{{ $category_select->id }}" />
                 @csrf
                 @foreach($category_select->fields as $field)
                     @if($field->form == 'TEXT')

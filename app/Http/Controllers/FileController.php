@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\File;
-use App\Http\Requests\StoreFileRequest;
-use App\Http\Requests\UpdateFileRequest;
+use Illuminate\Http\Request;
 
 class FileController extends Controller
 {
@@ -52,9 +51,10 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreFileRequest $request)
+    public function store(Request $request)
     {
-        //
+        $file = File::create($request->all());
+        return redirect()->route("file.index");
     }
 
     /**
@@ -78,7 +78,7 @@ class FileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFileRequest $request, File $file)
+    public function update(Request $request, File $file)
     {
         //
     }

@@ -13,7 +13,7 @@ class File extends Model
         'sen_bana','tabaghe', 'kol_vahed', 'otagh', 'sanad', 'kafpoosh', 'jahat', 'kabinet', 'hot', 'emtiyza',
         'more', 'mahal', 'slug', 'seo_title', 'meta_description', 'meta_keywords', 'image', 'video', 'address',
         'status', 'price', 'rahn', 'ejare', 'metr', 'metr_zamin', 'shekar', 'like', 'elvator', 'anbari', 'balkon',
-        'parking', 'farangi', 'moaveze', 'bazsazi', 'cooler', 'water_hot',
+        'parking', 'farangi', 'moaveze', 'bazsazi', 'cooler', 'water_hot', 'user_id', 'category_id',
     ];
 
     protected $casts = [
