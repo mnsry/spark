@@ -55,7 +55,7 @@ INSERT INTO `fields` (`id`, `parent_id`, `order`, `name`, `slug`, `form`, `optio
 (9, NULL, 9, 'گرمایش', 'hot', 'SELECT', 0, NULL, NULL),
 (10, NULL, 17, 'امتیازات', 'emtiyza', 'MULTISELECT', 0, NULL, NULL),
 (11, NULL, 23, 'انتخاب محل', 'mahal', 'SELECT', 0, NULL, NULL),
-(12, 1, 1, 'نوساز - صفر', 'sen-no', 'NULL', 0, NULL, NULL),
+(12, 1, 1, 'نوساز - صفر', 'seen-no', 'NULL', 0, NULL, NULL),
 (13, 1, 2, '1', 'seen-1', 'NULL', 0, NULL, NULL),
 (14, 1, 3, '2', 'seen-2', 'NULL', 0, NULL, NULL),
 (15, 1, 4, '3', 'seen-3', 'NULL', 0, NULL, NULL),
@@ -166,12 +166,12 @@ INSERT INTO `fields` (`id`, `parent_id`, `order`, `name`, `slug`, `form`, `optio
 (120, NULL, 22, 'آسانسور', 'elvator', 'CHECKBOX', 0, NULL, NULL),
 (121, NULL, 25, 'بازسازی', 'bazsazi', 'CHECKBOX', 0, NULL, NULL),
 (122, NULL, 10, 'سرمایش', 'cooler', 'RADIOBUTTON', 0, NULL, NULL),
-(123, 122, 1, 'ندارد', 'ndard', 'NULL', 0, NULL, NULL),
-(124, 122, 2, 'کولر آبی', 'wlr-aab', 'NULL', 0, NULL, NULL),
-(125, 122, 3, 'کولر گازی', 'wlr-az', 'NULL', 0, NULL, NULL),
+(123, 122, 1, 'ندارد', 'cooler-nadard', 'NULL', 0, NULL, NULL),
+(124, 122, 2, 'کولر آبی', 'cooler-abi', 'NULL', 0, NULL, NULL),
+(125, 122, 3, 'کولر گازی', 'cooler-gasi', 'NULL', 0, NULL, NULL),
 (126, NULL, 15, 'آبگرم', 'water_hot', 'RADIOBUTTON', 0, NULL, NULL),
-(127, 126, 1, 'آبگرمکن', 'aab-rm-n', 'NULL', 0, NULL, NULL),
-(128, 126, 2, 'پکیج', 'packge', 'NULL', 0, NULL, NULL);
+(127, 126, 1, 'آبگرمکن', 'water-abgarmkon', 'NULL', 0, NULL, NULL),
+(128, 126, 2, 'پکیج', 'water-packge', 'NULL', 0, NULL, NULL);
 
 --
 -- Indexes for dumped tables
