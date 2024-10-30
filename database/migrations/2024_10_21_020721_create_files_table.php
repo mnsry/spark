@@ -58,9 +58,9 @@ return new class extends Migration
             // انتخاب آیتم
             $table->enum('status', ['PUBLISHED', 'DRAFT', 'PENDING'])->default('DRAFT');
             // مقدار اعدادی
-            $table->integer('price')->default(0);
-            $table->integer('rahn')->default(0);
-            $table->integer('ejare')->default(0);
+            $table->bigInteger('price')->default(0);
+            $table->bigInteger('rahn')->default(0);
+            $table->bigInteger('ejare')->default(0);
             $table->integer('metr')->default(0);
             $table->integer('metr_zamin')->default(0);
             $table->integer('like')->default(0);
