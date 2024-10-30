@@ -21,7 +21,7 @@ class Category extends \TCG\Voyager\Models\Category
 
     public function files()
     {
-        return $this->belongsToMany(File::class)->orderBy('order', 'ASC');
+        return $this->belongsToMany(File::class);
     }
 
     public function allChildes()

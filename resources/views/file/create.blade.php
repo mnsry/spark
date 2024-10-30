@@ -62,7 +62,8 @@
                                 id="{{ $field->slug }}"
                                 placeholder="{{ $field->name }}"
                                 name="{{ $field->slug }}"
-                                value="{{ old($field->slug) }}"
+{{--                                value="{{ old($field->slug) }}"--}}
+                                value="0"
                             >
                             <label for="{{ $field->slug }}">{{ $field->name }}</label>
                         </div>

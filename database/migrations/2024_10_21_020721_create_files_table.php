@@ -53,7 +53,7 @@ return new class extends Migration
             $table->string('image')->nullable()->default('files/default.png');
             $table->string('video')->nullable()->default('posts/default.mp4');
             $table->string('address')->nullable();
-            $table->text('emtiyza')->nullable();
+            $table->json('emtiyza')->nullable()->default('[]');
             $table->string('more')->nullable();
             // انتخاب آیتم
             $table->enum('status', ['PUBLISHED', 'DRAFT', 'PENDING'])->default('DRAFT');

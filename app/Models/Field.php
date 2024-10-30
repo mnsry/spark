@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Field extends Model
 {
-    use HasFactory;
 
     protected $fillable = ['slug', 'name'];
 
@@ -26,6 +25,11 @@ class Field extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    public function files()
+    {
+        return $this->belongsToMany(File::class);
+    }
+
     public function scopeParentNull($query)
     {
         return $query->whereNull('parent_id')->orderBy('order', 'ASC');
@@ -34,5 +38,9 @@ class Field extends Model
     public function scopeParentNotNull($query)
     {
         return $query->whereNotNull('parent_id');
+    }
+    public function scopeEmtiyza(Builder $query, array $emtiyza)
+    {
+        $query->whereIn('id', $emtiyza);
     }
 }

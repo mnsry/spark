@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class File extends Model
@@ -20,12 +21,77 @@ class File extends Model
         'emtiyza' => 'array',
     ];
 
-    public function user()
+    public function scopeEmtiyza(Builder $query, array $emtiyza)
+    {
+        return Field::whereIn('id', $emtiyza)->get();
+    }
+
+    public function Waterhot(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Field::class, 'water_hot');
+    }
+
+    public function Cooler(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Field::class, 'cooler');
+    }
+
+    public function Mahal(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Field::class, 'mahal');
+    }
+
+    public function Hot(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Field::class, 'hot');
+    }
+
+    public function Kabinet(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Field::class, 'kabinet');
+    }
+
+    public function Jahat(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Field::class, 'jahat');
+    }
+
+    public function Kafpoosh(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Field::class, 'kafpoosh');
+    }
+
+    public function Sanad(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Field::class, 'sanad');
+    }
+
+    public function Otagh(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Field::class, 'otagh');
+    }
+
+    public function KolVahed(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Field::class, 'kol_vahed');
+    }
+
+    public function Tabaghe(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Field::class, 'tabaghe');
+    }
+
+    public function SenBana(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Field::class, 'sen_bana');
+    }
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Category::class);
     }

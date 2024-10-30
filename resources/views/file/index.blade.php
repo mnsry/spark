@@ -41,24 +41,28 @@
                                         <table class="table align-middle">
                                             <thead>
                                             <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">First</th>
-                                                <th scope="col">Last</th>
-                                                <th scope="col">Handle</th>
+                                                <th scope="col">قیمت</th>
+                                                <th scope="col">تعداد اتاق</th>
+                                                <th scope="col">کفپوش</th>
+                                                <th scope="col">امتیازات</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
+                                                <th scope="row">{{ $file->price }}</th>
+                                                <td>2</td>
+                                                <td>{{ $file->otagh }}</td>
+                                                <td>{{ $file->kafpoosh }}</td>
+                                                <td>
+                                                    @if($file->emtiyza != null)
+                                                        @php
+                                                            $emtiyz = \App\Models\Field::whereIn('id', $file->emtiyza)->get();
+                                                        @endphp
+                                                        @foreach ($emtiyz as $em)
+                                                            {{ $em->name  }} -
+                                                        @endforeach
+                                                    @endif
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
@@ -94,14 +98,7 @@
                         <div id="collapseThree{{ $file->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 3
-                                @if($file->emtiyza != null)
-                                    @php
-                                        $field = \App\Models\Field::whereIn('id', $file->emtiyza)->get();
-                                    @endphp
-                                    @foreach ($field as $f)
-                                        {{ $f->name  }} -
-                                    @endforeach
-                                @endif
+
                             </div>
                         </div>
                     </div>
