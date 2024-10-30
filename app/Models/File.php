@@ -25,8 +25,8 @@ class File extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function noe_moamele()
+    public function category()
     {
-        return $this->belongsTo(Category::class, 'parent_id');
+        return $this->belongsTo(Category::class);
     }
 }

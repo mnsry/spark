@@ -19,6 +19,11 @@ class Category extends \TCG\Voyager\Models\Category
         return $this->belongsToMany(Field::class)->orderBy('order', 'ASC');
     }
 
+    public function files()
+    {
+        return $this->belongsToMany(File::class)->orderBy('order', 'ASC');
+    }
+
     public function allChildes()
     {
         return collect($this->childes)->pluck('files')->flatten()->unique();
