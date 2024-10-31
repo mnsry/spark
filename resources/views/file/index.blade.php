@@ -50,19 +50,13 @@
                                             <tbody>
                                             <tr>
                                                 <th scope="row">{{ $file->price }}</th>
-                                                <td>2</td>
-                                                <td>{{ $file->otagh }}</td>
-                                                <td>{{ $file->kafpoosh }}</td>
-                                                <td>
-                                                    @if($file->emtiyza != null)
-                                                        @php
-                                                            $emtiyz = \App\Models\Field::whereIn('id', $file->emtiyza)->get();
-                                                        @endphp
-                                                        @foreach ($emtiyz as $em)
-                                                            {{ $em->name  }} -
-                                                        @endforeach
-                                                    @endif
-                                                </td>
+                                                <td>{{ dd($file->Otagh()->exists()) }}</td>
+{{--                                                <td>{{ $file->Kafpoosh }}</td>--}}
+{{--                                                <td>--}}
+{{--                                                    @foreach ($file->emtiyza($file->emtiyza) as $em)--}}
+{{--                                                        {{ $em->name  }} ---}}
+{{--                                                    @endforeach--}}
+{{--                                                </td>--}}
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
