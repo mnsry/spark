@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class FileController extends Controller
 {
@@ -20,8 +21,10 @@ class FileController extends Controller
     {
         $user = auth()->user();
         $files = $user->files;
+        $columns = Schema::getColumnListing('files');
         return view('file.index',[
-            'files' => $files
+            'files' => $files,
+            'columns' => $columns
         ]);
     }
 

@@ -40,39 +40,74 @@
                                     <div class="table-responsive">
                                         <table class="table align-middle">
                                             <thead>
-                                            <tr>
-                                                <th scope="col">قیمت</th>
-                                                <th scope="col">تعداد اتاق</th>
-                                                <th scope="col">کفپوش</th>
-                                                <th scope="col">امتیازات</th>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="col">emtiyza</th>
+                                                    <th scope="col">sen_bana</th>
+                                                    <th scope="col">tabaghe</th>
+                                                    <th scope="col">mahal</th>
+                                                    <th scope="col">cooler</th>
+                                                    <th scope="col">water_hot</th>
+                                                    <th scope="col">hot</th>
+                                                    <th scope="col">kabinet</th>
+                                                    <th scope="col">jahat</th>
+                                                    <th scope="col">kafpoosh</th>
+                                                    <th scope="col">sanad</th>
+                                                    <th scope="col">kol_vahed</th>
+                                                    <th scope="col">otagh</th>
+                                                    <th scope="col">created_at</th>
+                                                    <th scope="col">bazsazi</th>
+                                                    <th scope="col">moaveze</th>
+                                                    <th scope="col">farangi</th>
+                                                    <th scope="col">more</th>
+                                                    <th scope="col">price</th>
+                                                    <th scope="col">rahn</th>
+                                                    <th scope="col">ejare</th>
+                                                    <th scope="col">metr</th>
+                                                    <th scope="col">metr_zamin</th>
+                                                    <th scope="col">elvator</th>
+                                                    <th scope="col">anbari</th>
+                                                    <th scope="col">balkon</th>
+                                                    <th scope="col">parking</th>
+                                                    <th scope="col">image</th>
+                                                    <th scope="col">address</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <th scope="row">{{ $file->price }}</th>
-                                                <td>{{ dd($file->Otagh()->exists()) }}</td>
-{{--                                                <td>{{ $file->Kafpoosh }}</td>--}}
-{{--                                                <td>--}}
-{{--                                                    @foreach ($file->emtiyza($file->emtiyza) as $em)--}}
-{{--                                                        {{ $em->name  }} ---}}
-{{--                                                    @endforeach--}}
-{{--                                                </td>--}}
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td colspan="2">Larry the Bird</td>
-                                                <td>@twitter</td>
-                                            </tr>
-                                            <tr class="align-bottom">
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td class="align-top">This cell is aligned to the top.</td>
-                                                <td>...</td>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="col">                                                   
+                                                        @foreach (  $file->emtiyza($file->emtiyza) as $emtiaz)
+                                                            {{ $emtiaz->name }} 
+                                                        @endforeach
+                                                    </th>                                                                 
+                                                    <th scope="col"> {{ ($file->SenBana) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->Tabaghe->name) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->Mahal->name) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->Cooler->name) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->Waterhot->name) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->Hot->name) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->Kabinet->name) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->Jahat->name) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->Kafpoosh->name) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->Sanad->name) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->KolVahed->name) }} </th>                                                                                                                                                 
+                                                    <th scope="col"> {{ ($file->Otagh->name) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->created_at) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->bazsazi) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->moaveze) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->farangi) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->more) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->price) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->rahn) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->ejare) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->metr) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->metr_zamin) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->elvator) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->anbari) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->balkon) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->parking) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->image) }} </th>                                                                 
+                                                    <th scope="col"> {{ ($file->address) }} </th>                                                                 
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -83,16 +118,14 @@
                     <div class="accordion-item">
                         <div id="collapseTwo{{ $file->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                2
-
+                                ویژگی ها
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
                         <div id="collapseThree{{ $file->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                3
-
+                                ویرایش
                             </div>
                         </div>
                     </div>
