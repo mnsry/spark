@@ -39,8 +39,14 @@ class Field extends Model
     {
         return $query->whereNotNull('parent_id');
     }
+
     public function scopeEmtiyza(Builder $query, array $emtiyza)
     {
         $query->whereIn('id', $emtiyza);
+    }
+
+    public function scopeSelectCategory(Builder $query, array $select_category)
+    {
+        $query->where('categories', $select_category);
     }
 }

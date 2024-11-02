@@ -16,7 +16,7 @@ class Category extends \TCG\Voyager\Models\Category
 
     public function fields()
     {
-        return $this->belongsToMany(Field::class)->orderBy('order', 'ASC');
+        return $this->belongsToMany(Field::class)->whereNull('parent_id')->orderBy('order', 'ASC');
     }
 
     public function files()

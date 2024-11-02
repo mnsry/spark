@@ -76,8 +76,8 @@
                                 id="{{ $field->slug }}"
                                 name="{{ $field->slug }}"
                             >
-                                <option selected disabled>انتخاب کنید</option>
-                                @foreach($field->childes as $f_child)
+                                <option selected disabled>انتخاب کنید</option>                            
+                                @foreach($field->childes as $f_child)                                
                                     <option value="{{ $f_child->id }}" @selected(old($field->slug) == $f_child->id)>
                                         {{ $f_child->name }}
                                     </option>

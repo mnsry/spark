@@ -12,10 +12,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 Route::get('/', function () {return view('welcome');})->name('welcome');
 Route::get('/dev', function () {
-    $file = \App\Models\File::find(2);
-    foreach (  $file->category->fields as $field){
-        dd($file->field($field->slug));
-    }
+    return 'dev';
 })->name('dev');
 /*
 |--------------------------------------------------------------------------
