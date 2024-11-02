@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class File extends Model
 {
@@ -21,9 +22,19 @@ class File extends Model
         'emtiyza' => 'array',
     ];
 
+    public function scopeField(Builder $query,string $fieldSlug)
+    {
+        dd($query->$fieldSlug);
+    }
+
     public function scopeEmtiyza(Builder $query, array $emtiyza)
     {
         return Field::whereIn('id', $emtiyza)->get();
+    }
+
+    public function SenBana(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Field::class, 'sen_bana');
     }
 
     public function Waterhot(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -79,11 +90,6 @@ class File extends Model
     public function Tabaghe(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Field::class, 'tabaghe');
-    }
-
-    public function SenBana(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Field::class, 'sen_bana');
     }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo

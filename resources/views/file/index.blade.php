@@ -77,154 +77,154 @@
                                                     <th scope="col">
                                                         @if($file->emtiyza != [])
                                                             @foreach (  $file->emtiyza($file->emtiyza) as $emtiaz)
-                                                                {{ $emtiaz->name }} 
-                                                            @endforeach                                                    
+                                                                {{ $emtiaz->name }}
+                                                            @endforeach
                                                         @else
                                                             مقدار خالی است
-                                                        @endif   
-                                                    </th>                                                                 
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->SenBana()->exists())
-                                                            {{ ($file->SenBana->name) }}                                                    
+                                                            {{ ($file->SenBana->name) }}
                                                         @else
                                                             مقدار خالی است
-                                                        @endif                                                          
-                                                    </th>                                                                 
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->Tabaghe()->exists())
-                                                            {{ ($file->Tabaghe->name) }}                                                     
+                                                            {{ ($file->Tabaghe->name) }}
                                                         @else
                                                             مقدار خالی است
-                                                        @endif                                                     
-                                                    </th>                                                                 
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->Mahal()->exists())
-                                                            {{ ($file->Mahal->name) }}                                                     
+                                                            {{ ($file->Mahal->name) }}
                                                         @else
                                                             مقدار خالی است
-                                                        @endif 
-                                                    </th>                                                                 
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->Cooler()->exists())
-                                                            {{ ($file->Cooler->name) }}                                                     
+                                                            {{ ($file->Cooler->name) }}
                                                         @else
                                                             مقدار خالی است
-                                                        @endif 
-                                                    </th>                                                                 
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->Waterhot()->exists())
-                                                            {{ ($file->Waterhot->name) }}                                                     
+                                                            {{ ($file->Waterhot->name) }}
                                                         @else
                                                             مقدار خالی است
-                                                        @endif 
-                                                    </th>                                                                 
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->Hot()->exists())
-                                                            {{ ($file->Hot->name) }}                                                     
+                                                            {{ ($file->Hot->name) }}
                                                         @else
                                                             مقدار خالی است
-                                                        @endif 
-                                                    </th>                                                                 
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->Kabinet()->exists())
-                                                            {{ ($file->Kabinet->name) }}                                                     
+                                                            {{ ($file->Kabinet->name) }}
                                                         @else
                                                             مقدار خالی است
-                                                        @endif 
-                                                    </th>                                                                 
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->Jahat()->exists())
-                                                            {{ ($file->Jahat->name) }}                                                     
+                                                            {{ ($file->Jahat->name) }}
                                                         @else
                                                             مقدار خالی است
-                                                        @endif 
-                                                    </th>                                                                 
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->Kafpoosh()->exists())
-                                                            {{ ($file->Kafpoosh->name) }}                                                     
+                                                            {{ ($file->Kafpoosh->name) }}
                                                         @else
                                                             مقدار خالی است
-                                                        @endif 
-                                                    </th>                                                                  
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->Sanad()->exists())
-                                                            {{ ($file->Sanad->name) }}                                                     
+                                                            {{ ($file->Sanad->name) }}
                                                         @else
                                                             مقدار خالی است
-                                                        @endif 
-                                                    </th>                                                                  
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->KolVahed()->exists())
-                                                            {{ ($file->KolVahed->name) }}                                                     
+                                                            {{ ($file->KolVahed->name) }}
                                                         @else
                                                             مقدار خالی است
-                                                        @endif 
-                                                    </th>                                                                                                                                                 
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->Otagh()->exists())
-                                                            {{ ($file->Otagh->name) }}                                                     
+                                                            {{ ($file->Otagh->name) }}
                                                         @else
                                                             مقدار خالی است
-                                                        @endif 
-                                                    </th>                                                                 
-                                                    <th scope="col"> {{ ($file->created_at) }} </th> 
+                                                        @endif
+                                                    </th>
+                                                    <th scope="col"> {{ ($file->created_at) }} </th>
                                                     <th scope="col">
                                                         @if($file->bazsazi == 0)
-                                                            <span>نشده</span>                                                     
+                                                            <span>نشده</span>
                                                         @else
                                                             <span>شده</span>
-                                                        @endif 
-                                                    </th>                                                                 
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->moaveze == 0)
-                                                            <span>ندارم</span>                                                     
+                                                            <span>ندارم</span>
                                                         @else
                                                             <span>دارم</span>
-                                                        @endif 
-                                                    </th>                                                                
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->farangi == 0)
-                                                            <span>ندارد</span>                                                     
+                                                            <span>ندارد</span>
                                                         @else
                                                             <span>دارد</span>
-                                                        @endif 
-                                                    </th>                                                                                                                           
-                                                    <th scope="col"> {{ ($file->more) }} </th>                                                                 
-                                                    <th scope="col"> {{ ($file->price) }} </th>                                                                 
-                                                    <th scope="col"> {{ ($file->rahn) }} </th>                                                                 
-                                                    <th scope="col"> {{ ($file->ejare) }} </th>                                                                 
-                                                    <th scope="col"> {{ ($file->metr) }} </th>                                                                 
+                                                        @endif
+                                                    </th>
+                                                    <th scope="col"> {{ ($file->more) }} </th>
+                                                    <th scope="col"> {{ ($file->price) }} </th>
+                                                    <th scope="col"> {{ ($file->rahn) }} </th>
+                                                    <th scope="col"> {{ ($file->ejare) }} </th>
+                                                    <th scope="col"> {{ ($file->metr) }} </th>
                                                     <th scope="col"> {{ ($file->metr_zamin) }} </th>
                                                     <th scope="col">
                                                         @if($file->elvator == 0)
-                                                            <span>ندارد</span>                                                     
+                                                            <span>ندارد</span>
                                                         @else
                                                             <span>دارد</span>
-                                                        @endif 
-                                                    </th>                                                                 
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->anbari == 0)
-                                                            <span>ندارد</span>                                                     
+                                                            <span>ندارد</span>
                                                         @else
                                                             <span>دارد</span>
-                                                        @endif 
-                                                    </th>                                                                 
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->balkon == 0)
-                                                            <span>ندارد</span>                                                     
+                                                            <span>ندارد</span>
                                                         @else
                                                             <span>دارد</span>
-                                                        @endif 
-                                                    </th>                                                                 
+                                                        @endif
+                                                    </th>
                                                     <th scope="col">
                                                         @if($file->parking == 0)
-                                                            <span>ندارد</span>                                                     
+                                                            <span>ندارد</span>
                                                         @else
                                                             <span>دارد</span>
-                                                        @endif 
-                                                    </th>                                                                                                                                  
-                                                    <th scope="col"> {{ ($file->image) }} </th>                                                                 
-                                                    <th scope="col"> {{ ($file->address) }} </th>                                                                 
+                                                        @endif
+                                                    </th>
+                                                    <th scope="col"> {{ ($file->image) }} </th>
+                                                    <th scope="col"> {{ ($file->address) }} </th>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -236,7 +236,30 @@
                     <div class="accordion-item">
                         <div id="collapseTwo{{ $file->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                ویژگی ها
+
+                                    <div class="table-responsive">
+                                        <div class="table-responsive">
+                                            <table class="table align-middle">
+                                                <thead>
+                                                <tr>
+                                                    @foreach (  $file->category->fields as $field)
+                                                        <th scope="col">{{ $field->name }}</th>
+                                                    @endforeach
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    @foreach (  $file->category->fields as $field)
+                                                        <th scope="col">
+                                                            {{ ($file->field($field->slug)) }}
+                                                        </th>
+                                                    @endforeach
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
                             </div>
                         </div>
                     </div>

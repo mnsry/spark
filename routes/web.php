@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FileController;
@@ -13,8 +12,10 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 Route::get('/', function () {return view('welcome');})->name('welcome');
 Route::get('/dev', function () {
-    return Schema::getColumnListing('files');
-    //dd($file->emtiyza($file->emtiyza));
+    $file = \App\Models\File::find(2);
+    foreach (  $file->category->fields as $field){
+        dd($file->field($field->slug));
+    }
 })->name('dev');
 /*
 |--------------------------------------------------------------------------
