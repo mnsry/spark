@@ -62,8 +62,7 @@
                                 id="{{ $field->slug }}"
                                 placeholder="{{ $field->name }}"
                                 name="{{ $field->slug }}"
-{{--                                value="{{ old($field->slug) }}"--}}
-                                value="0"
+                                value="{{ old($field->slug) }}"
                             >
                             <label for="{{ $field->slug }}">{{ $field->name }}</label>
                         </div>
@@ -131,19 +130,23 @@
 
                     @if($field->form == 'RADIOBUTTON')
                         <br><p class="form-check form-check-inline"> {{ $field->name }}</p><br>
-                        @foreach($field->childes as $f_child)
-                            <div class="form-check form-check-inline">
-                                <input
-                                    type="radio"
-                                    class="form-check-input"
-                                    id="{{ $f_child->slug }}"
-                                    value="{{ $f_child->id }}"
-                                    name="{{ $field->slug }}"
-                                    {{ old($field->slug) == $f_child->id ? 'checked' : '' }}
-                                >
-                                <label class="form-check-label" for="{{ $f_child->slug }}"> {{ $f_child->name }} </label>
-                            </div>
-                        @endforeach
+                            @foreach($field->childes as $f_child)
+                                @foreach($f_child->categories as $cat)
+                                    @if($cat->id == $category_select->id)
+                                        <div class="form-check form-check-inline">
+                                            <input
+                                                type="radio"
+                                                class="form-check-input"
+                                                id="{{ $f_child->slug }}"
+                                                value="{{ $f_child->id }}"
+                                                name="{{ $field->slug }}"
+                                                {{ old($field->slug) == $f_child->id ? 'checked' : '' }}
+                                            >
+                                            <label class="form-check-label" for="{{ $f_child->slug }}"> {{ $f_child->name }} </label>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endforeach
                         <br>
                     @endif
 

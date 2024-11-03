@@ -19,12 +19,12 @@
                             مشخصات
                         </button>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <button class="nav-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo{{ $file->id }}" aria-expanded="false" aria-controls="collapseTwo{{ $file->id }}">
                             ویژگی ها
                         </button>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <button class="nav-link" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree{{ $file->id }}" aria-expanded="false" aria-controls="collapseThree{{ $file->id }}">
                             ویرایش
                         </button>
@@ -32,9 +32,9 @@
                 </ul>
             </div>
             <div class="card-body">
-                <div class="accordion" id="accordionExample">
+                <div class="accordion" id="accordionExample{{ $file->id }}">
                     <div class="accordion-item">
-                        <div id="collapseOne{{ $file->id }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div id="collapseOne{{ $file->id }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample{{ $file->id }}">
                             <div class="accordion-body">
                                 <div class="table-responsive">
                                     <div class="table-responsive">
@@ -234,7 +234,7 @@
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <div id="collapseTwo{{ $file->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div id="collapseTwo{{ $file->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample{{ $file->id }}">
                             <div class="accordion-body">
 
                                     <div class="table-responsive">
@@ -249,10 +249,8 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr>
-                                                    @foreach (  $file->category->fields as $field)
-                                                        <th scope="col">
-                                                            {{ ($file->field($field->slug)) }}
-                                                        </th>
+                                                    @foreach($file->category->fields as $field)
+                                                        <th scope="col">{{ $file->msd() }}</th>
                                                     @endforeach
                                                 </tr>
                                                 </tbody>
@@ -264,7 +262,7 @@
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <div id="collapseThree{{ $file->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div id="collapseThree{{ $file->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample{{ $file->id }}">
                             <div class="accordion-body">
                                 ویرایش
                             </div>
