@@ -61,7 +61,7 @@
                                                                 @endphp
                                                                 @foreach (  $file->emtiyza($colMore) as $emtiaz)
                                                                     {{ $emtiaz->name }}
-                                                                @endforeach                                                                   
+                                                                @endforeach
                                                             @else
                                                                 مقدار خالی است
                                                             @endif
@@ -107,7 +107,7 @@
                                                             @endif
                                                         </th>
                                                     @endif
-                                                
+
                                                     @if($field->slug == 'water_hot')
                                                         <th scope="col">
                                                             @if($file->Waterhot()->exists())
@@ -117,7 +117,7 @@
                                                             @endif
                                                         </th>
                                                     @endif
-                                                    
+
                                                     @if($field->slug == 'hot')
                                                         <th scope="col">
                                                             @if($file->Hot()->exists())
@@ -127,7 +127,7 @@
                                                             @endif
                                                         </th>
                                                     @endif
-                                                    
+
                                                     @if($field->slug == 'kabinet')
                                                         <th scope="col">
                                                             @if($file->Kabinet()->exists())
@@ -197,7 +197,7 @@
                                                             @endif
                                                         </th>
                                                     @endif
-                                                
+
                                                     @if($field->slug == 'moaveze')
                                                         <th scope="col">
                                                             @if($file->moaveze == 0)
@@ -219,7 +219,13 @@
                                                     @endif
 
                                                     @if($field->slug == 'more')
-                                                        <th scope="col"> {{ ($file->more) }} </th>
+                                                        <th scope="col">
+                                                            @if($file->more == null)
+                                                                <span>ندارد</span>
+                                                            @else
+                                                                <span>{{ ($file->more) }}</span>
+                                                            @endif
+                                                        </th>
                                                     @endif
 
                                                     @if($field->slug == 'price')
@@ -287,7 +293,13 @@
                                                     @endif
 
                                                     @if($field->slug == 'address')
-                                                        <th scope="col"> {{ ($file->address) }} </th>
+                                                        <th scope="col">
+                                                            @if($file->address == null)
+                                                                <span>ندارد</span>
+                                                            @else
+                                                                <span>{{ ($file->address) }}</span>
+                                                            @endif
+                                                        </th>
                                                     @endif
                                                 @endforeach
                                             </tr>
@@ -301,20 +313,14 @@
                     <div class="accordion-item">
                         <div id="collapseTwo{{ $file->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample{{ $file->id }}">
                             <div class="accordion-body">
-
-                                    <div class="table-responsive">
-                                        <div class="table-responsive">
-                                            optional
-                                        </div>
-                                    </div>
-
+                                optional
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
                         <div id="collapseThree{{ $file->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample{{ $file->id }}">
                             <div class="accordion-body">
-                                ویرایش
+                                edit
                             </div>
                         </div>
                     </div>
