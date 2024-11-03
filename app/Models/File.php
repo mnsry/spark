@@ -22,9 +22,9 @@ class File extends Model
         'emtiyza' => 'array',
     ];
 
-    public function scopeMsd(Builder $query)
+    public function scopeMsd(Builder $query, string $slug)
     {
-        dd($query);
+        dd($query->pluck($slug));
     }
 
     public function scopeEmtiyza(Builder $query, array $emtiyza)
