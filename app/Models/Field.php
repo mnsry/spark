@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Field extends Model
 {
+    protected $perPage = 500;
 
     protected $fillable = ['slug', 'name'];
 

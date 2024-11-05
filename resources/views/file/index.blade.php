@@ -88,10 +88,10 @@
                                                         </th>
                                                     @endif
 
-                                                    @if($field->slug == 'mahal')
+                                                    @if($field->slug == 'mahale')
                                                         <th scope="col">
-                                                            @if($file->Mahal()->exists())
-                                                                {{ ($file->Mahal->name) }}
+                                                            @if($file->mahale()->exists())
+                                                                {{ ($file->mahale->name) }}
                                                             @else
                                                                 مقدار خالی است
                                                             @endif

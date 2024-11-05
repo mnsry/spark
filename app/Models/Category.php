@@ -4,6 +4,8 @@ namespace App\Models;
 
 class Category extends \TCG\Voyager\Models\Category
 {
+    protected $perPage = 50;
+
     public function parent()
     {
         return $this->belongsTo(self::class, 'parent_id');

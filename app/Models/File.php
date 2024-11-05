@@ -47,9 +47,9 @@ class File extends Model
         return $this->belongsTo(Field::class, 'cooler');
     }
 
-    public function Mahal(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function Mahale(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Field::class, 'mahal');
+        return $this->belongsTo(Field::class, 'mahale');
     }
 
     public function Hot(): \Illuminate\Database\Eloquent\Relations\BelongsTo
