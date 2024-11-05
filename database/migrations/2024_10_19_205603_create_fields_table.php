@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('order')->default(1);
             $table->string('name');
             $table->string('slug')->unique();
-            $table->enum('form', ['NULL', 'NUMBER', 'TEXT', 'TEXTAREA', 'SELECT', 'MULTISELECT', 'RADIOBUTTON', 'TIME', 'CHECKBOX', 'IMAGE', 'MULTIIMAGE', 'VIDEO', 'FILE'])->default('NULL');
+            $table->enum('form', ['NULL', 'NUMBER', 'TEXT', 'TEXTAREA', 'SELECT', 'MULTISELECT', 'RADIOBUTTON', 'CHECKBOX', 'TIME', 'IMAGE', 'MULTIIMAGE', 'VIDEO', 'FILE'])->default('NULL');
             $table->boolean('option')->default(0);
             $table->timestamps();
             $table
