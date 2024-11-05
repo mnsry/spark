@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2024 at 12:03 PM
+-- Generation Time: Nov 05, 2024 at 11:41 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,7 +33,7 @@ CREATE TABLE `fields` (
   `order` int(11) NOT NULL DEFAULT 1,
   `name` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
-  `form` enum('NULL','TEXT','NUMBER','SELECT','MULTISELECT','CHECKBOX','RADIOBUTTON','TEXTAREA','IMAGE','MULTIIMAGE','VIDEO','FILE') NOT NULL DEFAULT 'NULL',
+  `form` enum('NULL','NUMBER','TEXT','TEXTAREA','SELECT','MULTISELECT','RADIOBUTTON','CHECKBOX','TIME','IMAGE','MULTIIMAGE','VIDEO','FILE') NOT NULL DEFAULT 'NULL',
   `option` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -498,7 +498,6 @@ INSERT INTO `fields` (`id`, `parent_id`, `order`, `name`, `slug`, `form`, `optio
 (452, 423, 28, '10.000.000', 'ejareaz_10000', 'NULL', 0, NULL, NULL),
 (453, 423, 29, 'بیش از 10 تومان', 'ejareaz_more10', 'NULL', 0, NULL, NULL);
 
-
 --
 -- Indexes for dumped tables
 --
@@ -519,7 +518,7 @@ ALTER TABLE `fields`
 -- AUTO_INCREMENT for table `fields`
 --
 ALTER TABLE `fields`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=454;
 
 --
 -- Constraints for dumped tables
