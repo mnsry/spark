@@ -9,26 +9,16 @@ class Field extends Model
 {
     protected $perPage = 500;
 
-    protected $fillable = ['slug', 'name'];
+    protected $fillable = ['slug', 'name', 'form'];
 
-    public function parentId()
+    public function categories()
     {
-        return $this->belongsTo(self::class);
+        return $this->belongsToMany(Category::class)->orderBy('order', 'ASC');
     }
 
     public function childes()
     {
-        return $this->hasMany(self::class, 'parent_id')->orderBy('order', 'ASC');
-    }
-
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class);
-    }
-
-    public function files()
-    {
-        return $this->belongsToMany(File::class);
+        return $this->hasMany(Fieldchild::class)->orderBy('order', 'ASC');
     }
 
     public function scopeParentNull($query)

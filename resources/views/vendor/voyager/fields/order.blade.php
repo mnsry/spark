@@ -12,7 +12,7 @@
 @stop
 
 @php
-    $field_parents = \App\Models\Field::parentNull()->get();
+    $field_parents = \App\Models\Field::all();
     $field_select = \App\Models\Field::find(request()->field);
 @endphp
 

@@ -2,7 +2,7 @@
     $edit = !is_null($dataTypeContent->getKey());
     $add  = is_null($dataTypeContent->getKey());
     $categories = \App\Models\Category::whereNull('parent_id')->get();
-    $fields = \App\Models\Field::whereNull('parent_id')->get();
+    $fields = \App\Models\Field::all();
 @endphp
 
 @extends('voyager::master')

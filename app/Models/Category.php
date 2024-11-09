@@ -6,6 +6,11 @@ class Category extends \TCG\Voyager\Models\Category
 {
     protected $perPage = 50;
 
+    public function fields()
+    {
+        return $this->belongsToMany(Field::class)->orderBy('order', 'ASC');
+    }
+
     public function parent()
     {
         return $this->belongsTo(self::class, 'parent_id');
@@ -16,19 +21,9 @@ class Category extends \TCG\Voyager\Models\Category
         return $this->hasMany(self::class, 'parent_id')->orderBy('order', 'ASC');
     }
 
-    public function fields()
-    {
-        return $this->belongsToMany(Field::class)->whereNull('parent_id')->orderBy('order', 'ASC');
-    }
-
-    public function files()
-    {
-        return $this->belongsToMany(File::class);
-    }
-
     public function allChildes()
     {
-        return collect($this->childes)->pluck('files')->flatten()->unique();
+        return collect($this->childes)->pluck('name')->flatten()->unique();
     }
 
     public function scopeParentNull($query)
@@ -38,6 +33,6 @@ class Category extends \TCG\Voyager\Models\Category
 
     public function scopeParentNotNull($query)
     {
-        return $query->whereNotNull('parent_id');
+        return $query->whereNotNull('parent_id')->orderBy('order', 'ASC');
     }
 }
