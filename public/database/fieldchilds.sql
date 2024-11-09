@@ -1,4 +1,4 @@
-INSERT INTO `fieldchildren` (`id`, `field_id`, `order`, `name`, `slug`, `created_at`, `updated_at`) VALUES
+INSERT INTO `fieldchilds` (`id`, `field_id`, `order`, `name`, `slug`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, 'ابرش', 'mahale_abrash', NULL, NULL),
 (2, 1, 2, 'ابریشم', 'mahale_abrisham', NULL, NULL),
 (3, 1, 3, 'اردمه', 'mahale_ardame', NULL, NULL),

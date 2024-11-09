@@ -15,7 +15,7 @@ return new class extends Migration
             $table->integer('category_id')->unsigned();
             $table->integer('fieldchild_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('fieldchild_id')->references('id')->on('fieldchildren');
+            $table->foreign('fieldchild_id')->references('id')->on('fieldchilds');
             $table->primary(['category_id','fieldchild_id']);
         });
     }

@@ -6,7 +6,7 @@
     <h1 class="page-title">
         <i class="voyager-list"></i>{{ $dataType->getTranslatedAttribute('display_name_plural') }} {{ __('voyager::bread.order') }}
         @if(request()->field != null)
-            <a href="{{ route('voyager.fields.order') }}" class="btn btn-success">برگشت به سربرگ های اصلی</a>
+            <a href="{{ route('voyager.fieldchilds.order') }}" class="btn btn-success">برگشت به سربرگ های اصلی</a>
         @endif
     </h1>
 @stop
@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="panel panel-bordered">
-                    <div class="panel-body">                   
+                    <div class="panel-body">
                             @if(request()->field == null)
                                 @foreach ($field_parents as $result)
                                     ( <span class="text-primary"> {{$result->name}} </span>
@@ -41,10 +41,10 @@
                                     @else
                                         ( <span class="text-primary"> {{$result->name}} </span>
                                         <span class="badge"> {{$result->id}} </span> )
-                                        # 
+                                        #
                                     @endif
                                 @endforeach
-                            @endif                           
+                            @endif
                         <form action="">
                             <select class="form-control select2" name="field">
                                 <option selected disabled>انتخاب زیر مجموعه و مرتب سازی</option>
@@ -98,14 +98,14 @@
                                         </li>
                                     @endforeach
                                 @else
-                                    @if($field_select->childes->count() == 0)
+                                    @if($field_select->fieldchilds->count() == 0)
                                         <li class="dd-item" data-id="{{ $result->getKey() }}">
                                             <div class="dd-handle" style="height:inherit">
                                                 زیر مجموعه ای ندارد
                                             </div>
                                         </li>
                                     @else
-                                        @foreach ($field_select->childes as $result)
+                                        @foreach ($field_select->fieldchilds as $result)
                                             <li class="dd-item" data-id="{{ $result->getKey() }}">
                                                 <div class="dd-handle" style="height:inherit">
                                                     @if (isset($dataRow->details->view_order))

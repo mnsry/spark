@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fieldchildren', function (Blueprint $table) {
+        Schema::create('fieldchilds', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('field_id')->unsigned();
             $table->integer('order')->default(1);

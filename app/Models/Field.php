@@ -16,7 +16,7 @@ class Field extends Model
         return $this->belongsToMany(Category::class)->orderBy('order', 'ASC');
     }
 
-    public function childes()
+    public function fieldchilds()
     {
         return $this->hasMany(Fieldchild::class)->orderBy('order', 'ASC');
     }

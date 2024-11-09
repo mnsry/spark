@@ -11,6 +11,11 @@ class Category extends \TCG\Voyager\Models\Category
         return $this->belongsToMany(Field::class)->orderBy('order', 'ASC');
     }
 
+    public function fieldchilds()
+    {
+        return $this->belongsToMany(Fieldchild::class)->orderBy('order', 'ASC');
+    }
+
     public function parent()
     {
         return $this->belongsTo(self::class, 'parent_id');
