@@ -68,6 +68,33 @@
                         </div>
                     @endif
 
+                    @if($field->form == 'CHECKBOX')
+                        <div class="form-check form-switch form-check-inline py-3">
+                            <input
+                                type="checkbox"
+                                class="form-check-input"
+                                id="{{ $field->slug }}"
+                                value="1"
+                                name="{{ $field->slug }}"
+                                {{ old($field->slug) == 1 ? 'checked' : '' }}
+                            >
+                            <label class="form-check-label" for="{{ $field->slug }}">{{ $field->name }}</label>
+                        </div>
+                    @endif
+
+                    @if($field->form == 'IMAGE')
+                        <div class="input-group py-3">
+                            <label class="input-group-text" for="{{ $field->slug }}">{{ $field->name }}</label>
+                            <input
+                                type="file"
+                                class="form-control"
+                                id="{{ $field->slug }}"
+                                name="{{ $field->slug }}"
+                                accept="image/*"
+                            >
+                        </div>
+                    @endif
+
                     @if($field->form == 'SELECT')
                         <div class="form-floating py-3">
                             <select
@@ -76,7 +103,7 @@
                                 name="{{ $field->slug }}"
                             >
                                 <option selected disabled>انتخاب کنید</option>
-                                @foreach($field->childes as $f_child)
+                                @foreach($field->fieldchilds as $f_child)
                                     @foreach($f_child->categories as $cat)
                                         @if($cat->id == $category_select->id)
                                             <option value="{{ $f_child->id }}" @selected(old($field->slug) == $f_child->id)>
@@ -100,7 +127,7 @@
                                 multiple
                             >
                                 <option selected disabled>انتخاب کنید</option>
-                                @foreach($field->childes as $f_child)
+                                @foreach($field->fieldchilds as $f_child)
                                     @foreach($f_child->categories as $cat)
                                         @if($cat->id == $category_select->id)
                                             <option value="{{ $f_child->id }}" @selected(old($field->slug) == $f_child->id)>
@@ -114,23 +141,9 @@
                         </div>
                     @endif
 
-                    @if($field->form == 'CHECKBOX')
-                        <div class="form-check form-switch form-check-inline py-3">
-                            <input
-                                type="checkbox"
-                                class="form-check-input"
-                                id="{{ $field->slug }}"
-                                value="1"
-                                name="{{ $field->slug }}"
-                                {{ old($field->slug) == 1 ? 'checked' : '' }}
-                            >
-                            <label class="form-check-label" for="{{ $field->slug }}">{{ $field->name }}</label>
-                        </div>
-                    @endif
-
                     @if($field->form == 'RADIOBUTTON')
-                        <br><p class="form-check form-check-inline"> {{ $field->name }}</p><br>
-                            @foreach($field->childes as $f_child)
+                            <br><p class="form-check form-check-inline"> {{ $field->name }}</p><br>
+                            @foreach($field->fieldchilds as $f_child)
                                 @foreach($f_child->categories as $cat)
                                     @if($cat->id == $category_select->id)
                                         <div class="form-check form-check-inline">
@@ -147,21 +160,9 @@
                                     @endif
                                 @endforeach
                             @endforeach
-                        <br>
-                    @endif
+                            <br>
+                        @endif
 
-                    @if($field->form == 'IMAGE')
-                        <div class="input-group py-3">
-                            <label class="input-group-text" for="{{ $field->slug }}">{{ $field->name }}</label>
-                            <input
-                                type="file"
-                                class="form-control"
-                                id="{{ $field->slug }}"
-                                name="{{ $field->slug }}"
-                                accept="image/*"
-                            >
-                        </div>
-                    @endif
                 @endforeach
                 <button type="submit" class="btn btn-primary py-3">ثبت فایل</button>
             </form>

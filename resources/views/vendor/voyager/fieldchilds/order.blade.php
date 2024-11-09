@@ -12,7 +12,10 @@
 @stop
 
 @php
-    $field_parents = \App\Models\Field::all();
+    $field_parents = \App\Models\Field::where('form', 'SELECT')
+                                        ->orWhere('form', 'MULTISELECT')
+                                        ->orWhere('form', 'MULTICHECKBOX')
+                                        ->orWhere('form', 'RADIOBUTTON')->get();
     $field_select = \App\Models\Field::find(request()->field);
 @endphp
 
@@ -31,7 +34,6 @@
                             @endif
                             @if(request()->field != null)
                                 @foreach($field_parents as $result)
-
                                     @if($field_select->id == $result->id)
                                         <button class="badge">
                                             ( <span class="text-primary"> {{$result->name}} </span>
@@ -63,7 +65,7 @@
                 <div class="panel panel-bordered">
                     <div class="panel-heading">
                         @if(request()->field == null)
-                            <p class="panel-title">مرتب سازی فیلد های اصلی</p>
+                            <p class="panel-title">ابتدا یکی از زیر مجموعه فیلد ها را انتخاب کنید</p>
                         @else
                             <p class="panel-title">
                                 <span> مرتب سازی زیر مجموعه فیلد | </span>
@@ -79,24 +81,11 @@
                         <div class="dd">
                             <ol class="dd-list">
                                 @if(request()->field == null)
-                                    @foreach ($field_parents as $result)
-                                        <li class="dd-item" data-id="{{ $result->getKey() }}">
-                                            <div class="dd-handle" style="height:inherit">
-                                                @if (isset($dataRow->details->view_order))
-                                                @elseif (isset($dataRow->details->view))
-                                                    @include($dataRow->details->view, ['row' => $dataRow, 'dataType' => $dataType, 'dataTypeContent' => $result, 'content' => $result->{$display_column}, 'action' => 'order'])
-                                                @elseif($dataRow->type == 'image')
-                                                    <span>
-                                            <img
-                                                src="@if( !filter_var($result->{$display_column}, FILTER_VALIDATE_URL)){{ Voyager::image( $result->{$display_column} ) }}@else{{ $result->{$display_column} }}@endif"
-                                                style="height:100px">
-                                        </span>
-                                                @else
-                                                    <span>{{ $result->{$display_column} }}</span>
-                                                @endif
-                                            </div>
-                                        </li>
-                                    @endforeach
+                                    <li class="dd-item" data-id="{{ $result->getKey() }}">
+                                        <div class="dd-handle" style="height:inherit">
+                                            مجموعه ای انتخاب کنید
+                                        </div>
+                                    </li>
                                 @else
                                     @if($field_select->fieldchilds->count() == 0)
                                         <li class="dd-item" data-id="{{ $result->getKey() }}">

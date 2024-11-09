@@ -20,6 +20,12 @@ class Fieldchild extends Model
         return $this->belongsToMany(Category::class)->orderBy('order', 'ASC');
     }
 
+    public function scopeParentCategoriesOn(Builder $query)
+    {
+        $field = \App\Models\Field::where('field_child_categories', '=', '1')->get();
+        return $query->whereBelongsTo($field);
+    }
+
     public function scopeOrderasc(Builder $query)
     {
         $query->orderBy('id', 'ASC');

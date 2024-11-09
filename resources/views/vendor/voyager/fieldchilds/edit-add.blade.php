@@ -2,6 +2,7 @@
     $edit = !is_null($dataTypeContent->getKey());
     $add  = is_null($dataTypeContent->getKey());
     $categories = \App\Models\Category::whereNull('parent_id')->get();
+    $fields = \App\Models\Fieldchild::ParentCategoriesOn()->get();
 @endphp
 
 @extends('voyager::master')
@@ -25,6 +26,31 @@
         <div class="row">
             <div class="col-12">
                 <div class="panel panel-bordered">
+                    <div class="panel-heading">
+                        <div class="container" style="padding-bottom: 25px">
+                            @foreach($fields as $field)
+                                @if ($field->id == preg_replace('/[^0-9]/','',request()->path()))
+                                    <button class="badge">
+                                        ( <span class="text-primary"> {{$field->field->name}} </span> |
+                                        @foreach($field->categories as $category)
+                                            <span class="text-danger"> {{$category->id}} </span>
+                                        @endforeach
+                                        <span class="text-primary"> {{$field->name}} </span>
+                                        <span class="badge"> {{$field->id}} </span> )
+                                    </button>
+                                    #
+                                @else
+                                    ( <span class="text-primary"> {{$field->field->name}} </span> |
+                                    @foreach($field->categories as $category)
+                                        <span class="text-danger"> {{$category->id}} </span>
+                                    @endforeach
+                                    <span class="text-primary"> {{$field->name}} </span>
+                                    <span class="badge"> {{$field->id}} </span> )
+                                    #
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
 
                     <div class="panel-heading">
                         <p class="panel-title">
