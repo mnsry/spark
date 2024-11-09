@@ -11,15 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fields', function (Blueprint $table) {
+        Schema::create('fieldchildren', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('field_id')->unsigned();
             $table->integer('order')->default(1);
             $table->string('name');
             $table->string('slug')->unique();
-            $table->enum('form', ['NULL', 'NUMBER', 'TEXT', 'TEXTAREA', 'SELECT', 'MULTISELECT', 'CHECKBOX', 'MULTICHECKBOX', 'RADIOBUTTON', 'DATE','IMAGE', 'MULTIIMAGE', 'VIDEO', 'FILE'])->default('NULL');
-            $table->boolean('optional')->default(0);
-            $table->boolean('field_child_categories')->default(0);
             $table->timestamps();
+            $table
+                ->foreign('field_id')
+                ->references('id')
+                ->on('fields')
+                ->onDelete('cascade');
         });
     }
 
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fields');
+        Schema::dropIfExists('fieldchildren');
     }
 };
