@@ -70,7 +70,7 @@ INSERT INTO `fields` (`id`, `order`, `name`, `slug`, `form`, `optional`, `field_
 (69, 69, 'اجاره بین', 'priceejarebeyn', 'MULTISELECT', 0, 0, NULL, NULL),
 (70, 70, 'اصل مبلغ', 'priceasl', 'NUMBER', 0, 0, NULL, NULL),
 (71, 71, 'با رهن', 'pricebarahn', 'NUMBER', 0, 0, NULL, NULL),
-(72, 72, 'تخلیه', 'takhleye', 'TIME', 1, 0, NULL, NULL),
+(72, 72, 'تخلیه', 'takhleye', 'DATE', 1, 0, NULL, NULL),
 (73, 73, 'شغل', 'shoghl', 'TEXT', 0, 0, NULL, NULL),
 (74, 74, 'سابقه', 'sabeghe', 'SELECT', 0, 0, NULL, NULL),
 (75, 75, 'سابقه از', 'sabegheaz', 'MULTISELECT', 0, 0, NULL, NULL),
