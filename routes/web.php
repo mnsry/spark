@@ -14,7 +14,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 Route::get('/', function () {return view('welcome');})->name('welcome');
 Route::get('/dev', function () {
     echo "<br>"; 
-    $products = Field::whereBetween('id', [1, 50])->get();
+    $products = Field::whereBetween('id', [50, 100])->get();
     //$products = Field::paginate(50);
     foreach($products as $product){
         echo ($product->id) . '-';
