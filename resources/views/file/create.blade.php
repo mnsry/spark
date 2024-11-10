@@ -104,13 +104,16 @@
                             >
                                 <option selected disabled>انتخاب کنید</option>
                                 @foreach($field->fieldchilds as $f_child)
-                                    @foreach($f_child->categories as $cat)
+                                    <option value="{{ $f_child->id }}" @selected(old($field->slug) == $f_child->id)>
+                                        {{ $f_child->name }}
+                                    </option>
+                                    {{-- @foreach($f_child->categories as $cat)
                                         @if($cat->id == $category_select->id)
                                             <option value="{{ $f_child->id }}" @selected(old($field->slug) == $f_child->id)>
                                                 {{ $f_child->name }}
                                             </option>
                                         @endif
-                                    @endforeach
+                                    @endforeach --}}
                                 @endforeach
                             </select>
                             <label for="{{ $field->slug }}">{{ $field->name }}</label>
@@ -128,13 +131,16 @@
                             >
                                 <option selected disabled>انتخاب کنید</option>
                                 @foreach($field->fieldchilds as $f_child)
-                                    @foreach($f_child->categories as $cat)
+                                    <option value="{{ $f_child->id }}" @selected(old($field->slug) == $f_child->id)>
+                                        {{ $f_child->name }}
+                                    </option>
+                                    {{-- @foreach($f_child->categories as $cat)
                                         @if($cat->id == $category_select->id)
                                             <option value="{{ $f_child->id }}" @selected(old($field->slug) == $f_child->id)>
                                                 {{ $f_child->name }}
                                             </option>
                                         @endif
-                                    @endforeach
+                                    @endforeach --}}
                                 @endforeach
                             </select>
                             <label for="{{ $field->slug }}">{{ $field->name }}</label>
@@ -144,7 +150,18 @@
                     @if($field->form == 'RADIOBUTTON')
                             <br><p class="form-check form-check-inline"> {{ $field->name }}</p><br>
                             @foreach($field->fieldchilds as $f_child)
-                                @foreach($f_child->categories as $cat)
+                            <div class="form-check form-check-inline">
+                                <input
+                                    type="radio"
+                                    class="form-check-input"
+                                    id="{{ $f_child->slug }}"
+                                    value="{{ $f_child->id }}"
+                                    name="{{ $field->slug }}"
+                                    {{ old($field->slug) == $f_child->id ? 'checked' : '' }}
+                                >
+                                <label class="form-check-label" for="{{ $f_child->slug }}"> {{ $f_child->name }} </label>
+                            </div>
+                                {{-- @foreach($f_child->categories as $cat)
                                     @if($cat->id == $category_select->id)
                                         <div class="form-check form-check-inline">
                                             <input
@@ -158,7 +175,7 @@
                                             <label class="form-check-label" for="{{ $f_child->slug }}"> {{ $f_child->name }} </label>
                                         </div>
                                     @endif
-                                @endforeach
+                                @endforeach --}}
                             @endforeach
                             <br>
                         @endif

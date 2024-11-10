@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FileController;
+use App\Models\Category;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
@@ -12,7 +13,22 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 Route::get('/', function () {return view('welcome');})->name('welcome');
 Route::get('/dev', function () {
-    return 'dev';
+    $cat = Category::all();
+    foreach($cat as $c){
+        
+        if($c->parent != null){
+            echo '<font size="5">'. ($c->id) . '</font> -';
+            echo ($c->name) . '-';
+            echo ($c->parent->name);
+        }else{
+            
+            echo ($c->name) . '-';
+            echo 'سربرگ اصلی';
+        }
+        
+        echo "<br>";
+    }
+
 })->name('dev');
 /*
 |--------------------------------------------------------------------------
