@@ -43,10 +43,26 @@ class FileController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    public function createUser()
+    {
+        $category_select = Category::find(request()->category);
+        return view('file.createUser', [
+            'category_select' => $category_select,
+        ]);
+    }
+
+    public function createInfo()
+    {
+        $category_select = Category::find(request()->category);
+        return view('file.createInfo', [
+            'category_select' => $category_select,
+        ]);
+    }
+
     public function create()
     {
         $category_select = Category::find(request()->category);
-        return view('file.create', [
+        return view('file.createUser', [
             'category_select' => $category_select,
         ]);
     }

@@ -13,15 +13,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 Route::get('/', function () {return view('welcome');})->name('welcome');
 Route::get('/dev', function () {
-    echo "<br>"; 
-    $products = Field::whereBetween('id', [50, 100])->get();
-    //$products = Field::paginate(50);
-    foreach($products as $product){
-        echo ($product->id) . '-';
-        echo ($product->name) . '-'. ($product->form);
-        echo "<br>"; 
-    }
-    
+    return "mansory"; 
 })->name('dev');
 /*
 |--------------------------------------------------------------------------
@@ -54,4 +46,6 @@ Route::group(['prefix' => 'admin'], function () { Voyager::routes(); });
 |--------------------------------------------------------------------------
 */
 Route::get('/file/select', [FileController::class, 'select'])->name('file.select');
+Route::post('/file/create-user', [FileController::class, 'createUser'])->name('file.createuser');
+Route::post('/file/create-info', [FileController::class, 'createInfo'])->name('file.createinfo');
 Route::resource('file', FileController::class);

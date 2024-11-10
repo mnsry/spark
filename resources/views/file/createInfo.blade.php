@@ -16,7 +16,7 @@
             |
             <span class="text-primary">  {{ $category_select->name }}</span>
         </h2>
-        <p class="lead pt-4">لطفا فیلد های زیر را با دقت پرکنید</p>
+        <p class="lead pt-4">اطلاعات ساختمان</p>
     </div>
 
     <div class="row">
