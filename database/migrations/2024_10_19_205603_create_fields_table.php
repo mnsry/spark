@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->enum('form', ['NULL', 'NUMBER', 'TEXT', 'TEXTAREA', 'SELECT', 'MULTISELECT', 'CHECKBOX', 'MULTICHECKBOX', 'RADIOBUTTON', 'DATE','IMAGE', 'MULTIIMAGE', 'VIDEO', 'FILE'])->default('NULL');
+            $table->enum('page', ['MOGHEYAT', 'INFORMATION', 'OPTIONAL', 'ADVANCE', 'PRICE', 'CHANGE', 'MEDIA'])->default('INFORMATION');
             $table->boolean('optional')->default(0);
             $table->boolean('field_child_categories')->default(0);
             $table->timestamps();

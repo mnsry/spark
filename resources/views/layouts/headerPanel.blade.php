@@ -5,10 +5,12 @@
             @can('browse_admin')
                 <a class="btn btn-sm btn-outline-success" href="{{ route('voyager.dashboard') }}">Panel</a>
             @endcan
-            <button type="button" class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-sm btn-outline-success" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
                 ایجاد فایل
             </button>
-            <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -16,10 +18,10 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('file.select') }}">
+                            <form action="{{ route('file.select.category') }}">
                                 <div class="form-group">
-                                    <label class="py-3" for="categories">لطفا نوع فایل را مشخص کنید</label>
-                                    <select id="categories" class="form-select" name="category" aria-label="category">
+                                    <select id="categories" class="form-select" name="category_id"
+                                            aria-label="category">
                                         @php
                                             $categories = \App\Models\Category::whereNull('parent_id')->orderBy('order', 'ASC')->get();
                                         @endphp
@@ -32,12 +34,9 @@
                                 <button class="btn btn-primary w-100 mt-1" type="submit">بعدی</button>
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">لغو</button>
-                        </div>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
     </div>
 </div>

@@ -13,7 +13,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 Route::get('/', function () {return view('welcome');})->name('welcome');
 Route::get('/dev', function () {
-    return "mansory"; 
+    return "mansory";
 })->name('dev');
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +45,13 @@ Route::group(['prefix' => 'admin'], function () { Voyager::routes(); });
 | File Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/file/select', [FileController::class, 'select'])->name('file.select');
-Route::post('/file/create-user', [FileController::class, 'createUser'])->name('file.createuser');
-Route::post('/file/create-info', [FileController::class, 'createInfo'])->name('file.createinfo');
+Route::get('/file/select-category', [FileController::class, 'selectCategory'])->name('file.select.category');
+Route::get('/file/create-user', [FileController::class, 'createUser'])->name('file.create.user');
+Route::get('/file/create-loc', [FileController::class, 'createLoc'])->name('file.create.loc');
+Route::get('/file/create-info', [FileController::class, 'createInfo'])->name('file.create.info');
+Route::get('/file/create-optional', [FileController::class, 'createOptional'])->name('file.create.optional');
+Route::get('/file/create-advance', [FileController::class, 'createAdvance'])->name('file.create.advance');
+Route::get('/file/create-price', [FileController::class, 'createPrice'])->name('file.create.price');
+Route::get('/file/create-change', [FileController::class, 'createChange'])->name('file.create.change');
+Route::get('/file/create-media', [FileController::class, 'createMedia'])->name('file.create.media');
 Route::resource('file', FileController::class);
