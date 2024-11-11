@@ -3,7 +3,7 @@
 
     <div class="pt-2 text-center">
         <h2 class="text-primary">{{ $category_select->parent->name }} - {{ $category_select->name }}</h2>
-        <p class="lead py-2"><span> اطلاعات ملک </span> - <span> {{ $user->name }} </span></p>
+        <p class="lead py-2"><span> اطلاعات ملک </span> - <span class="text-danger"> {{ $user->name }} </span></p>
     </div>
 
     <form action="{{ route('file.store') }}" method="POST">
