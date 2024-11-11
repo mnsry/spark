@@ -18,10 +18,9 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('file.select.category') }}">
+                            <form action="{{ route('file.select') }}">
                                 <div class="form-group">
-                                    <select id="categories" class="form-select" name="category_id"
-                                            aria-label="category">
+                                    <select class="form-select" name="category_id" aria-label="category_id">
                                         @php
                                             $categories = \App\Models\Category::whereNull('parent_id')->orderBy('order', 'ASC')->get();
                                         @endphp

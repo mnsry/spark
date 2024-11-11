@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Category;
-use App\Models\Field;
-use App\Models\File;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema;
 
 class FileController extends Controller
 {
@@ -19,122 +17,69 @@ class FileController extends Controller
     {
         $user = auth()->user();
         $files = $user->files;
-        //$columns = Schema::getColumnListing('files');
+
         return view('file.index',[
             'files' => $files,
-            //'columns' => $columns
         ]);
     }
 
-    public function selectCategory()
+    public function select()
     {
-        $category_select = Category::find(request()->category_id);
-        return view('file.selectCategory', [
+        $category_select = Category::find( request('category_id') );
+
+        return view('file.select', [
             'category_select' => $category_select,
         ]);
     }
 
-    public function createUser()
+    public function create(Request $request)
     {
-        $category_select = Category::find(request()->category_id);
-        return view('file.createUser', [
-            'category_select' => $category_select,
-        ]);
-    }
+        $category_select = Category::find( request('category_id') );
 
-    public function createLoc()
-    {
-        $category_select = Category::find(request()->category_id);
-        $field_mahale = Field::find(1);
-        $field_address = Field::find(3);
-        return view('file.createLoc', [
-            'category_select' => $category_select,
-            'field_mahale' => $field_mahale,
-            'field_address' => $field_address,
+        $request->validate([
+            'username' => 'required',
+            'mobile' => 'required|min:10|max:14',
         ]);
-    }
 
-    public function createInfo()
-    {
-        $category_select = Category::find(request()->category_id);
-        return view('file.createInfo', [
-            'category_select' => $category_select,
-        ]);
-    }
+        $user = User::firstOrCreate(
+            ['mobile' => $request['mobile']],
+            [
+                'user_id' => auth()->id(),
+                'name' => $request['username'],
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+            ]
+        );
 
-    public function createOptional()
-    {
-        $category_select = Category::find(request()->category_id);
-        return view('file.createOptional', [
+        return view('file.create', [
             'category_select' => $category_select,
-        ]);
-    }
-
-    public function createAdvance()
-    {
-        $category_select = Category::find(request()->category_id);
-        return view('file.createAdvance', [
-            'category_select' => $category_select,
-        ]);
-    }
-
-    public function createPrice()
-    {
-        $category_select = Category::find(request()->category_id);
-        return view('file.createPrice', [
-            'category_select' => $category_select,
-        ]);
-    }
-
-    public function createChange()
-    {
-        $category_select = Category::find(request()->category_id);
-        return view('file.createChange', [
-            'category_select' => $category_select,
-        ]);
-    }
-
-    public function createMedia()
-    {
-        $category_select = Category::find(request()->category_id);
-        return view('file.createMedia', [
-            'category_select' => $category_select,
-        ]);
-    }
-
-    public function create()
-    {
-        $category_select = Category::find(request()->category);
-        return view('file.createUser', [
-            'category_select' => $category_select,
+            'user' => $user,
         ]);
     }
 
     public function store(Request $request)
     {
-        $file = File::create($request->all());
-        return redirect()->route("file.index");
+        dd('store');
+        //$file = File::create($request->all());
+        //return to_route('file.index');
     }
 
-    public function show(File $file)
-    {
-        return view('file.show',[
-            'file' => $file
-        ]);
-    }
-
-    public function edit(File $file)
+    public function show()
     {
         //
     }
 
-    public function update(Request $request, File $file)
+    public function edit()
     {
         //
     }
 
-    public function destroy(File $file)
+    public function update(Request $request)
     {
-        return redirect()->route('file.index');
+        //
+    }
+
+    public function destroy()
+    {
+        //
     }
 }
