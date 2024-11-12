@@ -6,7 +6,7 @@ INSERT INTO `fields` (`id`, `order`, `name`, `slug`, `form`, `optional`, `field_
 (5, 5, 'جهت', 'jahat', 'SELECT', 1, 0, NULL, NULL),
 (6, 6, 'سن بنا', 'senbana', 'SELECT', 0, 0, NULL, NULL),
 (7, 7, 'کل واحد', 'kolvahed', 'SELECT', 1, 0, NULL, NULL),
-(8, 8, 'واحد', 'vahet', 'TEXT', 0, 0, NULL, NULL),
+(8, 8, 'واحد', 'vahed', 'TEXT', 0, 0, NULL, NULL),
 (9, 9, 'طبقات', 'tabaghat', 'SELECT', 0, 0, NULL, NULL),
 (10, 10, 'طبقه', 'tabaghe', 'SELECT', 0, 0, NULL, NULL),
 (11, 11, 'طبقات بین', 'tabaghatbeyn', 'MULTISELECT', 0, 0, NULL, NULL),

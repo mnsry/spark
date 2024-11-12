@@ -15,8 +15,8 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('field_id')->unsigned();
             $table->integer('order')->default(1);
-            $table->string('name');
-            $table->string('slug')->unique();
+            $table->string('name', 20);
+            $table->string('slug', 30)->unique();
             $table->timestamps();
             $table
                 ->foreign('field_id')
