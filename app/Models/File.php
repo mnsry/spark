@@ -5,100 +5,95 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\DB;
 
 class File extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
-        'sen_bana','tabaghe', 'kol_vahed', 'otagh', 'sanad', 'kafpoosh', 'jahat', 'kabinet', 'hot', 'emtiyza',
-        'more', 'mahal', 'slug', 'seo_title', 'meta_description', 'meta_keywords', 'image', 'video', 'address',
-        'status', 'price', 'rahn', 'ejare', 'metr', 'metr_zamin', 'shekar', 'like', 'elvator', 'anbari', 'balkon',
-        'parking', 'farangi', 'moaveze', 'bazsazi', 'cooler', 'water_hot', 'user_id', 'category_id',
+        'user_id', 'category_id', 'mahale', 'mahalekharid', 'address', 'sanad', 'jahat', 'senbana', 'kolvahed',
+        'vahed', 'tabaghat', 'tabaghe', 'tabaghatbeyn', 'parking', 'anbari', 'elvator', 'metrajzamin', 'metrajmaskoni',
+        'metrajtejari', 'metrajmohavate', 'metrajmohavatebeyn', 'metrajbanabeyn', 'metrajbeyn', 'metrajhashiye',
+        'metraj', 'metrajbana', 'metrajbalkon', 'metrajhayat', 'otagh', 'ashpazkhane', 'emtiazat', 'emtiazatbagh',
+        'abouteemtiazat', 'nama', 'darb', 'kafposh', 'divar', 'divarsanati', 'saghf', 'loster', 'hammam', 'tovalet',
+        'dastshor', 'zarfiyattedad', 'zarfiyat', 'zarfiyatmazad', 'abgarm', 'garmayesh', 'sarmayesh', 'estakhr',
+        'sonajacozi', 'alachigh', 'gasromizi', 'takht', 'moble', 'tv', 'yakhchal', 'pokhtopaz', 'priceadi',
+        'priceendhafte', 'pricetatilat', 'pricenafar', 'price', 'pricerahnaz', 'priceejareaz', 'pricerahnta',
+        'priceejareta', 'priceasl', 'pricebarahn', 'priceejarebeyn', 'takhleye', 'van', 'komoddivari', 'kabinet',
+        'shoghl', 'aboute', 'image', 'imagemulti', 'video', 'sabeghe', 'sabegheaz', 'mojavez', 'shekar', 'ajnas',
+        'pricemoaveze', 'like', 'moavezeba', 'mahalemoaveze', 'status',
     ];
 
     protected $casts = [
-        'emtiyza' => 'array',
+        'mahalekharid' => 'array', 'tabaghatbeyn' => 'array', 'metrajmohavatebeyn' => 'array',
+        'metrajbanabeyn' => 'array', 'metrajbeyn' => 'array', 'emtiazat' => 'array', 'emtiazatbagh' => 'array',
+        'priceejarebeyn' => 'array', 'sabegheaz' => 'array', 'mahalemoaveze' => 'array',
     ];
 
-    public function scopeMsd(Builder $query, string $slug)
-    {
-        dd($query->pluck($slug));
-    }
 
-    public function scopeEmtiyza(Builder $query, array $emtiyza)
-    {
-        return Field::whereIn('id', $emtiyza)->get();
-    }
 
-    public function SenBana(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Field::class, 'sen_bana');
-    }
-
-    public function Waterhot(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Field::class, 'water_hot');
-    }
-
-    public function Cooler(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Field::class, 'cooler');
-    }
-
-    public function Mahale(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Field::class, 'mahale');
-    }
-
-    public function Hot(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Field::class, 'hot');
-    }
-
-    public function Kabinet(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Field::class, 'kabinet');
-    }
-
-    public function Jahat(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Field::class, 'jahat');
-    }
-
-    public function Kafpoosh(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Field::class, 'kafpoosh');
-    }
-
-    public function Sanad(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Field::class, 'sanad');
-    }
-
-    public function Otagh(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Field::class, 'otagh');
-    }
-
-    public function KolVahed(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Field::class, 'kol_vahed');
-    }
-
-    public function Tabaghe(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Field::class, 'tabaghe');
-    }
-
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function mahale()
+    {
+        return $this->belongsTo(Fieldchild::class, 'mahale');
+    }
+
+    public function scopeMahalekharid(Builder $query, array $mahalekharid)
+    {
+        return Fieldchild::whereIn('id', $mahalekharid)->get();
+    }
+
+    public function scopeTabaghatbeyn(Builder $query, array $tabaghatbeyn)
+    {
+        return Fieldchild::whereIn('id', $tabaghatbeyn)->get();
+    }
+
+    public function scopeMetrajmohavatebeyn(Builder $query, array $metrajmohavatebeyn)
+    {
+        return Fieldchild::whereIn('id', $metrajmohavatebeyn)->get();
+    }
+
+    public function scopeMetrajbanabeyn(Builder $query, array $metrajbanabeyn)
+    {
+        return Fieldchild::whereIn('id', $metrajbanabeyn)->get();
+    }
+
+    public function scopeMetrajbeyn(Builder $query, array $metrajbeyn)
+    {
+        return Fieldchild::whereIn('id', $metrajbeyn)->get();
+    }
+
+    public function scopeEmtiazat(Builder $query, array $emtiazat)
+    {
+        return Fieldchild::whereIn('id', $emtiazat)->get();
+    }
+
+    public function scopeEmtiazatbagh(Builder $query, array $emtiazatbagh)
+    {
+        return Fieldchild::whereIn('id', $emtiazatbagh)->get();
+    }
+
+    public function scopePriceejarebeyn(Builder $query, array $priceejarebeyn)
+    {
+        return Fieldchild::whereIn('id', $priceejarebeyn)->get();
+    }
+
+    public function scopeSabegheazd(Builder $query, array $sabegheaz)
+    {
+        return Fieldchild::whereIn('id', $sabegheaz)->get();
+    }
+
+    public function scopeMahalemoaveze(Builder $query, array $mahalemoaveze)
+    {
+        return Fieldchild::whereIn('id', $mahalemoaveze)->get();
     }
 }
