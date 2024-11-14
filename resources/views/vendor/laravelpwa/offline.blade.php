@@ -2,6 +2,6 @@
 
 @section('content')
 
-    <h1>اینترنت شما قطعه</h1>
+    <h3>اینترنت شما قطعه</h3>
 
 @endsection

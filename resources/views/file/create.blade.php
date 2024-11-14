@@ -28,14 +28,14 @@
 
             @if($field->form == 'TEXTAREA')
                 <div class="form-floating py-3">
-                            <textarea
-                                class="form-control"
-                                style="height: 100px"
-                                id="{{ $field->slug }}"
-                                name="{{ $field->slug }}"
-                            >
-                                {{ old($field->slug) }}
-                            </textarea>
+                    <textarea
+                        class="form-control"
+                        style="height: 100px"
+                        id="{{ $field->slug }}"
+                        name="{{ $field->slug }}"
+                    >
+                        {{ old($field->slug) }}
+                    </textarea>
                     <label for="{{ $field->slug }}">{{ $field->name }}</label>
                 </div>
             @endif
@@ -89,17 +89,21 @@
                         name="{{ $field->slug }}"
                     >
                         <option selected disabled>انتخاب کنید</option>
-                        @foreach($field->fieldchilds as $f_child)
-                            <option value="{{ $f_child->id }}" @selected(old($field->slug) == $f_child->id)>
-                                {{ $f_child->name }}
-                            </option>
-                            {{-- @foreach($f_child->categories as $cat)
-                                @if($cat->id == $category_select->id)
-                                    <option value="{{ $f_child->id }}" @selected(old($field->slug) == $f_child->id)>
-                                        {{ $f_child->name }}
-                                    </option>
-                                @endif
-                            @endforeach --}}
+                        @foreach($field->fieldchilds as $fieldchild)
+                            @if ($field->field_child_categories == 0)
+                                <option value="{{ $fieldchild->id }}" @selected(old($field->slug) == $fieldchild->id)>
+                                    {{ $fieldchild->name }}
+                                </option> 
+                            @endif
+                            @if ($field->field_child_categories == 1)
+                                @foreach($fieldchild->categories as $category)
+                                    @if($category->id == $category_select->id)
+                                        <option value="{{ $fieldchild->id }}" @selected(old($field->slug) == $fieldchild->id)>
+                                            {{ $fieldchild->name }}
+                                        </option>
+                                    @endif
+                                @endforeach
+                            @endif                   
                         @endforeach
                     </select>
                     <label for="{{ $field->slug }}">{{ $field->name }}</label>
@@ -116,17 +120,21 @@
                         multiple
                     >
                         <option selected disabled>انتخاب کنید</option>
-                        @foreach($field->fieldchilds as $f_child)
-                            <option value="{{ $f_child->id }}" @selected(old($field->slug) == $f_child->id)>
-                                {{ $f_child->name }}
-                            </option>
-                            {{-- @foreach($f_child->categories as $cat)
-                                @if($cat->id == $category_select->id)
-                                    <option value="{{ $f_child->id }}" @selected(old($field->slug) == $f_child->id)>
-                                        {{ $f_child->name }}
-                                    </option>
-                                @endif
-                            @endforeach --}}
+                        @foreach($field->fieldchilds as $fieldchild)
+                            @if ($field->field_child_categories == 0)
+                                <option value="{{ $fieldchild->id }}" @selected(old($field->slug) == $fieldchild->id)>
+                                    {{ $fieldchild->name }}
+                                </option> 
+                            @endif
+                            @if ($field->field_child_categories == 1)
+                                @foreach($fieldchild->categories as $category)
+                                    @if($category->id == $category_select->id)
+                                        <option value="{{ $fieldchild->id }}" @selected(old($field->slug) == $fieldchild->id)>
+                                            {{ $fieldchild->name }}
+                                        </option>
+                                    @endif
+                                @endforeach
+                            @endif                   
                         @endforeach
                     </select>
                     <label for="{{ $field->slug }}">{{ $field->name }}</label>
@@ -135,33 +143,37 @@
 
             @if($field->form == 'RADIOBUTTON')
                 <br><p class="form-check form-check-inline"> {{ $field->name }}</p><br>
-                @foreach($field->fieldchilds as $f_child)
-                    <div class="form-check form-check-inline">
-                        <input
-                            type="radio"
-                            class="form-check-input"
-                            id="{{ $f_child->slug }}"
-                            value="{{ $f_child->id }}"
-                            name="{{ $field->slug }}"
-                            {{ old($field->slug) == $f_child->id ? 'checked' : '' }}
-                        >
-                        <label class="form-check-label" for="{{ $f_child->slug }}"> {{ $f_child->name }} </label>
-                    </div>
-                    {{-- @foreach($f_child->categories as $cat)
-                        @if($cat->id == $category_select->id)
-                            <div class="form-check form-check-inline">
-                                <input
-                                    type="radio"
-                                    class="form-check-input"
-                                    id="{{ $f_child->slug }}"
-                                    value="{{ $f_child->id }}"
-                                    name="{{ $field->slug }}"
-                                    {{ old($field->slug) == $f_child->id ? 'checked' : '' }}
-                                >
-                                <label class="form-check-label" for="{{ $f_child->slug }}"> {{ $f_child->name }} </label>
-                            </div>
-                        @endif
-                    @endforeach --}}
+                @foreach($field->fieldchilds as $fieldchild)
+                    @if ($field->field_child_categories == 0)
+                        <div class="form-check form-check-inline">
+                            <input
+                                type="radio"
+                                class="form-check-input"
+                                id="{{ $fieldchild->slug }}"
+                                value="{{ $fieldchild->id }}"
+                                name="{{ $field->slug }}"
+                                {{ old($field->slug) == $fieldchild->id ? 'checked' : '' }}
+                            >
+                            <label class="form-check-label" for="{{ $fieldchild->slug }}"> {{ $fieldchild->name }} </label>
+                        </div>
+                    @endif
+                    @if ($field->field_child_categories == 1)
+                        @foreach($fieldchild->categories as $category)
+                            @if($category->id == $category_select->id)       
+                                <div class="form-check form-check-inline">
+                                    <input
+                                        type="radio"
+                                        class="form-check-input"
+                                        id="{{ $fieldchild->slug }}"
+                                        value="{{ $fieldchild->id }}"
+                                        name="{{ $field->slug }}"
+                                        {{ old($field->slug) == $fieldchild->id ? 'checked' : '' }}
+                                    >
+                                    <label class="form-check-label" for="{{ $fieldchild->slug }}"> {{ $fieldchild->name }} </label>
+                                </div>
+                            @endif
+                        @endforeach
+                    @endif
                 @endforeach
                 <br>
             @endif

@@ -107,8 +107,9 @@ return new class extends Migration
             $table->foreign('abgarm')->references('id')->on('fieldchilds');
             $table->integer('garmayesh')->unsigned()->nullable()->default(null);
             $table->foreign('garmayesh')->references('id')->on('fieldchilds');
-            $table->integer('sarmayesh')->unsigned()->nullable()->default(null);
-            $table->foreign('sarmayesh')->references('id')->on('fieldchilds');
+            // json
+            $table->json('sarmayesh')->nullable()->default('[]');
+            // id field
             $table->integer('estakhr')->unsigned()->nullable()->default(null);
             $table->foreign('estakhr')->references('id')->on('fieldchilds');
             // مقادیر هست و نیست

@@ -27,10 +27,8 @@ class File extends Model
     protected $casts = [
         'mahalekharid' => 'array', 'tabaghatbeyn' => 'array', 'metrajmohavatebeyn' => 'array',
         'metrajbanabeyn' => 'array', 'metrajbeyn' => 'array', 'emtiazat' => 'array', 'emtiazatbagh' => 'array',
-        'priceejarebeyn' => 'array', 'sabegheaz' => 'array', 'mahalemoaveze' => 'array',
+        'priceejarebeyn' => 'array', 'sabegheaz' => 'array', 'mahalemoaveze' => 'array', 'sarmayesh' => 'array'
     ];
-
-
 
     public function user()
     {

@@ -16,9 +16,13 @@ class FileController extends Controller
 
     public function index()
     {
-        $user = auth()->user();
-        $files = $user->files;
-
+        if(auth()->id() == 1){
+            $files = File::all();
+        } else {
+            $user = auth()->user();
+            $files = $user->files;
+        }
+        
         return view('file.index',[
             'files' => $files,
         ]);
