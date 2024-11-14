@@ -1,41 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Nov 13, 2024 at 09:02 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `spark`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `category_field`
---
-
-CREATE TABLE `category_field` (
-  `category_id` int(10) UNSIGNED NOT NULL,
-  `field_id` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `category_field`
---
-
 INSERT INTO `category_field` (`category_id`, `field_id`) VALUES
 (2, 1),
 (2, 3),
@@ -420,31 +382,180 @@ INSERT INTO `category_field` (`category_id`, `field_id`) VALUES
 (25, 72),
 (25, 82),
 (25, 83),
-(25, 84);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `category_field`
---
-ALTER TABLE `category_field`
-  ADD PRIMARY KEY (`category_id`,`field_id`),
-  ADD KEY `category_field_field_id_foreign` (`field_id`);
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `category_field`
---
-ALTER TABLE `category_field`
-  ADD CONSTRAINT `category_field_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
-  ADD CONSTRAINT `category_field_field_id_foreign` FOREIGN KEY (`field_id`) REFERENCES `fields` (`id`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+(25, 84),
+(26, 2),
+(26, 3),
+(26, 21),
+(26, 24),
+(26, 29),
+(26, 30),
+(26, 33),
+(26, 34),
+(26, 35),
+(26, 36),
+(26, 38),
+(26, 65),
+(26, 66),
+(26, 67),
+(26, 68),
+(26, 71),
+(26, 72),
+(26, 82),
+(26, 83),
+(26, 84),
+(27, 2),
+(27, 3),
+(27, 20),
+(27, 21),
+(27, 22),
+(27, 27),
+(27, 29),
+(27, 30),
+(27, 33),
+(27, 34),
+(27, 35),
+(27, 38),
+(27, 65),
+(27, 66),
+(27, 67),
+(27, 68),
+(27, 71),
+(27, 72),
+(27, 82),
+(27, 83),
+(27, 84),
+(28, 2),
+(28, 3),
+(28, 7),
+(28, 8),
+(28, 12),
+(28, 13),
+(28, 21),
+(28, 27),
+(28, 28),
+(28, 29),
+(28, 30),
+(28, 33),
+(28, 35),
+(28, 36),
+(28, 38),
+(28, 45),
+(28, 46),
+(28, 47),
+(28, 65),
+(28, 66),
+(28, 67),
+(28, 68),
+(28, 71),
+(28, 72),
+(28, 82),
+(28, 83),
+(28, 84),
+(29, 2),
+(29, 3),
+(29, 18),
+(29, 22),
+(29, 27),
+(29, 29),
+(29, 40),
+(29, 42),
+(29, 45),
+(29, 46),
+(29, 47),
+(29, 48),
+(29, 49),
+(29, 51),
+(29, 52),
+(29, 55),
+(29, 56),
+(29, 57),
+(29, 58),
+(29, 59),
+(29, 60),
+(29, 63),
+(29, 82),
+(29, 83),
+(29, 84),
+(30, 2),
+(30, 3),
+(30, 22),
+(30, 27),
+(30, 40),
+(30, 42),
+(30, 46),
+(30, 47),
+(30, 52),
+(30, 55),
+(30, 56),
+(30, 57),
+(30, 58),
+(30, 59),
+(30, 60),
+(30, 61),
+(30, 62),
+(30, 63),
+(30, 82),
+(30, 83),
+(30, 84),
+(32, 2),
+(32, 9),
+(32, 12),
+(32, 14),
+(32, 21),
+(32, 27),
+(32, 65),
+(32, 66),
+(32, 67),
+(32, 68),
+(32, 71),
+(32, 82),
+(33, 2),
+(33, 21),
+(33, 27),
+(33, 65),
+(33, 66),
+(33, 67),
+(33, 68),
+(33, 71),
+(33, 82),
+(34, 2),
+(34, 21),
+(34, 65),
+(34, 66),
+(34, 67),
+(34, 68),
+(34, 71),
+(34, 82),
+(35, 2),
+(35, 21),
+(35, 65),
+(35, 66),
+(35, 67),
+(35, 68),
+(35, 71),
+(35, 82),
+(36, 2),
+(36, 21),
+(36, 27),
+(36, 65),
+(36, 66),
+(36, 67),
+(36, 68),
+(36, 71),
+(36, 82),
+(37, 2),
+(37, 19),
+(37, 23),
+(37, 27),
+(37, 43),
+(37, 48),
+(37, 49),
+(37, 68),
+(37, 82),
+(38, 2),
+(38, 21),
+(38, 27),
+(38, 40),
+(38, 43),
+(38, 68),
+(38, 82);
