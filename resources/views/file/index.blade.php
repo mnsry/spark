@@ -53,14 +53,14 @@
                                                         $colOne = $file->pluck($field->slug)->first();
                                                     @endphp
 
-                                                    @if($field->slug == 'emtiyza')
+                                                    @if($field->slug == 'emtiazat')
                                                         <th scope="col">
-                                                            @if($file->emtiyza != [])
+                                                            @if($file->emtiazat != [])
                                                                 @php
                                                                     $colMore = $file->pluck($field->slug)->flatten()->toArray();
                                                                 @endphp
-                                                                @foreach (  $file->emtiyza($colMore) as $emtiaz)
-                                                                    {{ $emtiaz->name }}
+                                                                @foreach (  $file->emtiazat($colMore) as $emtiyza)
+                                                                    {{ $emtiyza->name }}
                                                                 @endforeach
                                                             @else
                                                                 مقدار خالی است

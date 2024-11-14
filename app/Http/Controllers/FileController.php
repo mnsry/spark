@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Category;
+use App\Models\File;
 use Illuminate\Http\Request;
 
 class FileController extends Controller
@@ -58,9 +59,8 @@ class FileController extends Controller
 
     public function store(Request $request)
     {
-        dd('store');
-        //$file = File::create($request->all());
-        //return to_route('file.index');
+        File::create($request->all());
+        return to_route('file.index');
     }
 
     public function show()
