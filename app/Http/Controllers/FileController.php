@@ -22,7 +22,7 @@ class FileController extends Controller
             $user = auth()->user();
             $files = $user->files;
         }
-        
+
         return view('file.index',[
             'files' => $files,
         ]);
@@ -42,7 +42,7 @@ class FileController extends Controller
         $category_select = Category::find( request('category_id') );
 
         $request->validate([
-            'username' => 'required',
+            'name' => 'required',
             'mobile' => 'required|min:10|max:14',
         ]);
 
@@ -50,7 +50,7 @@ class FileController extends Controller
             ['mobile' => $request['mobile']],
             [
                 'user_id' => auth()->id(),
-                'name' => $request['username'],
+                'name' => $request['name'],
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             ]
         );
@@ -63,6 +63,7 @@ class FileController extends Controller
 
     public function store(Request $request)
     {
+        dd($request);
         File::create($request->all());
         return to_route('file.index');
     }

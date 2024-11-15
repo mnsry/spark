@@ -17,10 +17,10 @@
         </div>
 
         <div class="form-floating mt-3">
-            <input id="username" type="text" class="form-control @error('username') is-invalid @enderror"
-                   name="username" value="{{ old('username') }}"  placeholder="username">
-            <label for="username">نام و نام خانوادگی</label>
-            @error('username')
+            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                   name="name" value="{{ old('name') }}"  placeholder="name">
+            <label for="name">نام و نام خانوادگی</label>
+            @error('name')
                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
             @enderror
         </div>
