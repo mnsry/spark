@@ -19,7 +19,7 @@ class File extends Model
         'dastshor', 'zarfiyattedad', 'zarfiyat', 'zarfiyatmazad', 'abgarm', 'garmayesh', 'sarmayesh', 'estakhr',
         'sonajacozi', 'alachigh', 'gasromizi', 'takht', 'moble', 'tv', 'yakhchal', 'pokhtopaz', 'priceadi',
         'priceendhafte', 'pricetatilat', 'pricenafar', 'price', 'pricerahnaz', 'priceejareaz', 'pricerahnta',
-        'priceejareta', 'priceasl', 'pricebarahn', 'priceejarebeyn', 'takhleye', 'van', 'komoddivari', 'kabinet',
+        'priceejareta', 'priceasl', 'pricebarahn', 'priceejarebeyn', 'takhleyeday', 'takhleyemonth', 'van', 'komoddivari', 'kabinet',
         'shoghl', 'aboute', 'image', 'imagemulti', 'video', 'sabeghe', 'sabegheaz', 'mojavez', 'shekar', 'ajnas',
         'pricemoaveze', 'like', 'moavezeba', 'mahalemoaveze', 'status',
     ];

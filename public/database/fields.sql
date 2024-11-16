@@ -81,6 +81,6 @@ INSERT INTO `fields` (`id`, `order`, `name`, `slug`, `form`, `optional`, `field_
 (80, 80, 'معاوضه محل', 'mahalemoaveze', 'MULTISELECT', 1, 1, NULL, NULL),
 (81, 81, 'معاوضه مبلغ', 'pricemoaveze', 'NUMBER', 1, 0, NULL, NULL),
 (82, 82, 'توضیحات', 'aboute', 'TEXTAREA', 1, 0, NULL, NULL),
-(83, 83, 'عکس', 'image', 'IMAGE', 0, 0, NULL, NULL),
+(83, 83, 'عکس', 'image', 'IMAGE', 1, 0, NULL, NULL),
 (84, 84, 'ویدیو', 'video', 'VIDEO', 1, 0, NULL, NULL),
-(85, 85, 'عکس ها', 'imagemulti', 'MULTIIMAGE', 0, 0, NULL, NULL);
+(85, 85, 'عکس ها', 'imagemulti', 'MULTIIMAGE', 1, 0, NULL, NULL);

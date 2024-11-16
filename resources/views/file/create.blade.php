@@ -10,8 +10,8 @@
         @csrf
         <input type="hidden" name="category_id" value="{{ $category_select->id }}" />
         <input type="hidden" name="user_id" value="{{ $user->id }}" />
-        @foreach($category_select->fields as $field)
 
+        @foreach($category_select->fields as $field)
             @if($field->form == 'TEXT')
                 <div class="form-floating mt-3">
                     <input

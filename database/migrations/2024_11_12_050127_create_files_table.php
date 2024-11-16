@@ -122,21 +122,22 @@ return new class extends Migration
             $table->boolean('yakhchal')->default(0);
             $table->boolean('pokhtopaz')->default(0);
             // مقدار اعدادی
-            $table->integer('priceadi')->nullable()->default(0);
-            $table->integer('priceendhafte')->nullable()->default(0);
-            $table->integer('pricetatilat')->nullable()->default(0);
-            $table->integer('pricenafar')->nullable()->default(0);
-            $table->integer('price')->nullable()->default(0);
-            $table->integer('pricerahnaz')->nullable()->default(0);
-            $table->integer('priceejareaz')->nullable()->default(0);
-            $table->integer('pricerahnta')->nullable()->default(0);
-            $table->integer('priceejareta')->nullable()->default(0);
-            $table->integer('priceasl')->nullable()->default(0);
-            $table->integer('pricebarahn')->nullable()->default(0);
+            $table->bigInteger('priceadi')->nullable()->default(0);
+            $table->bigInteger('priceendhafte')->nullable()->default(0);
+            $table->bigInteger('pricetatilat')->nullable()->default(0);
+            $table->bigInteger('pricenafar')->nullable()->default(0);
+            $table->bigInteger('price')->nullable()->default(0);
+            $table->bigInteger('pricerahnaz')->nullable()->default(0);
+            $table->bigInteger('priceejareaz')->nullable()->default(0);
+            $table->bigInteger('pricerahnta')->nullable()->default(0);
+            $table->bigInteger('priceejareta')->nullable()->default(0);
+            $table->bigInteger('priceasl')->nullable()->default(0);
+            $table->bigInteger('pricebarahn')->nullable()->default(0);
             // json
             $table->json('priceejarebeyn')->nullable()->default('[]');
             // تقویم
-            $table->date('takhleye')->nullable();
+            $table->integer('takhleyeday')->nullable();
+            $table->integer('takhleyemonth')->nullable();
             // آیدی فیلد امکانات
             $table->integer('van')->unsigned()->nullable()->default(null);
             $table->foreign('van')->references('id')->on('fieldchilds');
@@ -159,9 +160,9 @@ return new class extends Migration
             $table->boolean('mojavez')->default(0);
             $table->boolean('shekar')->default(0);
             // مقدار اعدادی
-            $table->integer('amval')->nullable()->default(0);
-            $table->integer('ajnas')->nullable()->default(0);
-            $table->integer('pricemoaveze')->nullable()->default(0);
+            $table->bigInteger('amval')->nullable()->default(0);
+            $table->bigInteger('ajnas')->nullable()->default(0);
+            $table->bigInteger('pricemoaveze')->nullable()->default(0);
             $table->integer('like')->nullable()->default(0);
             // آیدی فیلد معاوضه
             $table->integer('moavezeba')->unsigned()->nullable()->default(null);
