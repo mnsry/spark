@@ -63,7 +63,6 @@ class FileController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
         File::create($request->all());
         return to_route('file.index');
     }
