@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('mahale')->unsigned()->nullable()->default(null);
             $table->foreign('mahale')->references('id')->on('fieldchilds');
             // متن
-            $table->longText('mahalekharid')->nullable()->default('[]');
+            $table->text('mahalekharid')->nullable()->default('[]');
             $table->string('address', 50)->nullable();
             // آیدی فیلد اطلاعات
             $table->integer('sanad')->unsigned()->nullable()->default(null);
@@ -42,7 +42,7 @@ return new class extends Migration
             $table->integer('tabaghe')->unsigned()->nullable()->default(null);
             $table->foreign('tabaghe')->references('id')->on('fieldchilds');
             // json
-            $table->longText('tabaghatbeyn')->nullable()->default('[]');
+            $table->text('tabaghatbeyn')->nullable()->default('[]');
             // مقادیر هست و نیست
             $table->boolean('parking')->default(0);
             $table->boolean('anbari')->default(0);
@@ -53,9 +53,9 @@ return new class extends Migration
             $table->integer('metrajtejari')->nullable()->default(0);
             $table->integer('metrajmohavate')->nullable()->default(0);
             // json
-            $table->longText('metrajmohavatebeyn')->nullable()->default('[]');
-            $table->longText('metrajbanabeyn')->nullable()->default('[]');
-            $table->longText('metrajbeyn')->nullable()->default('[]');
+            $table->text('metrajmohavatebeyn')->nullable()->default('[]');
+            $table->text('metrajbanabeyn')->nullable()->default('[]');
+            $table->text('metrajbeyn')->nullable()->default('[]');
             // مقدار اعدادی
             $table->integer('metrajhashiye')->nullable()->default(0);
             $table->integer('metraj')->nullable()->default(0);
@@ -68,8 +68,8 @@ return new class extends Migration
             // مقادیر هست و نیست
             $table->boolean('ashpazkhane')->default(0);
             // فیلد امتیازات
-            $table->longText('emtiazat')->nullable()->default('[]');
-            $table->longText('emtiazatbagh')->nullable()->default('[]');
+            $table->text('emtiazat')->nullable()->default('[]');
+            $table->text('emtiazatbagh')->nullable()->default('[]');
             // متن
             $table->string('abouteemtiazat', 100)->nullable();
             // آیدی فیلد بدنه
@@ -108,7 +108,7 @@ return new class extends Migration
             $table->integer('garmayesh')->unsigned()->nullable()->default(null);
             $table->foreign('garmayesh')->references('id')->on('fieldchilds');
             // json
-            $table->longText('sarmayesh')->nullable()->default('[]');
+            $table->text('sarmayesh')->nullable()->default('[]');
             // id field
             $table->integer('estakhr')->unsigned()->nullable()->default(null);
             $table->foreign('estakhr')->references('id')->on('fieldchilds');
@@ -134,7 +134,7 @@ return new class extends Migration
             $table->bigInteger('priceasl')->nullable()->default(0);
             $table->bigInteger('pricebarahn')->nullable()->default(0);
             // json
-            $table->longText('priceejarebeyn')->nullable()->default('[]');
+            $table->text('priceejarebeyn')->nullable()->default('[]');
             // تقویم
             $table->integer('takhleyeday')->nullable();
             $table->integer('takhleyemonth')->nullable();
@@ -155,7 +155,7 @@ return new class extends Migration
             $table->integer('sabeghe')->unsigned()->nullable()->default(null);
             $table->foreign('sabeghe')->references('id')->on('fieldchilds');
             // json
-            $table->longText('sabegheaz')->nullable()->default('[]');
+            $table->text('sabegheaz')->nullable()->default('[]');
             // مقادیر هست و نیست
             $table->boolean('mojavez')->default(0);
             $table->boolean('shekar')->default(0);
@@ -168,7 +168,7 @@ return new class extends Migration
             $table->integer('moavezeba')->unsigned()->nullable()->default(null);
             $table->foreign('moavezeba')->references('id')->on('fieldchilds');
             // json
-            $table->longText('mahalemoaveze')->nullable()->default('[]');
+            $table->text('mahalemoaveze')->nullable()->default('[]');
             // انتخابی
             $table->enum('status', ['PUBLISHED', 'DRAFT', 'PENDING'])->default('DRAFT');
             // زمان ها
