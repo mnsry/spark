@@ -149,7 +149,7 @@ return new class extends Migration
             $table->string('shoghl', 30)->nullable();
             $table->string('aboute')->nullable();
             $table->string('image')->nullable();
-            $table->text('imagemulti')->nullable();
+            $table->text('imagemulti')->nullable()->default('[]');
             $table->string('video')->nullable();
             // آیدی فیلد معاوضه
             $table->integer('sabeghe')->unsigned()->nullable()->default(null);

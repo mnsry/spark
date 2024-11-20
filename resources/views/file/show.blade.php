@@ -4,42 +4,48 @@
 
     <h2>{{ $file->title }}</h2>
     <div class="table-responsive small">
-        <table class="table table-striped table-sm">
-            <thead>
-            <tr>
-                <th scope="col">آیدی</th>
-                <th scope="col">عکس</th>
-                <th scope="col">عنوان</th>
-                <th scope="col">دسته بندی</th>
-                <th scope="col">وضعیت</th>
-            </tr>
-            </thead>
 
-            <tbody>
-                <tr>
-                    <td>{{ $file->id }}</td>
-                    <td>
-                        <img src="{{url('/') }}/storage/{{ $file->id }}" alt="{{ $file->id }}" style="width:100px"  />
-                    </td>
-                    <td>{{ $file->id }}</td>
-                    <td>
-                        @php $category = \TCG\Voyager\Models\Category::find( $file->id ); @endphp
-                        {{ $category->name }}
-                    </td>
-                    <td>
-                        @if ($file->id == 'PUBLISHED')
-                            انتشار
-                        @endif
-                        @if ($file->id == 'DRAFT')
-                            مطلق
-                        @endif
-                        @if ($file->id == 'PENDING')
-                            درحال بررسی
-                        @endif
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+
+        @if($field->slug == 'emtiazat')
+            <th scope="col">
+                @if($file->emtiazat != [])
+                    @php
+                        $colMore = $file->pluck($field->slug)->flatten()->toArray();
+                    @endphp
+                    @foreach ($file->emtiazat($colMore) as $emtiyza)
+                        {{ $emtiyza->name }}
+                    @endforeach
+                @else
+                    مقدار خالی است
+                @endif
+            </th>
+        @endif
+
+        @if($field->slug == 'kabinet')
+            <th scope="col">
+                @if($file->Kabinet()->exists())
+                    {{ ($file->Kabinet->name) }}
+                @else
+                    مقدار خالی است
+                @endif
+            </th>
+        @endif
+
+        @if($field->slug == 'price')
+            <th scope="col"> {{ ($file->price) }} </th>
+        @endif
+
+        @if($field->slug == 'elvator')
+            <th scope="col">
+                @if($file->elvator == 0)
+                    <span>ندارد</span>
+                @else
+                    <span>دارد</span>
+                @endif
+            </th>
+        @endif
+
+
     </div>
 
 @endsection

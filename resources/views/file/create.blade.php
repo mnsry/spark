@@ -254,6 +254,25 @@
                 </div>
             @endif
 
+            @if($field->form == 'MULTIIMAGE')
+                    <div class="input-group mt-3">
+                        <label class="input-group-text" for="{{ $field->slug }}">{{ $field->name }}
+                            @if($field->optional == 1)
+                                <small class="translate-middle-y badge text-success">(اختیاری)</small>
+                            @endif
+                        </label>
+                        <input
+                            type="file"
+                            class="form-control @error( $field->slug ) is-invalid @enderror"
+                            id="{{ $field->slug }}"
+                            name="{{ $field->slug }}[]"
+                            accept="image/*"
+                            {{ $field->optional == 0 ? 'required' : '' }}
+                            multiple
+                        >
+                    </div>
+            @endif
+
             @if($field->form == 'DATE')
                 <div class="d-flex text-center mt-3">
                     <div class="form-floating w-50 me-1">
@@ -286,7 +305,7 @@ $days = collect([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,
 $months = collect(['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','ابان','آذر','دی','بهمن','اسفند',])->all();
                             @endphp
                             @foreach($months as $key=>$month)
-                                <option value="{{ $key }}" @selected(old('takhleyemonth') == $month)>
+                                <option value="{{ $key+1 }}" @selected(old('takhleyemonth') == $month)>
                                     {{ $month }}
                                 </option>
                             @endforeach

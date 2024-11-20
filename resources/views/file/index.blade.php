@@ -37,66 +37,81 @@
                         <div id="collapseOne{{ $file->id }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample{{ $file->id }}">
                             <div class="accordion-body">
                                 <div class="table-responsive">
-                                    <div class="table-responsive">
-                                        <table class="table align-middle">
-                                            <thead>
-                                            <tr>
-                                                @foreach ($file->category->fields as $field)
-                                                    <th scope="col">{{ $field->name }}</th>
-                                                @endforeach
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-{{--                                            <tr>--}}
-{{--                                                @foreach($file->category->fields as $field)--}}
-{{--                                                    @php--}}
-{{--                                                        $colOne = $file->pluck($field->slug)->first();--}}
-{{--                                                    @endphp--}}
+                                    <table class="table-sm">
+                                        <thead>
+                                        <tr>
+                                            @foreach ($file->category->fields as $field)
+                                                <th scope="col">{{ $field->name }}</th>
+                                            @endforeach
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            @foreach($file->category->fields as $field)
+                                                @if (Schema::hasColumn($file->getTable(), $field->slug))
+                                                    @php
+                                                        $type = Schema::getColumnType('files', $field->slug);
+                                                        $valCol = $file->value($field->slug);
+                                                    @endphp
+                                                    @if($type == 'integer')
+                                                        @php
+                                                            $check = Schema::enableForeignKeyConstraints();
+                                                            $fieldchid = App\Models\Fieldchild::find($valCol);
+                                                        @endphp
 
-{{--                                                    @if($field->slug == 'emtiazat')--}}
-{{--                                                        <th scope="col">--}}
-{{--                                                            @if($file->emtiazat != [])--}}
-{{--                                                                @php--}}
-{{--                                                                    $colMore = $file->pluck($field->slug)->flatten()->toArray();--}}
-{{--                                                                @endphp--}}
-{{--                                                                @foreach ($file->emtiazat($colMore) as $emtiyza)--}}
-{{--                                                                    {{ $emtiyza->name }}--}}
-{{--                                                                @endforeach--}}
-{{--                                                            @else--}}
-{{--                                                                مقدار خالی است--}}
-{{--                                                            @endif--}}
-{{--                                                        </th>--}}
-{{--                                                    @endif--}}
+                                                        <th scope="col">
+                                                            @if($check == 1)
+                                                                {{ $fieldchid->name }}
+                                                            @else
+                                                                {{ $valCol }}
+                                                            @endif
+                                                        </th>
+                                                    @endif
+                                                    @if($type === 'boolean')
+                                                        <th scope="col">
+                                                            @if($valCol == 1)
+                                                                دارد
+                                                            @else
+                                                                ندارد
+                                                            @endif
+                                                        </th>
+                                                    @endif
+                                                    @if($type === 'bigint')
+                                                        <th scope="col">
+                                                            {{ $valCol }}
+                                                        </th>
+                                                    @endif
 
-{{--                                                    --}}{{-- @if($field->slug == 'kabinet')--}}
-{{--                                                        <th scope="col">--}}
-{{--                                                            @if($file->Kabinet()->exists())--}}
-{{--                                                                {{ ($file->Kabinet->name) }}--}}
-{{--                                                            @else--}}
-{{--                                                                مقدار خالی است--}}
-{{--                                                            @endif--}}
-{{--                                                        </th>--}}
-{{--                                                    @endif --}}
-
-{{--                                                    @if($field->slug == 'price')--}}
-{{--                                                        <th scope="col"> {{ ($file->price) }} </th>--}}
-{{--                                                    @endif--}}
-
-{{--                                                    @if($field->slug == 'elvator')--}}
-{{--                                                        <th scope="col">--}}
-{{--                                                            @if($file->elvator == 0)--}}
-{{--                                                                <span>ندارد</span>--}}
-{{--                                                            @else--}}
-{{--                                                                <span>دارد</span>--}}
-{{--                                                            @endif--}}
-{{--                                                        </th>--}}
-{{--                                                    @endif--}}
-
-{{--                                                @endforeach--}}
-{{--                                            </tr>--}}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                    @if( $valCol === null)
+                                                        <th scope="col">
+                                                            خالی
+                                                        </th>
+                                                    @endif
+                                                    @if(is_string( $valCol ))
+                                                        <th scope="col">
+                                                            {{ $valCol }}
+                                                        </th>
+                                                    @endif
+                                                    @if (is_array( $valCol ))
+                                                        <th scope="col">
+                                                            @if($valCol != [])
+                                                                @foreach (App\Models\Fieldchild::whereIn('id', $valCol)->get() as $fieldchid)
+                                                                    {{ $fieldchid->name }}
+                                                                @endforeach
+                                                            @else
+                                                                مقدار خالی است
+                                                            @endif
+                                                        </th>
+                                                    @endif
+                                                @else
+                                                    <th scope="col">
+                                                        {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}
+                                                    </th>
+                                                @endif
+                                            @endforeach
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
