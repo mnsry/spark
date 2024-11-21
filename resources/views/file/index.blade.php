@@ -48,33 +48,61 @@
                                         <tbody>
                                         <tr>
                                             @foreach($file->category->fields as $field)
-                                                @if (Schema::hasColumn($file->getTable(), $field->slug))
+                                                @if ($file->hosCol($field->slug))
                                                     @php
-                                                        $valCol = $file->value($field->slug);
+                                                        $value = $file->value($field->slug); 
                                                     @endphp
-                                                    @if (is_array( $valCol ))
+
+                                                    @if(is_null( $value ))
                                                         <th scope="col">
-                                                            @if($valCol != [])
-                                                                @foreach (App\Models\Fieldchild::whereIn('id', $valCol)->get() as $fieldchid)
+                                                            خالی
+                                                        </th>
+                                                    @endif
+
+                                                    @if(is_string( $value ))
+                                                        <th scope="col">
+                                                            {{ $value }}
+                                                        </th>
+                                                    @endif
+
+                                                    @if(is_numeric( $value ))
+                                                        @php
+                                                            $type = $file->type($field->slug); 
+                                                        @endphp
+                                                        <th scope="col">
+                                                            @if($file->isFK($field->slug))
+                                                                @php
+                                                                    $fieldchid = App\Models\Fieldchild::find($value);
+                                                                @endphp
+                                                                {{ $fieldchid->name }}
+                                                            @else
+                                                                @if($type === 'boolean')
+                                                                    @if($value == 1)
+                                                                        دارد
+                                                                    @else
+                                                                        ندارد
+                                                                    @endif
+                                                                @else
+                                                                    {{ $value }}
+                                                                @endif
+                                                            @endif
+                                                        </th>
+                                                    @endif
+
+                                                    @if (is_array( $value ))
+                                                        <th scope="col">
+                                                            @if($value != [])
+                                                                @php
+                                                                    $fieldchilds = App\Models\Fieldchild::whereIn('id', $value)->get(); 
+                                                                @endphp
+                                                                @foreach ($fieldchilds as $fieldchid)
                                                                     {{ $fieldchid->name }}
                                                                 @endforeach
                                                             @else
-                                                                مقدار خالی است
+                                                                خالی
                                                             @endif
                                                         </th>
-                                                    @else
-                                                        @if($file->isFK($field->slug))
-                                                            @php
-                                                                $fieldchid = App\Models\Fieldchild::find($valCol);
-                                                            @endphp
-                                                            {{ $fieldchid->name }}
-                                                        @else
-                                                            {{ $valCol }}
-                                                        @endif
-                                                        <th scope="col"> {{ $valCol }} </th>
                                                     @endif
-
-
                                                 @else
                                                     <th scope="col">
                                                         {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}

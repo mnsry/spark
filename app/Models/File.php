@@ -40,6 +40,16 @@ class File extends Model
         return $this->belongsTo(Category::class);
     }
 
+    function hosCol(string $column): bool
+    {
+        return Schema::hasColumn('files', $column);
+    }
+
+    function type(string $column): string
+    {
+        return Schema::getColumnType('files', $column);
+    }
+
     function isFK(string $column): bool
     {
         $fkColumns = Schema::getConnection()
