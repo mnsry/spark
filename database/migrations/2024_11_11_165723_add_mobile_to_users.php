@@ -12,9 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('mobile',14)->unique()->nullable()->after('email');
-            $table->unsignedBigInteger('user_id')->nullable()->default(null)->after('role_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            if (!Schema::hasColumn('users', 'mobile')) {
+                $table->string('mobile',14)->unique()->nullable()->after('email');
+            }
+            if (!Schema::hasColumn('users', 'user_id')) {
+                $table->unsignedBigInteger('user_id')->nullable()->default(null)->after('role_id');
+                $table->foreign('user_id')->references('id')->on('users');
+            }
             $table->string('email')->nullable()->change();
         });
     }
