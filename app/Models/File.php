@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class File extends Model
@@ -19,15 +19,15 @@ class File extends Model
         'dastshor', 'zarfiyattedad', 'zarfiyat', 'zarfiyatmazad', 'abgarm', 'garmayesh', 'sarmayesh', 'estakhr',
         'sonajacozi', 'alachigh', 'gasromizi', 'takht', 'moble', 'tv', 'yakhchal', 'pokhtopaz', 'priceadi',
         'priceendhafte', 'pricetatilat', 'pricenafar', 'price', 'pricerahnaz', 'priceejareaz', 'pricerahnta',
-        'priceejareta', 'priceasl', 'pricebarahn', 'priceejarebeyn', 'takhleyeday', 'takhleyemonth', 'van', 'komoddivari', 'kabinet',
-        'shoghl', 'aboute', 'image', 'imagemulti', 'video', 'sabeghe', 'sabegheaz', 'mojavez', 'shekar', 'ajnas',
-        'pricemoaveze', 'like', 'moavezeba', 'mahalemoaveze', 'status',
+        'priceejareta', 'priceasl', 'pricebarahn', 'priceejarebeyn', 'takhleyeday', 'takhleyemonth', 'van', 'komoddivari',
+        'kabinet', 'shoghl', 'aboute', 'image', 'imagemulti', 'video', 'sabeghe', 'sabegheaz', 'mojavez', 'shekar',
+        'ajnas', 'pricemoaveze', 'like', 'moavezeba', 'mahalemoaveze', 'status',
     ];
 
     protected $casts = [
-        'mahalekharid' => 'array', 'tabaghatbeyn' => 'array', 'metrajmohavatebeyn' => 'array',
+        'mahalekharid' => 'array', 'tabaghatbeyn' => 'array', 'metrajmohavatebeyn' => 'array', 'imagemulti' => 'array',
         'metrajbanabeyn' => 'array', 'metrajbeyn' => 'array', 'emtiazat' => 'array', 'emtiazatbagh' => 'array',
-        'priceejarebeyn' => 'array', 'sabegheaz' => 'array', 'mahalemoaveze' => 'array', 'sarmayesh' => 'array'
+        'priceejarebeyn' => 'array', 'sabegheaz' => 'array', 'mahalemoaveze' => 'array', 'sarmayesh' => 'array',
     ];
 
     public function user()
@@ -40,58 +40,14 @@ class File extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function mahale()
+    function isFK(string $column): bool
     {
-        return $this->belongsTo(Fieldchild::class, 'mahale');
-    }
+        $fkColumns = Schema::getConnection()
+            ->getDoctrineSchemaManager()
+            ->listTableForeignKeys('files');
 
-    public function scopeMahalekharid(Builder $query, array $mahalekharid)
-    {
-        return Fieldchild::whereIn('id', $mahalekharid)->get();
-    }
-
-    public function scopeTabaghatbeyn(Builder $query, array $tabaghatbeyn)
-    {
-        return Fieldchild::whereIn('id', $tabaghatbeyn)->get();
-    }
-
-    public function scopeMetrajmohavatebeyn(Builder $query, array $metrajmohavatebeyn)
-    {
-        return Fieldchild::whereIn('id', $metrajmohavatebeyn)->get();
-    }
-
-    public function scopeMetrajbanabeyn(Builder $query, array $metrajbanabeyn)
-    {
-        return Fieldchild::whereIn('id', $metrajbanabeyn)->get();
-    }
-
-    public function scopeMetrajbeyn(Builder $query, array $metrajbeyn)
-    {
-        return Fieldchild::whereIn('id', $metrajbeyn)->get();
-    }
-
-    public function scopeEmtiazat(Builder $query, array $emtiazat)
-    {
-        return Fieldchild::whereIn('id', $emtiazat)->get();
-    }
-
-    public function scopeEmtiazatbagh(Builder $query, array $emtiazatbagh)
-    {
-        return Fieldchild::whereIn('id', $emtiazatbagh)->get();
-    }
-
-    public function scopePriceejarebeyn(Builder $query, array $priceejarebeyn)
-    {
-        return Fieldchild::whereIn('id', $priceejarebeyn)->get();
-    }
-
-    public function scopeSabegheazd(Builder $query, array $sabegheaz)
-    {
-        return Fieldchild::whereIn('id', $sabegheaz)->get();
-    }
-
-    public function scopeMahalemoaveze(Builder $query, array $mahalemoaveze)
-    {
-        return Fieldchild::whereIn('id', $mahalemoaveze)->get();
+        return collect($fkColumns)->map(function ($fkColumn) {
+            return $fkColumn->getColumns();
+        })->flatten()->contains($column);
     }
 }

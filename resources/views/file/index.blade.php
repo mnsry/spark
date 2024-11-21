@@ -50,48 +50,8 @@
                                             @foreach($file->category->fields as $field)
                                                 @if (Schema::hasColumn($file->getTable(), $field->slug))
                                                     @php
-                                                        $type = Schema::getColumnType('files', $field->slug);
                                                         $valCol = $file->value($field->slug);
                                                     @endphp
-                                                    @if($type == 'integer')
-                                                        @php
-                                                            $check = Schema::enableForeignKeyConstraints();
-                                                            $fieldchid = App\Models\Fieldchild::find($valCol);
-                                                        @endphp
-
-                                                        <th scope="col">
-                                                            @if($check == 1)
-                                                                {{ $fieldchid->name }}
-                                                            @else
-                                                                {{ $valCol }}
-                                                            @endif
-                                                        </th>
-                                                    @endif
-                                                    @if($type === 'boolean')
-                                                        <th scope="col">
-                                                            @if($valCol == 1)
-                                                                دارد
-                                                            @else
-                                                                ندارد
-                                                            @endif
-                                                        </th>
-                                                    @endif
-                                                    @if($type === 'bigint')
-                                                        <th scope="col">
-                                                            {{ $valCol }}
-                                                        </th>
-                                                    @endif
-
-                                                    @if( $valCol === null)
-                                                        <th scope="col">
-                                                            خالی
-                                                        </th>
-                                                    @endif
-                                                    @if(is_string( $valCol ))
-                                                        <th scope="col">
-                                                            {{ $valCol }}
-                                                        </th>
-                                                    @endif
                                                     @if (is_array( $valCol ))
                                                         <th scope="col">
                                                             @if($valCol != [])
@@ -102,7 +62,19 @@
                                                                 مقدار خالی است
                                                             @endif
                                                         </th>
+                                                    @else
+                                                        @if($file->isFK($field->slug))
+                                                            @php
+                                                                $fieldchid = App\Models\Fieldchild::find($valCol);
+                                                            @endphp
+                                                            {{ $fieldchid->name }}
+                                                        @else
+                                                            {{ $valCol }}
+                                                        @endif
+                                                        <th scope="col"> {{ $valCol }} </th>
                                                     @endif
+
+
                                                 @else
                                                     <th scope="col">
                                                         {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}

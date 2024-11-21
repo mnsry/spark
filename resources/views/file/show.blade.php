@@ -6,44 +6,67 @@
     <div class="table-responsive small">
 
 
-        @if($field->slug == 'emtiazat')
+
+        @if (Schema::hasColumn($file->getTable(), $field->slug))
+            @php
+                $type = Schema::getColumnType($file->getTable(), $field->slug);
+                $valCol = $file->value($field->slug);
+            @endphp
+            @if($type == 'integer')
+                <th scope="col">
+                    @if($file->isFK($field->slug))
+                        @php
+                            $fieldchid = App\Models\Fieldchild::find($valCol);
+                        @endphp
+                        {{ $fieldchid->name }}
+                    @else
+                        {{ $valCol }}
+                    @endif
+                </th>
+            @endif
+            @if($type === 'boolean')
+                <th scope="col">
+                    @if($valCol == 1)
+                        دارد
+                    @else
+                        ندارد
+                    @endif
+                </th>
+            @endif
+            @if($type === 'bigint')
+                <th scope="col">
+                    {{ $valCol }}
+                </th>
+            @endif
+            @if( $valCol === null)
+                <th scope="col">
+                    خالی
+                </th>
+            @endif
+            @if(is_string( $valCol ))
+                <th scope="col">
+                    {{ $valCol }}
+                </th>
+            @endif
+            @if (is_array( $valCol ))
+                <th scope="col">
+                    @if($valCol != [])
+                        @foreach (App\Models\Fieldchild::whereIn('id', $valCol)->get() as $fieldchid)
+                            {{ $fieldchid->name }}
+                        @endforeach
+                    @else
+                        مقدار خالی است
+                    @endif
+                </th>
+            @endif
+        @else
             <th scope="col">
-                @if($file->emtiazat != [])
-                    @php
-                        $colMore = $file->pluck($field->slug)->flatten()->toArray();
-                    @endphp
-                    @foreach ($file->emtiazat($colMore) as $emtiyza)
-                        {{ $emtiyza->name }}
-                    @endforeach
-                @else
-                    مقدار خالی است
-                @endif
+                {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}
             </th>
         @endif
 
-        @if($field->slug == 'kabinet')
-            <th scope="col">
-                @if($file->Kabinet()->exists())
-                    {{ ($file->Kabinet->name) }}
-                @else
-                    مقدار خالی است
-                @endif
-            </th>
-        @endif
 
-        @if($field->slug == 'price')
-            <th scope="col"> {{ ($file->price) }} </th>
-        @endif
 
-        @if($field->slug == 'elvator')
-            <th scope="col">
-                @if($file->elvator == 0)
-                    <span>ندارد</span>
-                @else
-                    <span>دارد</span>
-                @endif
-            </th>
-        @endif
 
 
     </div>
