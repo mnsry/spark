@@ -16,12 +16,7 @@ class FileController extends Controller
 
     public function index()
     {
-        if(auth()->id() == 1){
-            $files = File::all();
-        } else {
-            $user = auth()->user();
-            $files = $user->files;
-        }
+        $files = File::all();
 
         return view('file.index',[
             'files' => $files,
@@ -69,12 +64,12 @@ class FileController extends Controller
 
     public function show()
     {
-        //
+        return 'show';
     }
 
     public function edit()
     {
-        //
+        return 'edit';
     }
 
     public function update(Request $request)
@@ -84,6 +79,28 @@ class FileController extends Controller
 
     public function destroy()
     {
-        //
+        return 'destroy';
+    }
+
+    public function like(File $file)
+    {
+        if ($file->like == 0){
+            $file->like = 1;
+        } else {
+            $file->like = 0;
+        }
+        $file->save();
+        return back();
+    }
+
+    public function shekar(File $file)
+    {
+        if ($file->shekar == 0){
+            $file->shekar = 1;
+        } else {
+            $file->shekar = 0;
+        }
+        $file->save();
+        return back();
     }
 }
