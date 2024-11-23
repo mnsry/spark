@@ -13,10 +13,10 @@
         <tbody>
         <tr>
             @foreach($file->category->fields as $field)
+
                 @if ($file->hosCol($field->slug))
                     @php
-                        $value = DB::table('files')->whereId($file->id)->value($field->slug);
-                        $type = $file->type($field->slug);
+                        $value = $file->value($field->slug);
                     @endphp
 
                     @if(is_null( $value ))
@@ -25,49 +25,56 @@
                         </th>
                     @endif
 
-                    @if($type == 'boolean')
-                        @if($value == 1)
-                            دارد
-                        @else
-                            ندارد
-                        @endif
+                    @if(is_string( $value ))
+                        <th scope="col">
+                            {{ $value }}
+                        </th>
                     @endif
 
-                        @if(is_string( $value ))
-                            <th scope="col">
-                                {{ $value }}
-                            </th>
-                        @endif
-
-                        @if(is_numeric( $value ))
-                            <th scope="col">
-                                @if($file->isFK($field->slug))
-                                    {{ DB::table('fieldchilds')->where('id', $value)->value('name') }}
+                    @if(is_numeric( $value ))
+                        @php
+                            $type = $file->type($field->slug);
+                        @endphp
+                        <th scope="col">
+                            @if($file->isFK($field->slug))
+                                {{--                                    @php--}}
+                                {{--                                        $fieldchid = App\Models\Fieldchild::find($value);--}}
+                                {{--                                    @endphp--}}
+                                {{--                                    {{ $fieldchid->name }}--}}
+                            @else
+                                @if($type === 'boolean')
+                                    @if($value == 1)
+                                        دارد
+                                    @else
+                                        ندارد
+                                    @endif
                                 @else
                                     {{ $value }}
                                 @endif
-                            </th>
-                        @endif
-
-                        @if (is_array( $value ))
-                            <th scope="col">
-                                @if($value != [])
-                                    @php
-                                        $fieldchilds = DB::table('fieldchilds')->whereIn('id', $value)->get();
-                                    @endphp
-                                    @foreach ($fieldchilds as $fieldchid)
-                                        {{ $fieldchid->name }}
-                                    @endforeach
-                                @else
-                                    خالی
-                                @endif
-                            </th>
-                        @endif
-                    @else
-                        <th scope="col">
-                            {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}
+                            @endif
                         </th>
+                    @endif
+
+                    @if (is_array( $value ))
+                        <th scope="col">
+                            @if($value != [])
+                                @php
+                                    $fieldchilds = App\Models\Fieldchild::whereIn('id', $value)->get();
+                                @endphp
+                                @foreach ($fieldchilds as $fieldchid)
+                                    {{ $fieldchid->name }}
+                                @endforeach
+                            @else
+                                خالی
+                            @endif
+                        </th>
+                    @endif
+                @else
+                    <th scope="col">
+                        {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}
+                    </th>
                 @endif
+
             @endforeach
         </tr>
         </tbody>

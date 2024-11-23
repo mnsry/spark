@@ -62,9 +62,11 @@ class FileController extends Controller
         return to_route('file.index');
     }
 
-    public function show()
+    public function show(File $file)
     {
-        return 'show';
+        return view('file.show',[
+            'file' => $file
+        ]);
     }
 
     public function edit()
