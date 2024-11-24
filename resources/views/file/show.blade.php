@@ -2,108 +2,42 @@
 
 @section('content')
 
-    <table class="table">
-        <thead>
-        <tr>
-            @foreach ($file->category->fields as $field)
-                <th scope="col">{{ $field->name }}</th>
-            @endforeach
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            @foreach($file->category->fields as $field)
-                @if ($file->hosCol($field->slug))
-                    @php
-                        $value = DB::table('files')->whereId($file->id)->value($field->slug);
-                        $type = $file->type($field->slug);
-                    @endphp
+    <h2>{{ $file->user->name }}<a class="btn" href="tel:{{ $file->user->mobile }}"> {{ $file->user->mobile }} </a></h2>
 
-                    @if(is_null( $value ))
-                        <th scope="col">
-                            خالی
-                        </th>
-                    @endif
+    <div class="alert alert-success" role="alert">
+        {{ $file->category->parent->name }} | {{ $file->category->name }}
+        <div class="float-end">{{ $file->created_at->diffForHumans() }}</div>
+    </div>
 
-                    @if($type == 'boolean')
-                        @if($value == 1)
-                            دارد
-                        @else
-                            ندارد
-                        @endif
-                    @endif
-
-                        @if(is_string( $value ))
-                            <th scope="col">
-                                {{ $value }}
-                            </th>
-                        @endif
-
-                        @if(is_numeric( $value ))
-                            <th scope="col">
-                                @if($file->isFK($field->slug))
-                                    {{ DB::table('fieldchilds')->where('id', $value)->value('name') }}
-                                @else
-                                    {{ $value }}
-                                @endif
-                            </th>
-                        @endif
-
-                        @if (is_array( $value ))
-                            <th scope="col">
-                                @if($value != [])
-                                    @php
-                                        $fieldchilds = DB::table('fieldchilds')->whereIn('id', $value)->get();
-                                    @endphp
-                                    @foreach ($fieldchilds as $fieldchid)
-                                        {{ $fieldchid->name }}
-                                    @endforeach
-                                @else
-                                    خالی
-                                @endif
-                            </th>
-                        @endif
-                    @else
-                        <th scope="col">
-                            {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}
-                        </th>
-                @endif
-            @endforeach
-        </tr>
-        </tbody>
-    </table>
-
-
-    <div class="card">
+    <div class="card mt-3">
         <div class="card-header">
-            <span> اطلاعات مالک </span>
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">{{ $file->user->name}} <span> {{ $file->user->mobile}} </span></h5>
-            <br>
-            <div class="d-flex justify-content-center">
-
-                <form action="{{ route('file.like', $file) }}" method="post">
-                    @CSRF
-                    @method("put")
-                    <button class="btn {{ $file->like == 1 ? 'btn-success' : 'btn-primary' }} mx-3">
-                        LIKE
-                        <span class="badge {{ $file->like == 1 ? 'text-bg-danger' : 'text-bg-success' }} ">{{ $file->like }}</span>
-                    </button>
-                </form>
-
-                <form action="{{ route('file.shekar', $file) }}" method="post">
-                    @CSRF
-                    @method("put")
-                    <button class="btn {{ $file->shekar == 1 ? 'btn-success' : 'btn-primary' }} mx-3">
-                        شکار<span class="badge {{ $file->shekar == 1 ? 'text-bg-danger' : 'text-bg-success' }} ">{{ $file->shekar }}</span>
-                    </button>
-                </form>
-
-                <a href="{{ route('file.show', $file )}}" class="btn btn-primary mx-3">نمایش</a>
-
-                <a href="{{ route('file.edit', $file )}}" class="btn btn-primary mx-3">ویرایش</a>
-
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a href="{{ route('file.index' )}}" class="btn btn-sm mx-1 btn-primary">برگشت</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('file.edit', $file )}}" class="btn btn-sm mx-1 btn-primary">ویرایش</a>
+                </li>
+                <li class="nav-item">
+                    <form action="{{ route('file.like', $file) }}" method="post">
+                        @CSRF
+                        @method("put")
+                        <button class="btn btn-sm mx-1 btn-primary">
+                            لایک
+                            <span class="badge {{ $file->like == 1 ? 'text-bg-danger' : 'text-bg-success' }} ">{{ $file->like }}</span>
+                        </button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <form action="{{ route('file.shekar', $file) }}" method="post">
+                        @CSRF
+                        @method("put")
+                        <button class="btn btn-sm mx-1 btn-primary">
+                            شکار
+                            <span class="badge {{ $file->shekar == 1 ? 'text-bg-danger' : 'text-bg-success' }} ">{{ $file->shekar }}</span>
+                        </button>
+                    </form>
+                </li>
                 <li class="nav-item">
                     <button type="button" class="btn btn-sm mx-1 btn-danger d-none d-sm-block" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $file->id }}">
                         حذف فایل
@@ -132,8 +66,102 @@
                         </div>
                     </div>
                 </li>
-            </div>
+            </ul>
         </div>
     </div>
 
+    <div class="table-responsive mt-3">
+        <table class="table">
+            <thead>
+            <tr>
+                @foreach ($file->category->fields as $field)
+                    <th scope="col">{{ $field->name }}</th>
+                @endforeach
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                @foreach($file->category->fields as $field)
+                    @if ($file->hosCol($field->slug))
+
+                        @php
+                            $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                            $type = $file->type($field->slug);
+                        @endphp
+
+                        @if($type == 'integer')
+                            <th scope="col">
+                                @if($file->isFK($field->slug))
+                                    @if(is_null( $value ))
+                                        فیلد انتخاب نشده
+                                    @else
+                                        {{ DB::table('fieldchilds')->whereId($value)->value('name') }}
+                                    @endif
+                                @else
+                                    @if(is_null( $value ))
+                                        مقدار ثبت نشده
+                                    @else
+                                        {{ $value }}
+                                    @endif
+                                @endif
+                            </th>
+                        @endif
+
+                        @if($type == 'boolean')
+                            <th scope="col">
+                                @if($value == 1)
+                                    دارد
+                                @else
+                                    ندارد
+                                @endif
+                            </th>
+                        @endif
+
+                        @if($type == 'bigint')
+                            <th scope="col">
+                                @if(is_null( $value ))
+                                    مبلغ درج نشده
+                                @else
+                                    {{ $value }}
+                                @endif
+                            </th>
+                        @endif
+
+                        @if($type == 'string')
+                            <th scope="col">
+                                @if(is_null( $value ))
+                                    خالی
+                                @else
+                                    @php
+                                        $val = $file->value($field->slug)
+                                    @endphp
+                                    @if (is_array( $val ))
+                                        @if($field->slug == 'imagemulti')
+                                            عکس ها
+                                        @else
+                                            @if($val == [])
+                                                انتخاب نشده
+                                            @else
+                                                @foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid)
+                                                    {{ $fieldchid->name }}
+                                                @endforeach
+                                            @endif
+                                        @endif
+                                    @else
+                                        {{ $value }}
+                                    @endif
+                                @endif
+                            </th>
+                        @endif
+
+                        @else
+                            <th scope="col">
+                                {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}
+                            </th>
+                    @endif
+                @endforeach
+            </tr>
+            </tbody>
+        </table>
+    </div>
 @endsection

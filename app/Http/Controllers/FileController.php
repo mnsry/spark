@@ -69,9 +69,11 @@ class FileController extends Controller
         ]);
     }
 
-    public function edit()
+    public function edit(File $file)
     {
-        return 'edit';
+        return view('file.edit',[
+            'file' => $file
+        ]);
     }
 
     public function update(Request $request)
