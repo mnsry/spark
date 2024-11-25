@@ -14,13 +14,16 @@
         @foreach($file->category->fields as $field)
             @if($field->form == 'TEXT')
                 <div class="form-floating mt-3">
+                    @php
+                        $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                    @endphp
                     <input
                         type="text"
                         class="form-control @error( $field->slug ) is-invalid @enderror"
                         id="{{ $field->slug }}"
                         placeholder="{{ $field->name }}"
                         name="{{ $field->slug }}"
-                        value="{{ old($field->slug) }}"
+                        value="{{ $value }}"
                         {{ $field->optional == 0 ? 'required' : '' }}
                     >
                     <label for="{{ $field->slug }}">{{ $field->name }}
@@ -33,6 +36,9 @@
 
             @if($field->form == 'TEXTAREA')
                 <div class="form-floating mt-3">
+                    @php
+                        $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                    @endphp
                     <textarea
                         class="form-control @error( $field->slug ) is-invalid @enderror"
                         placeholder="{{ $field->name }}"
@@ -40,7 +46,7 @@
                         name="{{ $field->slug }}"
                         {{ $field->optional == 0 ? 'required' : '' }}
                         style="height: 100px"
-                    >{{ old($field->slug) }}</textarea>
+                    >{{ $value }}</textarea>
                     <label for="{{ $field->slug }}">{{ $field->name }}
                         @if($field->optional == 1)
                             <small class="translate-middle-y badge text-success">(اختیاری)</small>
@@ -51,13 +57,16 @@
 
             @if($field->form == 'NUMBER')
                 <div class="form-floating mt-3">
+                    @php
+                        $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                    @endphp
                     <input
                         type="number"
                         class="form-control @error( $field->slug ) is-invalid @enderror"
                         id="{{ $field->slug }}"
                         placeholder="{{ $field->name }}"
                         name="{{ $field->slug }}"
-                        value="{{ old($field->slug) }}"
+                        value="{{ $value }}"
                         {{ $field->optional == 0 ? 'required' : '' }}
                     >
                     <label for="{{ $field->slug }}">{{ $field->name }}
@@ -70,13 +79,22 @@
 
             @if($field->form == 'SELECT')
                 <div class="form-floating mt-3">
+                    @php
+                        $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                    @endphp
                     <select
                         class="form-select @error( $field->slug ) is-invalid @enderror"
                         id="{{ $field->slug }}"
                         name="{{ $field->slug }}"
                         {{ $field->optional == 0 ? 'required' : '' }}
                     >
-                        <option selected disabled value="{{ old($field->slug) }}">انتخاب کنید</option>
+                        <option selected disabled value="{{ $value }}">
+                            @if(is_null( $value ))
+                                فیلد انتخاب نشده
+                            @else
+                                {{ DB::table('fieldchilds')->whereId($value)->value('name') }}
+                            @endif
+                        </option>
                         @foreach($field->fieldchilds as $fieldchild)
                             @if ($field->field_child_categories == 0)
                                 <option value="{{ $fieldchild->id }}" @selected(old($field->slug) == $fieldchild->id)>
