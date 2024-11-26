@@ -6,8 +6,9 @@
         <p class="lead py-2"><span> اطلاعات ملک </span> - <span class="text-danger"> {{ $file->user->name }} </span></p>
     </div>
 
-    <form action="{{ route('file.store') }}" method="POST">
+    <form action="{{ route('file.update', $file) }}" method="POST">
         @csrf
+        @method('put')
         <input type="hidden" name="category_id" value="{{ $file->category->id }}" />
         <input type="hidden" name="user_id" value="{{ $file->user->id }}" />
 
@@ -92,19 +93,19 @@
                             @if(is_null( $value ))
                                 فیلد انتخاب نشده
                             @else
-                                {{ DB::table('fieldchilds')->whereId($value)->value('name') }}
+                                " {{ DB::table('fieldchilds')->whereId($value)->value('name') }} "
                             @endif
                         </option>
                         @foreach($field->fieldchilds as $fieldchild)
                             @if ($field->field_child_categories == 0)
-                                <option value="{{ $fieldchild->id }}" @selected(old($field->slug) == $fieldchild->id)>
+                                <option value="{{ $fieldchild->id }}" @selected($value == $fieldchild->id)>
                                     {{ $fieldchild->name }}
                                 </option>
                             @endif
                             @if ($field->field_child_categories == 1)
                                 @foreach($fieldchild->categories as $category)
                                     @if($category->id == $category_select->id)
-                                        <option value="{{ $fieldchild->id }}" @selected(old($field->slug) == $fieldchild->id)>
+                                        <option value="{{ $fieldchild->id }}" @selected($value == $fieldchild->id)>
                                             {{ $fieldchild->name }}
                                         </option>
                                     @endif
@@ -130,17 +131,36 @@
                         multiple
                         {{ $field->optional == 0 ? 'required' : '' }}
                     >
-                        <option selected disabled value="{{ old($field->slug) }}">انتخاب کنید</option>
+                        @php
+                            $val = $file->value($field->slug)
+                        @endphp
+                        <option selected disabled>
+                            @if($val == [])
+                                انتخاب نشده
+                            @else
+                                @foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid)
+                                    {{ $fieldchid->name }}
+                                @endforeach
+                            @endif
+                        </option>
                         @foreach($field->fieldchilds as $fieldchild)
                             @if ($field->field_child_categories == 0)
-                                <option value="{{ $fieldchild->id }}" @selected(old($field->slug) == $fieldchild->id)>
+                                <option value="{{ $fieldchild->id }}"
+                                    @if($val != [])
+                                        {{ in_array($fieldchild->id, $val)  ? 'selected' : '' }}
+                                    @endif
+                                >
                                     {{ $fieldchild->name }}
                                 </option>
                             @endif
                             @if ($field->field_child_categories == 1)
                                 @foreach($fieldchild->categories as $category)
                                     @if($category->id == $category_select->id)
-                                        <option value="{{ $fieldchild->id }}" @selected(old($field->slug) == $fieldchild->id)>
+                                        <option value="{{ $fieldchild->id }}"
+                                        @if($val != [])
+                                            {{ in_array($fieldchild->id, $val)  ? 'selected' : '' }}
+                                        @endif
+                                        >
                                             {{ $fieldchild->name }}
                                         </option>
                                     @endif
@@ -157,7 +177,14 @@
             @endif
 
             @if($field->form == 'RADIOBUTTON')
-                <p class="form-check form-check-inline mt-3"> {{ $field->name }}</p><br>
+                <p class="form-check form-check-inline mt-3"> {{ $field->name }}</p>
+                @if($field->optional == 1)
+                    <small class="translate-middle-y badge text-success">(اختیاری)</small>
+                @endif
+                <br>
+                @php
+                    $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                @endphp
                 @foreach($field->fieldchilds as $fieldchild)
                     <div class="form-check form-check-inline">
                         @if ($field->field_child_categories == 0)
@@ -167,7 +194,7 @@
                                 id="{{ $fieldchild->slug }}"
                                 value="{{ $fieldchild->id }}"
                                 name="{{ $field->slug }}"
-                                {{ old($field->slug) ? 'checked' : '' }}
+                                {{ $value == $fieldchild->id ? 'checked' : '' }}
                                 {{ $field->optional == 0 ? 'required' : '' }}
                             >
                         @endif
@@ -180,17 +207,13 @@
                                         id="{{ $fieldchild->slug }}"
                                         value="{{ $fieldchild->id }}"
                                         name="{{ $field->slug }}"
-                                        {{ old($field->slug) ? 'checked' : '' }}
+                                        {{ $value == $fieldchild->id ? 'checked' : '' }}
                                         {{ $field->optional == 0 ? 'required' : '' }}
                                     >
                                 @endif
                             @endforeach
                         @endif
-                        <label class="form-check-label" for="{{ $fieldchild->slug }}">{{ $field->name }}
-                            @if($field->optional == 1)
-                                <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                            @endif
-                        </label>
+                        <label class="form-check-label" for="{{ $fieldchild->slug }}">{{ $fieldchild->name }}</label>
                     </div>
                 @endforeach
                 <br>
@@ -198,13 +221,16 @@
 
             @if($field->form == 'CHECKBOX')
                 <div class="form-check form-switch form-check-inline mt-3">
+                    @php
+                        $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                    @endphp
                     <input
                         type="checkbox"
                         class="form-check-input @error( $field->slug ) is-invalid @enderror"
                         id="{{ $field->slug }}"
                         value="1"
                         name="{{ $field->slug }}"
-                        {{ old($field->slug) ? 'checked' : '' }}
+                        {{ $value == 1 ? 'checked' : '' }}
                     >
                     <label class="form-check-label" for="{{ $field->slug }}">{{ $field->name }}
                         @if($field->optional == 1)
@@ -215,7 +241,14 @@
             @endif
 
             @if($field->form == 'MULTICHECKBOX')
-                <p class="form-check form-check-inline mt-3"> {{ $field->name }}</p><br>
+                <p class="form-check form-check-inline mt-3"> {{ $field->name }}</p>
+                @if($field->optional == 1)
+                    <small class="translate-middle-y badge text-success">(اختیاری)</small>
+                @endif
+                <br>
+                @php
+                    $val = $file->value($field->slug)
+                @endphp
                 @foreach($field->fieldchilds as $fieldchild)
                     <div class="form-check form-check-inline">
                         @if ($field->field_child_categories == 0)
@@ -225,7 +258,9 @@
                                 id="{{ $fieldchild->slug }}"
                                 value="{{ $fieldchild->id }}"
                                 name="{{ $field->slug }}[]"
-                                {{ old($field->slug) ? 'checked' : '' }}
+                                @if($val != [])
+                                    {{ in_array($fieldchild->id, $val)  ? 'checked' : '' }}
+                                @endif
                                 {{ $field->optional == 0 ? 'required' : '' }}
                             >
                         @endif
@@ -238,17 +273,15 @@
                                         id="{{ $fieldchild->slug }}"
                                         value="{{ $fieldchild->id }}"
                                         name="{{ $field->slug }}[]"
-                                        {{ old($field->slug) ? 'checked' : '' }}
+                                        @if($val != [])
+                                            {{ in_array($fieldchild->id, $val)  ? 'checked' : '' }}
+                                        @endif
                                         {{ $field->optional == 0 ? 'required' : '' }}
                                     >
                                 @endif
                             @endforeach
                         @endif
-                        <label class="form-check-label" for="{{ $field->slug }}">{{ $field->name }}
-                            @if($field->optional == 1)
-                                <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                            @endif
-                        </label>
+                        <label class="form-check-label" for="{{ $field->slug }}">{{ $fieldchild->name }}</label>
                     </div>
                 @endforeach
                 <br>
@@ -299,12 +332,12 @@
                             id="{{ $field->slug }}day"
                             name="{{ $field->slug }}day"
                         >
-                            <option selected disabled value="{{ old('takhleyeday') }}">انتخاب روز</option>
+                            <option selected disabled value="{{ $file->takhleyeday }}">" {{ $file->takhleyeday }} "</option>
                             @php
                                 $days = collect([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31])->all();
                             @endphp
                             @foreach($days as $day)
-                                <option value="{{ $day }}" @selected(old('takhleyeday') == $day)>
+                                <option value="{{ $day }}" @selected( $file->takhleyeday  == $day)>
                                     {{ $day }}
                                 </option>
                             @endforeach
@@ -318,12 +351,12 @@
                             id="{{ $field->slug }}month"
                             name="{{ $field->slug }}month"
                         >
-                            <option selected disabled value="{{ old('takhleyemonth') }}">انتخاب ماه</option>
+                            <option selected disabled value="{{ $file->takhleyemonth }}">" {{ $file->takhleyemonth }} "</option>
                             @php
                                 $months = collect(['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','ابان','آذر','دی','بهمن','اسفند',])->all();
                             @endphp
                             @foreach($months as $key=>$month)
-                                <option value="{{ $key+1 }}" @selected(old('takhleyemonth') == $month)>
+                                <option @selected($file->takhleyemonth == $key+1) value="{{ $key+1 }}" >
                                     {{ $month }}
                                 </option>
                             @endforeach

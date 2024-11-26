@@ -139,7 +139,11 @@
             @endif
 
             @if($field->form == 'RADIOBUTTON')
-                <p class="form-check form-check-inline mt-3"> {{ $field->name }}</p><br>
+                <p class="form-check form-check-inline mt-3"> {{ $field->name }}</p>
+                @if($field->optional == 1)
+                    <small class="translate-middle-y badge text-success">(اختیاری)</small>
+                @endif
+                <br>
                 @foreach($field->fieldchilds as $fieldchild)
                     <div class="form-check form-check-inline">
                         @if ($field->field_child_categories == 0)
@@ -168,11 +172,7 @@
                                 @endif
                             @endforeach
                         @endif
-                        <label class="form-check-label" for="{{ $fieldchild->slug }}">{{ $field->name }}
-                            @if($field->optional == 1)
-                                <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                            @endif
-                        </label>
+                        <label class="form-check-label" for="{{ $fieldchild->slug }}">{{ $fieldchild->name }}</label>
                     </div>
                 @endforeach
                 <br>
@@ -197,7 +197,11 @@
             @endif
 
             @if($field->form == 'MULTICHECKBOX')
-                <p class="form-check form-check-inline mt-3"> {{ $field->name }}</p><br>
+                <p class="form-check form-check-inline mt-3"> {{ $field->name }}</p>
+                @if($field->optional == 1)
+                    <small class="translate-middle-y badge text-success">(اختیاری)</small>
+                @endif
+                <br>
                 @foreach($field->fieldchilds as $fieldchild)
                     <div class="form-check form-check-inline">
                         @if ($field->field_child_categories == 0)
@@ -226,11 +230,7 @@
                                 @endif
                             @endforeach
                         @endif
-                        <label class="form-check-label" for="{{ $field->slug }}">{{ $field->name }}
-                            @if($field->optional == 1)
-                                <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                            @endif
-                        </label>
+                        <label class="form-check-label" for="{{ $field->slug }}">{{ $fieldchild->name }}</label>
                     </div>
                 @endforeach
                 <br>
