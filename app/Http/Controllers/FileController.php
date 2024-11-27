@@ -76,14 +76,20 @@ class FileController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, File $file)
     {
-        //
+//        File::find($file->id)->update($request->all());
+        $input = $request->all();
+        $file->fill($input)->save();
+        return view('file.show',[
+            'file' => $file
+        ]);
     }
 
-    public function destroy()
+    public function destroy(File $file)
     {
-        return 'destroy';
+        $file->delete();
+        return to_route('file.index');
     }
 
     public function like(File $file)

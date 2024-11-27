@@ -93,6 +93,9 @@
                                 @endforeach
                             @endif
                         @endforeach
+                        @if($field->optional == 1)
+                            <option value="">بدون انتخاب</option>
+                        @endif
                     </select>
                     <label for="{{ $field->slug }}">{{ $field->name }}
                         @if($field->optional == 1)
@@ -129,6 +132,9 @@
                                 @endforeach
                             @endif
                         @endforeach
+                        @if($field->optional == 1)
+                            <option value="">بدون انتخاب</option>
+                        @endif
                     </select>
                     <label for="{{ $field->slug }}">{{ $field->name }}
                         @if($field->optional == 1)
@@ -175,6 +181,18 @@
                         <label class="form-check-label" for="{{ $fieldchild->slug }}">{{ $fieldchild->name }}</label>
                     </div>
                 @endforeach
+                @if($field->optional == 1)
+                    <div class="form-check form-check-inline">
+                        <input
+                            type="radio"
+                            class="form-check-input"
+                            id="del"
+                            value=""
+                            name="{{ $field->slug }}"
+                        >
+                        <label class="form-check-label" for="del">بدون انتخاب</label>
+                    </div>
+                @endif
                 <br>
             @endif
 
@@ -212,7 +230,6 @@
                                 value="{{ $fieldchild->id }}"
                                 name="{{ $field->slug }}[]"
                                 {{ old($field->slug) ? 'checked' : '' }}
-                                {{ $field->optional == 0 ? 'required' : '' }}
                             >
                         @endif
                         @if ($field->field_child_categories == 1)
@@ -225,7 +242,6 @@
                                         value="{{ $fieldchild->id }}"
                                         name="{{ $field->slug }}[]"
                                         {{ old($field->slug) ? 'checked' : '' }}
-                                        {{ $field->optional == 0 ? 'required' : '' }}
                                     >
                                 @endif
                             @endforeach

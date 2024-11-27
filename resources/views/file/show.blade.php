@@ -136,16 +136,12 @@
                                         $val = $file->value($field->slug)
                                     @endphp
                                     @if (is_array( $val ))
-                                        @if($field->slug == 'imagemulti')
-                                            عکس ها
+                                        @if($val == [] || $val == [null])
+                                            انتخاب نشده
                                         @else
-                                            @if($val == [])
-                                                انتخاب نشده
-                                            @else
-                                                @foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid)
-                                                    {{ $fieldchid->name }}
-                                                @endforeach
-                                            @endif
+                                            @foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid)
+                                                {{ $fieldchid->name }}
+                                            @endforeach
                                         @endif
                                     @else
                                         {{ $value }}

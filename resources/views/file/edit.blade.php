@@ -112,6 +112,9 @@
                                 @endforeach
                             @endif
                         @endforeach
+                        @if(!is_null( $value ) &&  $field->optional == 1)
+                            <option value="">حذف انتخاب</option>
+                        @endif
                     </select>
                     <label for="{{ $field->slug }}">{{ $field->name }}
                         @if($field->optional == 1)
@@ -135,7 +138,7 @@
                             $val = $file->value($field->slug)
                         @endphp
                         <option selected disabled>
-                            @if($val == [])
+                            @if($val == [] || $val == [null])
                                 انتخاب نشده
                             @else
                                 @foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid)
@@ -167,6 +170,13 @@
                                 @endforeach
                             @endif
                         @endforeach
+                        @if($val != [])
+                            @if($val != [null])
+                                @if($field->optional == 1)
+                                    <option value="">حذف انتخاب</option>
+                                @endif
+                            @endif
+                        @endif
                     </select>
                     <label for="{{ $field->slug }}">{{ $field->name }}
                         @if($field->optional == 1)
@@ -216,6 +226,20 @@
                         <label class="form-check-label" for="{{ $fieldchild->slug }}">{{ $fieldchild->name }}</label>
                     </div>
                 @endforeach
+                @if(!is_null( $value ) &&  $field->optional == 1)
+                    <div class="form-check form-check-inline">
+                        <input
+                            type="radio"
+                            class="form-check-input"
+                            id="del"
+                            value=""
+                            name="{{ $field->slug }}"
+                            {{ $value == $fieldchild->id ? 'checked' : '' }}
+                            {{ $field->optional == 0 ? 'required' : '' }}
+                        >
+                        <label class="form-check-label" for="del">حذف انتخاب</label>
+                    </div>
+                @endif
                 <br>
             @endif
 
@@ -224,6 +248,7 @@
                     @php
                         $value = DB::table('files')->whereId($file->id)->value($field->slug);
                     @endphp
+                    <input type="hidden" value="0" name="{{ $field->slug }}">
                     <input
                         type="checkbox"
                         class="form-check-input @error( $field->slug ) is-invalid @enderror"
@@ -249,6 +274,7 @@
                 @php
                     $val = $file->value($field->slug)
                 @endphp
+                    <input type="hidden" value="" name="{{ $field->slug }}[]">
                 @foreach($field->fieldchilds as $fieldchild)
                     <div class="form-check form-check-inline">
                         @if ($field->field_child_categories == 0)
@@ -261,7 +287,6 @@
                                 @if($val != [])
                                     {{ in_array($fieldchild->id, $val)  ? 'checked' : '' }}
                                 @endif
-                                {{ $field->optional == 0 ? 'required' : '' }}
                             >
                         @endif
                         @if ($field->field_child_categories == 1)
@@ -276,7 +301,6 @@
                                         @if($val != [])
                                             {{ in_array($fieldchild->id, $val)  ? 'checked' : '' }}
                                         @endif
-                                        {{ $field->optional == 0 ? 'required' : '' }}
                                     >
                                 @endif
                             @endforeach
