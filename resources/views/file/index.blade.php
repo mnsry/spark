@@ -11,7 +11,7 @@
             <div class="card-body  text-center">
                 <h5 class="card-title">{{ $file->category->parent->name }} | {{ $file->category->name }}</h5>
                 <p class="card-text">
-                    توضیحات : {{ $file->aboute }}
+                    {{ $file->aboute }}
                 </p>
             </div>
             <div class="card-footer">
@@ -19,9 +19,9 @@
                     <li class="nav-item">
                         <a href="{{ route('file.show', $file )}}" class="btn btn-sm mx-1 btn-primary">نمایش</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('file.edit', $file )}}" class="btn btn-sm mx-1 btn-primary">ویرایش</a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{ route('file.edit', $file )}}" class="btn btn-sm mx-1 btn-primary">ویرایش</a>--}}
+{{--                    </li>--}}
                     <li class="nav-item">
                         <form action="{{ route('file.like', $file) }}" method="post">
                             @CSRF
