@@ -11,6 +11,18 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 |--------------------------------------------------------------------------
 */
 Route::get('/', function () {return view('welcome');})->name('welcome');
+Route::get('/dev', function () {
+    $file = \App\Models\File::find(1);
+    foreach($file->category->fields as $field){
+        if($field->form == 'MULTISELECT'){
+            $value = DB::table('files')->whereId($file->id)->value($field->slug);;
+            $val = json_decode($value, true);
+            foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid){
+                dd($fieldchid);
+            }
+        }
+    }
+})->name('dev');
 Route::group(['prefix' => 'admin'], function () { Voyager::routes(); });
 Auth::routes();
 /*

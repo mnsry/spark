@@ -133,7 +133,8 @@
                                     خالی
                                 @else
                                     @php
-                                        $val = $file->value($field->slug)
+                                        $value = DB::table('files')->whereId($file->id)->value($field->slug);;
+                                        $val = json_decode($value, true);
                                     @endphp
                                     @if (is_array( $val ))
                                         @if($val == [] || $val == [null])

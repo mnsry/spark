@@ -135,7 +135,8 @@
                         {{ $field->optional == 0 ? 'required' : '' }}
                     >
                         @php
-                            $val = $file->value($field->slug)
+                            $value = DB::table('files')->whereId($file->id)->value($field->slug);;
+                            $val = json_decode($value, true);
                         @endphp
                         <option selected disabled>
                             @if($val == [] || $val == [null])
@@ -272,7 +273,8 @@
                 @endif
                 <br>
                 @php
-                    $val = $file->value($field->slug)
+                    $value = DB::table('files')->whereId($file->id)->value($field->slug);;
+                    $val = json_decode($value, true);
                 @endphp
                     <input type="hidden" value="" name="{{ $field->slug }}[]">
                 @foreach($field->fieldchilds as $fieldchild)
