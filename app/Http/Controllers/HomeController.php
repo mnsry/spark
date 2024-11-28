@@ -49,7 +49,7 @@ class HomeController extends Controller
     {
         $request->validate([
             'name' => 'required|min:5',
-            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
         $user = User::find(auth()->id());
         if($request->hasFile('avatar')){
