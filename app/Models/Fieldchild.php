@@ -22,7 +22,7 @@ class Fieldchild extends Model
 
     public function scopeParentCategoriesOn(Builder $query)
     {
-        $field = \App\Models\Field::where('field_child_categories', '=', '1')->get();
+        $field = Field::where('field_child_categories', '=', '1')->get();
         return $query->whereBelongsTo($field);
     }
 
