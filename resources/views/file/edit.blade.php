@@ -89,7 +89,7 @@
                         name="{{ $field->slug }}"
                         {{ $field->optional == 0 ? 'required' : '' }}
                     >
-                        <option selected disabled value="{{ $value }}">
+                        <option disabled>
                             @if(is_null( $value ))
                                 فیلد انتخاب نشده
                             @else
@@ -138,7 +138,7 @@
                             $value = DB::table('files')->whereId($file->id)->value($field->slug);;
                             $val = json_decode($value, true);
                         @endphp
-                        <option selected disabled>
+                        <option disabled>
                             @if($val == [] || $val == [null])
                                 انتخاب نشده
                             @else
@@ -235,7 +235,6 @@
                             id="del"
                             value=""
                             name="{{ $field->slug }}"
-                            {{ $value == $fieldchild->id ? 'checked' : '' }}
                             {{ $field->optional == 0 ? 'required' : '' }}
                         >
                         <label class="form-check-label" for="del">حذف انتخاب</label>
