@@ -53,4 +53,9 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     {
         return $this->hasMany(File::class);
     }
+
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'user_id');
+    }
 }

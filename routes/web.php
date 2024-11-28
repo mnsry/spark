@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FileController;
-use App\Models\Field;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
@@ -12,9 +11,8 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 |--------------------------------------------------------------------------
 */
 Route::get('/', function () {return view('welcome');})->name('welcome');
-Route::get('/dev', function () {
-    return "mansory";
-})->name('dev');
+Route::group(['prefix' => 'admin'], function () { Voyager::routes(); });
+Auth::routes();
 /*
 |--------------------------------------------------------------------------
 | Email AND Auth Routes
@@ -23,23 +21,22 @@ Route::get('/dev', function () {
 Route::get('/email/verify', function () {
     return view('auth.verify');
 })->middleware('auth')->name('verification.notice');
-
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $r) {
     $r->fulfill();
     return redirect('/home')->with('status', 'حسابتان تایید شد');
 })->middleware(['auth', 'signed'])->name('verification.verify');
-
 Route::post('/email/verification-notification', function (Request $r) {
     $r->user()->sendEmailVerificationNotification();
     return back()->with('resent', 'Verification link sent ');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-Auth::routes();
-
+/*
+|--------------------------------------------------------------------------
+| Dashboard Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-Route::group(['prefix' => 'admin'], function () { Voyager::routes(); });
-
+Route::get('/user', [HomeController::class, 'user'])->name('user');
+Route::post('/user', [HomeController::class, 'userUpdate'])->name('user.update');
 /*
 |--------------------------------------------------------------------------
 | File Routes

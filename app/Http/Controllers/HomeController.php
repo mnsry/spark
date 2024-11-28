@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
+use App\Models\User;
+use Illuminate\Http\Request;
+
 class HomeController extends Controller
 {
     /**
@@ -21,6 +25,32 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $usersCount = User::count();
+        $usersLast = User::latest()->first();
+        $filesCount = File::count();
+        $filesLast = File::latest()->first();
+        return view('home',[
+            'usersCount' => $usersCount,
+            'usersLast' => $usersLast,
+            'filesCount' => $filesCount,
+            'filesLast' => $filesLast,
+        ]);
+    }
+
+    public function user()
+    {
+        $users = User::all();
+        return view('user',[
+            'users' => $users,
+        ]);
+    }
+
+    public function userUpdate(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|min:5',
+        ]);
+        User::find(Auth()->id())->update($request->all());
+        return back();
     }
 }
