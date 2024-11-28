@@ -27,7 +27,7 @@
     </form>
     <h3 class="mt-3">لیست کاربران</h3>
     <div class="table-responsive mt-3">
-        <table class="table">
+        <table class="table table-sm">
         <thead>
         <tr>
             <th scope="col">نام</th>
