@@ -20,7 +20,13 @@
         <div class="mb-3 row">
             <label for="avatar" class="col-sm-2 col-form-label">آواتار</label>
             <div class="col-sm-10">
-                <input type="file" data-name="avatar" name="avatar">
+                <input
+                    type="file"
+                    class="form-control @error( 'avatar' ) is-invalid @enderror"
+                    id="avatar"
+                    name="avatar"
+                    accept="image/*"
+                >
             </div>
         </div>
         <button class="btn btn-primary w-100 mt-1" type="submit">ویرایش من</button>
