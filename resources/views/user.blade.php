@@ -2,7 +2,7 @@
 
 @section('content')
     <h3>ویرایش  من</h3>
-    <form class="mt-4" method="POST" action="{{ route('user.update') }}">
+    <form class="mt-4" method="POST" action="{{ route('user.update') }}" enctype="multipart/form-data">
         @csrf
         <div class="mb-3 row">
             <label for="mobile" class="col-sm-2 col-form-label">موبایل</label>
@@ -26,21 +26,19 @@
         <button class="btn btn-primary w-100 mt-1" type="submit">ویرایش من</button>
     </form>
     <h3 class="mt-3">لیست کاربران</h3>
-    <table class="table mt-3">
+    <div class="table-responsive mt-3">
+        <table class="table">
         <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">نام</th>
             <th scope="col">سازنده</th>
             <th scope="col">موبایل</th>
-            <th scope="col">تاریخ</th>
         </tr>
         </thead>
         <tbody>
         @foreach ($users as $user)
             <tr>
-                <th scope="row">{{ $user->id }}</th>
-                <td>{{ $user->name }}</td>
+                <th scope="row">{{ $user->name }}</th>
                 <td>
                     @if($user->parent()->exists())
                         {{ $user->parent->name }}
@@ -49,9 +47,9 @@
                     @endif
                 </td>
                 <td>{{ $user->mobile }}</td>
-                <td>{{ $user->created_at->diffForHumans() }}</td>
             </tr>
         @endforeach
         </tbody>
     </table>
+    </div>
 @endsection

@@ -49,8 +49,16 @@ class HomeController extends Controller
     {
         $request->validate([
             'name' => 'required|min:5',
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        User::find(Auth()->id())->update($request->all());
+        $user = User::find(auth()->id());
+        if($request->hasFile('avatar')){
+            $path = $request->file('avatar')->store("users",['disk' => 'public']);
+            $user->avatar = $path;
+        }
+        $user->name = $request->name;
+        $user->save();
+
         return back();
     }
 }
