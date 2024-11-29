@@ -52,5 +52,5 @@
         <button class="btn btn-primary w-100 mt-1" type="submit">ثبت نام</button>
 
     </form>
-    <a class="btn w-100 mt-4" href="{{ route('login') }}">ورود به حساب قبلی</a>
+    <a class="btn w-100 mt-4" href="{{ route('login') }}" onclick="this.disabled=true;this.form.submit();">ورود به حساب قبلی</a>
 @endsection

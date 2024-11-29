@@ -34,7 +34,7 @@
             @enderror
         </div>
 
-        <button class="btn btn-primary w-100 mt-4" type="submit">بعدی</button>
+        <button class="btn btn-primary w-100 mt-4" type="submit" onclick="this.disabled=true;this.form.submit();">بعدی</button>
     </form>
     <br><br>
 @endsection

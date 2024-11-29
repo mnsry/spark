@@ -36,7 +36,7 @@
             </label>
         </div>
 
-        <button class="btn btn-primary w-100 mb-3" type="submit">ورود</button>
+        <button class="btn btn-primary w-100 mb-3" type="submit" onclick="this.disabled=true;this.form.submit();">ورود</button>
 
     </form>
 

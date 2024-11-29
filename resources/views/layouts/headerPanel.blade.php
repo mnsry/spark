@@ -28,7 +28,7 @@
                                     </select>
                                 </div>
                                 <br>
-                                <button class="btn btn-primary w-100 mt-1" type="submit">بعدی</button>
+                                <button class="btn btn-primary w-100 mt-1" type="submit" onclick="this.disabled=true;this.form.submit();">بعدی</button>
                             </form>
                         </div>
                     </div>

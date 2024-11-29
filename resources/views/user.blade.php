@@ -29,7 +29,7 @@
                 >
             </div>
         </div>
-        <button class="btn btn-primary w-100 mt-1" type="submit">ویرایش من</button>
+        <button class="btn btn-primary w-100 mt-1" type="submit" onclick="this.disabled=true;this.form.submit();">ویرایش من</button>
     </form>
     <h3 class="mt-3">لیست کاربران</h3>
     <div class="table-responsive mt-3">

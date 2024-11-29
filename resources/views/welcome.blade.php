@@ -12,7 +12,7 @@
             برای استفاده از سایت لطفا وارد سیستم شوید
         </p>
 
-        <a class="mt-5 btn btn-bd-primary" href="{{ route('login') }}">ورود به سیستم</a>
+        <a class="mt-5 btn btn-bd-primary" href="{{ route('login') }}" onclick="this.disabled=true;this.form.submit();">ورود به سیستم</a>
     </div>
 @endsection
 

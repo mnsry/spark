@@ -18,7 +18,7 @@
             @enderror
         </div>
 
-        <button class="btn btn-primary w-100 mt-1" type="submit">تایید گذرواژه</button>
+        <button class="btn btn-primary w-100 mt-1" type="submit" onclick="this.disabled=true;this.form.submit();">تایید گذرواژه</button>
     </form>
     <a class="btn w-100" href="{{ route('password.request') }}">گذرواژه ام را فراموش کردم</a>
 

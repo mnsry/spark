@@ -37,7 +37,7 @@
             <label for="password-confirm">تکرار گذرواژه جدید</label>
         </div>
 
-        <button class="btn btn-primary w-100 mt-1" type="submit">ذخیره گذرواژه</button>
+        <button class="btn btn-primary w-100 mt-1" type="submit" onclick="this.disabled=true;this.form.submit();">ذخیره گذرواژه</button>
 
     </form>
 

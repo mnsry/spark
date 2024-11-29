@@ -278,6 +278,7 @@
                             class="form-select"
                             id="{{ $field->slug }}day"
                             name="{{ $field->slug }}day"
+                            {{ $field->optional == 0 ? 'required' : '' }}
                         >
                             <option selected disabled value="{{ old('takhleyeday') }}">انتخاب روز</option>
                             @php
@@ -289,7 +290,11 @@ $days = collect([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,
                                 </option>
                             @endforeach
                         </select>
-                        <label for="{{ $field->slug }}">{{ $field->name }}</label>
+                        <label for="{{ $field->slug }}">{{ $field->name }}
+                            @if($field->optional == 1)
+                                <small class="translate-middle-y badge text-success">(اختیاری)</small>
+                            @endif
+                        </label>
                     </div>
 
                     <div class="form-floating w-50 ms-1">
@@ -297,6 +302,7 @@ $days = collect([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,
                             class="form-select"
                             id="{{ $field->slug }}month"
                             name="{{ $field->slug }}month"
+                            {{ $field->optional == 0 ? 'required' : '' }}
                         >
                             <option selected disabled value="{{ old('takhleyemonth') }}">انتخاب ماه</option>
                             @php
@@ -308,12 +314,16 @@ $months = collect(['فروردین','اردیبهشت','خرداد','تیر','م
                                 </option>
                             @endforeach
                         </select>
-                        <label for="{{ $field->slug }}">{{ $field->name }}</label>
+                        <label for="{{ $field->slug }}">{{ $field->name }}
+                            @if($field->optional == 1)
+                                <small class="translate-middle-y badge text-success">(اختیاری)</small>
+                            @endif
+                        </label>
                     </div>
                 </div>
             @endif
         @endforeach
-        <button class="btn btn-primary w-100 mt-3 " type="submit">ثبت</button>
+        <button class="btn btn-primary w-100 mt-3" type="submit">ثبت</button>
     </form>
     <br><br>
 @endsection

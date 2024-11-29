@@ -16,7 +16,7 @@ class FileController extends Controller
 
     public function index()
     {
-        $files = File::all();
+        $files = File::orderBy('id', 'DESC')->get();
 
         return view('file.index',[
             'files' => $files,
