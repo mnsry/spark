@@ -359,12 +359,12 @@
                             {{ $field->optional == 0 ? 'required' : '' }}
                         >
                             <option selected disabled value="">
-                                @if(is_null( $value ))
-                                    فیلد انتخاب نشده
+                                @if(is_null( $file->takhleyeday ))
+                                    " انتخاب نشده "
                                 @else
-                                    " {{ DB::table('fieldchilds')->whereId($value)->value('name') }} "
+                                    " {{ $file->takhleyeday }} "
                                 @endif
-                                " {{ $file->takhleyeday }} "</option>
+                                </option>
                             @php
                                 $days = collect([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31])->all();
                             @endphp
@@ -378,7 +378,8 @@
                             @if($field->optional == 1)
                                 <small class="translate-middle-y badge text-success">(اختیاری)</small>
                             @endif
-                        </label>                    </div>
+                        </label>
+                    </div>
 
                     <div class="form-floating w-50 ms-1">
                         <select
@@ -387,7 +388,13 @@
                             name="{{ $field->slug }}month"
                             {{ $field->optional == 0 ? 'required' : '' }}
                         >
-                            <option selected disabled value="{{ $file->takhleyemonth }}">" {{ $file->takhleyemonth }} "</option>
+                            <option selected disabled value="">
+                                @if(is_null( $file->takhleyemonth ))
+                                    " انتخاب نشده "
+                                @else
+                                    " {{ $file->takhleyemonth }} "
+                                @endif
+                            </option>
                             @php
                                 $months = collect(['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','ابان','آذر','دی','بهمن','اسفند',])->all();
                             @endphp
@@ -401,7 +408,8 @@
                             @if($field->optional == 1)
                                 <small class="translate-middle-y badge text-success">(اختیاری)</small>
                             @endif
-                        </label>                    </div>
+                        </label>
+                    </div>
                 </div>
             @endif
         @endforeach
