@@ -8,7 +8,7 @@
             <ul class="nav flex-column">
                 @can('browse_admin')
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{ route('voyager.dashboard') }}">
+                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{ route('voyager.dashboard') }}" target="_blank">
                             <svg class="bi"><use xlink:href="#house-fill"/></svg>
                             پنل اصلی
                         </a>

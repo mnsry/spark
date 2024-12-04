@@ -161,4 +161,263 @@
             </tbody>
         </table>
     </div>
+
+    @foreach($file->category->fields as $field)
+        @if($field->form == 'TEXT')
+            <div class="form-floating mt-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="{{ $field->slug }}"
+                    placeholder="{{ $field->name }}"
+                    name="{{ $field->slug }}"
+                    value="{{ DB::table('files')->whereId($file->id)->value($field->slug) }}"
+                    disabled
+                >
+                <label for="{{ $field->slug }}">{{ $field->name }}</label>
+            </div>
+        @endif
+
+        @if($field->form == 'TEXTAREA')
+            <div class="form-floating mt-3">
+                <textarea
+                    class="form-control"
+                    placeholder="{{ $field->name }}"
+                    id="{{ $field->slug }}"
+                    name="{{ $field->slug }}"
+                    style="height: 100px"
+                    disabled
+                >{{ DB::table('files')->whereId($file->id)->value($field->slug) }}</textarea>
+                <label for="{{ $field->slug }}">{{ $field->name }}</label>
+            </div>
+        @endif
+
+        @if($field->form == 'NUMBER')
+            <div class="form-floating mt-3">
+                <input
+                    type="number"
+                    class="form-control"
+                    id="{{ $field->slug }}"
+                    placeholder="{{ $field->name }}"
+                    name="{{ $field->slug }}"
+                    value="{{ DB::table('files')->whereId($file->id)->value($field->slug) }}"
+                    disabled
+                >
+                <label for="{{ $field->slug }}">{{ $field->name }}</label>
+            </div>
+        @endif
+
+        @if($field->form == 'SELECT')
+            <div class="form-floating mt-3">
+                @php
+                    $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                @endphp
+                <select
+                    class="form-select"
+                    id="{{ $field->slug }}"
+                    name="{{ $field->slug }}"
+                    disabled
+                >
+                    <option disabled selected>
+                        @if(is_null( $value ))
+                            فیلد انتخاب نشده
+                        @else
+                            " {{ DB::table('fieldchilds')->whereId($value)->value('name') }} "
+                        @endif
+                    </option>
+                </select>
+                <label for="{{ $field->slug }}">{{ $field->name }}</label>
+            </div>
+        @endif
+
+        @if($field->form == 'MULTISELECT')
+            <div class="form-floating mt-3">
+                <select
+                    class="form-select @error( $field->slug ) is-invalid @enderror"
+                    id="{{ $field->slug }}"
+                    name="{{ $field->slug }}[]"
+                    multiple
+                    disabled
+                >
+                    @php
+                        $value = DB::table('files')->whereId($file->id)->value($field->slug);;
+                        $val = json_decode($value, true);
+                    @endphp
+                    <option disabled selected>
+                        @if($val == [] || $val == [null])
+                            انتخاب نشده
+                        @else
+                            @foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid)
+                                {{ $fieldchid->name }}
+                            @endforeach
+                        @endif
+                    </option>
+                </select>
+                <label for="{{ $field->slug }}">{{ $field->name }}</label>
+            </div>
+        @endif
+
+        @if($field->form == 'RADIOBUTTON')
+            <p class="form-check form-check-inline mt-3"> {{ $field->name }}</p>
+            <br>
+            @php
+                $value = DB::table('files')->whereId($file->id)->value($field->slug);
+            @endphp
+            @foreach($field->fieldchilds as $fieldchild)
+                <div class="form-check form-check-inline">
+                        <input
+                            type="radio"
+                            class="form-check-input @error( $field->slug ) is-invalid @enderror"
+                            id="{{ $fieldchild->slug }}"
+                            value="{{ $fieldchild->id }}"
+                            name="{{ $field->slug }}"
+                            {{ $value == $fieldchild->id ? 'checked' : '' }}
+                        >
+                    <label class="form-check-label" for="{{ $fieldchild->slug }}">{{ $fieldchild->name }}</label>
+                </div>
+            @endforeach
+            @if(!is_null( $value ))
+                <div class="form-check form-check-inline">
+                    <input
+                        type="radio"
+                        class="form-check-input"
+                        id="del"
+                        value=""
+                        name="{{ $field->slug }}"
+                    >
+                    <label class="form-check-label" for="del">حذف انتخاب</label>
+                </div>
+            @endif
+            <br>
+        @endif
+
+        @if($field->form == 'CHECKBOX')
+            <div class="form-check form-switch form-check-inline mt-3">
+                <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="{{ $field->slug }}"
+                    name="{{ $field->slug }}"
+                    {{ DB::table('files')->whereId($file->id)->value($field->slug) == 1 ? 'checked' : '' }}
+                    disabled
+                >
+                <label class="form-check-label" for="{{ $field->slug }}">{{ $field->name }}</label>
+            </div>
+        @endif
+
+        @if($field->form == 'MULTICHECKBOX')
+            <p class="form-check form-check-inline mt-3"> {{ $field->name }}</p>
+            @if($field->optional == 1)
+                <small class="translate-middle-y badge text-success">(اختیاری)</small>
+            @endif
+            <br>
+            @php
+                $value = DB::table('files')->whereId($file->id)->value($field->slug);;
+                $val = json_decode($value, true);
+            @endphp
+            <input type="hidden" value="" name="{{ $field->slug }}[]">
+            @foreach($field->fieldchilds as $fieldchild)
+                <div class="form-check form-check-inline">
+                    @if ($field->field_child_categories == 0)
+                        <input
+                            type="checkbox"
+                            class="form-check-input @error( $field->slug ) is-invalid @enderror"
+                            id="{{ $fieldchild->slug }}"
+                            value="{{ $fieldchild->id }}"
+                            name="{{ $field->slug }}[]"
+                        @if($val != [])
+                            {{ in_array($fieldchild->id, $val)  ? 'checked' : '' }}
+                            @endif
+                        >
+                    @endif
+                    @if ($field->field_child_categories == 1)
+                        @foreach($fieldchild->categories as $category)
+                            @if($category->id == $category_select->id)
+                                <input
+                                    type="checkbox"
+                                    class="form-check-input @error( $field->slug ) is-invalid @enderror"
+                                    id="{{ $fieldchild->slug }}"
+                                    value="{{ $fieldchild->id }}"
+                                    name="{{ $field->slug }}[]"
+                                @if($val != [])
+                                    {{ in_array($fieldchild->id, $val)  ? 'checked' : '' }}
+                                    @endif
+                                >
+                            @endif
+                        @endforeach
+                    @endif
+                    <label class="form-check-label" for="{{ $field->slug }}">{{ $fieldchild->name }}</label>
+                </div>
+            @endforeach
+            <br>
+        @endif
+
+        @if($field->form == 'IMAGE')
+            <div class="input-group mt-3">
+                <label class="input-group-text" for="{{ $field->slug }}">{{ $field->name }}</label>
+                <input
+                    type="file"
+                    class="form-control"
+                    id="{{ $field->slug }}"
+                    name="{{ $field->slug }}"
+                    disabled
+                >
+            </div>
+        @endif
+
+        @if($field->form == 'MULTIIMAGE')
+            <div class="input-group mt-3">
+                <label class="input-group-text" for="{{ $field->slug }}">{{ $field->name }}</label>
+                <input
+                    type="file"
+                    class="form-control"
+                    id="{{ $field->slug }}"
+                    name="{{ $field->slug }}[]"
+                    accept="image/*"
+                    disabled
+                >
+            </div>
+        @endif
+
+        @if($field->form == 'DATE')
+            <div class="d-flex text-center mt-3">
+                <div class="form-floating w-50 me-1">
+                    <select
+                        class="form-select"
+                        id="{{ $field->slug }}day"
+                        name="{{ $field->slug }}day"
+                        disabled
+                    >
+                        <option selected disabled>
+                            @if(is_null( $file->takhleyeday ))
+                                " انتخاب نشده "
+                            @else
+                                " {{ $file->takhleyeday }} "
+                            @endif
+                        </option>
+                    </select>
+                    <label for="{{ $field->slug }}">{{ $field->name }} روز </label>
+                </div>
+
+                <div class="form-floating w-50 ms-1">
+                    <select
+                        class="form-select"
+                        id="{{ $field->slug }}month"
+                        name="{{ $field->slug }}month"
+                        disabled
+                    >
+                        <option selected disabled value="">
+                            @if(is_null( $file->takhleyemonth ))
+                                " انتخاب نشده "
+                            @else
+                                " {{ $file->takhleyemonth }} "
+                            @endif
+                        </option>
+                    </select>
+                    <label for="{{ $field->slug }}">{{ $field->name }} ماه </label>
+                </div>
+            </div>
+        @endif
+    @endforeach
+    <br><br>
 @endsection
