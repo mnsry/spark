@@ -49,6 +49,7 @@ Route::post('/email/verification-notification', function (Request $r) {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/user', [HomeController::class, 'user'])->name('user');
 Route::post('/user', [HomeController::class, 'userUpdate'])->name('user.update');
+Route::get('/comision', [HomeController::class, 'comision'])->name('comision');
 /*
 |--------------------------------------------------------------------------
 | File Routes

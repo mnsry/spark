@@ -61,4 +61,9 @@ class HomeController extends Controller
 
         return back();
     }
+
+    public function comision()
+    {
+        return view('comision');
+    }
 }
