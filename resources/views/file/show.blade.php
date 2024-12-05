@@ -164,31 +164,182 @@
 
     @foreach($file->category->fields as $field)
         @if($field->form == 'TEXT')
-            <div class="form-floating mt-3">
-                <input
-                    type="text"
-                    class="form-control"
-                    id="{{ $field->slug }}"
-                    placeholder="{{ $field->name }}"
-                    name="{{ $field->slug }}"
-                    value="{{ DB::table('files')->whereId($file->id)->value($field->slug) }}"
-                    disabled
-                >
-                <label for="{{ $field->slug }}">{{ $field->name }}</label>
+            <div class="table-responsive mt-3">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">{{ $field->name }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                            @if ($file->hosCol($field->slug))
+
+                                @php
+                                    $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                                    $type = $file->type($field->slug);
+                                @endphp
+
+                                @if($type == 'integer')
+                                    <th scope="col">
+                                        @if($file->isFK($field->slug))
+                                            @if(is_null( $value ))
+                                                فیلد انتخاب نشده
+                                            @else
+                                                {{ DB::table('fieldchilds')->whereId($value)->value('name') }}
+                                            @endif
+                                        @else
+                                            @if(is_null( $value ))
+                                                مقدار ثبت نشده
+                                            @else
+                                                {{ $value }}
+                                            @endif
+                                        @endif
+                                    </th>
+                                @endif
+
+                                @if($type == 'boolean')
+                                    <th scope="col">
+                                        @if($value == 1)
+                                            دارد
+                                        @else
+                                            ندارد
+                                        @endif
+                                    </th>
+                                @endif
+
+                                @if($type == 'bigint')
+                                    <th scope="col">
+                                        @if(is_null( $value ))
+                                            مبلغ درج نشده
+                                        @else
+                                            {{ $value }}
+                                        @endif
+                                    </th>
+                                @endif
+
+                                @if($type == 'string')
+                                    <th scope="col">
+                                        @if(is_null( $value ))
+                                            خالی
+                                        @else
+                                            @php
+                                                $value = DB::table('files')->whereId($file->id)->value($field->slug);;
+                                                $val = json_decode($value, true);
+                                            @endphp
+                                            @if (is_array( $val ))
+                                                @if($val == [] || $val == [null])
+                                                    انتخاب نشده
+                                                @else
+                                                    @foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid)
+                                                        {{ $fieldchid->name }}
+                                                    @endforeach
+                                                @endif
+                                            @else
+                                                {{ $value }}
+                                            @endif
+                                        @endif
+                                    </th>
+                                @endif
+
+                            @else
+                                <th scope="col">
+                                    {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}
+                                </th>
+                            @endif
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         @endif
 
         @if($field->form == 'TEXTAREA')
-            <div class="form-floating mt-3">
-                <textarea
-                    class="form-control"
-                    placeholder="{{ $field->name }}"
-                    id="{{ $field->slug }}"
-                    name="{{ $field->slug }}"
-                    style="height: 100px"
-                    disabled
-                >{{ DB::table('files')->whereId($file->id)->value($field->slug) }}</textarea>
-                <label for="{{ $field->slug }}">{{ $field->name }}</label>
+            <div class="table-responsive mt-3">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">{{ $field->name }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        @if ($file->hosCol($field->slug))
+
+                            @php
+                                $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                                $type = $file->type($field->slug);
+                            @endphp
+
+                            @if($type == 'integer')
+                                <th scope="col">
+                                    @if($file->isFK($field->slug))
+                                        @if(is_null( $value ))
+                                            فیلد انتخاب نشده
+                                        @else
+                                            {{ DB::table('fieldchilds')->whereId($value)->value('name') }}
+                                        @endif
+                                    @else
+                                        @if(is_null( $value ))
+                                            مقدار ثبت نشده
+                                        @else
+                                            {{ $value }}
+                                        @endif
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'boolean')
+                                <th scope="col">
+                                    @if($value == 1)
+                                        دارد
+                                    @else
+                                        ندارد
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'bigint')
+                                <th scope="col">
+                                    @if(is_null( $value ))
+                                        مبلغ درج نشده
+                                    @else
+                                        {{ $value }}
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'string')
+                                <th scope="col">
+                                    @if(is_null( $value ))
+                                        خالی
+                                    @else
+                                        @php
+                                            $value = DB::table('files')->whereId($file->id)->value($field->slug);;
+                                            $val = json_decode($value, true);
+                                        @endphp
+                                        @if (is_array( $val ))
+                                            @if($val == [] || $val == [null])
+                                                انتخاب نشده
+                                            @else
+                                                @foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid)
+                                                    {{ $fieldchid->name }}
+                                                @endforeach
+                                            @endif
+                                        @else
+                                            {{ $value }}
+                                        @endif
+                                    @endif
+                                </th>
+                            @endif
+
+                        @else
+                            <th scope="col">
+                                {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}
+                            </th>
+                        @endif
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         @endif
 
@@ -208,174 +359,542 @@
         @endif
 
         @if($field->form == 'SELECT')
-            <div class="form-floating mt-3">
-                @php
-                    $value = DB::table('files')->whereId($file->id)->value($field->slug);
-                @endphp
-                <select
-                    class="form-select"
-                    id="{{ $field->slug }}"
-                    name="{{ $field->slug }}"
-                    disabled
-                >
-                    <option disabled selected>
-                        @if(is_null( $value ))
-                            فیلد انتخاب نشده
+            <div class="table-responsive mt-3">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">{{ $field->name }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        @if ($file->hosCol($field->slug))
+
+                            @php
+                                $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                                $type = $file->type($field->slug);
+                            @endphp
+
+                            @if($type == 'integer')
+                                <th scope="col">
+                                    @if($file->isFK($field->slug))
+                                        @if(is_null( $value ))
+                                            فیلد انتخاب نشده
+                                        @else
+                                            {{ DB::table('fieldchilds')->whereId($value)->value('name') }}
+                                        @endif
+                                    @else
+                                        @if(is_null( $value ))
+                                            مقدار ثبت نشده
+                                        @else
+                                            {{ $value }}
+                                        @endif
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'boolean')
+                                <th scope="col">
+                                    @if($value == 1)
+                                        دارد
+                                    @else
+                                        ندارد
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'bigint')
+                                <th scope="col">
+                                    @if(is_null( $value ))
+                                        مبلغ درج نشده
+                                    @else
+                                        {{ $value }}
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'string')
+                                <th scope="col">
+                                    @if(is_null( $value ))
+                                        خالی
+                                    @else
+                                        @php
+                                            $value = DB::table('files')->whereId($file->id)->value($field->slug);;
+                                            $val = json_decode($value, true);
+                                        @endphp
+                                        @if (is_array( $val ))
+                                            @if($val == [] || $val == [null])
+                                                انتخاب نشده
+                                            @else
+                                                @foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid)
+                                                    {{ $fieldchid->name }}
+                                                @endforeach
+                                            @endif
+                                        @else
+                                            {{ $value }}
+                                        @endif
+                                    @endif
+                                </th>
+                            @endif
+
                         @else
-                            " {{ DB::table('fieldchilds')->whereId($value)->value('name') }} "
+                            <th scope="col">
+                                {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}
+                            </th>
                         @endif
-                    </option>
-                </select>
-                <label for="{{ $field->slug }}">{{ $field->name }}</label>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         @endif
 
         @if($field->form == 'MULTISELECT')
-            <div class="form-floating mt-3">
-                <select
-                    class="form-select @error( $field->slug ) is-invalid @enderror"
-                    id="{{ $field->slug }}"
-                    name="{{ $field->slug }}[]"
-                    multiple
-                    disabled
-                >
-                    @php
-                        $value = DB::table('files')->whereId($file->id)->value($field->slug);;
-                        $val = json_decode($value, true);
-                    @endphp
-                    <option disabled selected>
-                        @if($val == [] || $val == [null])
-                            انتخاب نشده
+            <div class="table-responsive mt-3">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">{{ $field->name }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        @if ($file->hosCol($field->slug))
+
+                            @php
+                                $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                                $type = $file->type($field->slug);
+                            @endphp
+
+                            @if($type == 'integer')
+                                <th scope="col">
+                                    @if($file->isFK($field->slug))
+                                        @if(is_null( $value ))
+                                            فیلد انتخاب نشده
+                                        @else
+                                            {{ DB::table('fieldchilds')->whereId($value)->value('name') }}
+                                        @endif
+                                    @else
+                                        @if(is_null( $value ))
+                                            مقدار ثبت نشده
+                                        @else
+                                            {{ $value }}
+                                        @endif
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'boolean')
+                                <th scope="col">
+                                    @if($value == 1)
+                                        دارد
+                                    @else
+                                        ندارد
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'bigint')
+                                <th scope="col">
+                                    @if(is_null( $value ))
+                                        مبلغ درج نشده
+                                    @else
+                                        {{ $value }}
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'string')
+                                <th scope="col">
+                                    @if(is_null( $value ))
+                                        خالی
+                                    @else
+                                        @php
+                                            $value = DB::table('files')->whereId($file->id)->value($field->slug);;
+                                            $val = json_decode($value, true);
+                                        @endphp
+                                        @if (is_array( $val ))
+                                            @if($val == [] || $val == [null])
+                                                انتخاب نشده
+                                            @else
+                                                @foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid)
+                                                    {{ $fieldchid->name }}
+                                                @endforeach
+                                            @endif
+                                        @else
+                                            {{ $value }}
+                                        @endif
+                                    @endif
+                                </th>
+                            @endif
+
                         @else
-                            @foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid)
-                                {{ $fieldchid->name }}
-                            @endforeach
+                            <th scope="col">
+                                {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}
+                            </th>
                         @endif
-                    </option>
-                </select>
-                <label for="{{ $field->slug }}">{{ $field->name }}</label>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         @endif
 
         @if($field->form == 'RADIOBUTTON')
-            <p class="form-check form-check-inline mt-3"> {{ $field->name }}</p>
-            <br>
-            @php
-                $value = DB::table('files')->whereId($file->id)->value($field->slug);
-            @endphp
-            @foreach($field->fieldchilds as $fieldchild)
-                <div class="form-check form-check-inline">
-                        <input
-                            type="radio"
-                            class="form-check-input @error( $field->slug ) is-invalid @enderror"
-                            id="{{ $fieldchild->slug }}"
-                            value="{{ $fieldchild->id }}"
-                            name="{{ $field->slug }}"
-                            {{ $value == $fieldchild->id ? 'checked' : '' }}
-                        >
-                    <label class="form-check-label" for="{{ $fieldchild->slug }}">{{ $fieldchild->name }}</label>
-                </div>
-            @endforeach
-            @if(!is_null( $value ))
-                <div class="form-check form-check-inline">
-                    <input
-                        type="radio"
-                        class="form-check-input"
-                        id="del"
-                        value=""
-                        name="{{ $field->slug }}"
-                    >
-                    <label class="form-check-label" for="del">حذف انتخاب</label>
-                </div>
-            @endif
-            <br>
+            <div class="table-responsive mt-3">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">{{ $field->name }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        @if ($file->hosCol($field->slug))
+
+                            @php
+                                $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                                $type = $file->type($field->slug);
+                            @endphp
+
+                            @if($type == 'integer')
+                                <th scope="col">
+                                    @if($file->isFK($field->slug))
+                                        @if(is_null( $value ))
+                                            فیلد انتخاب نشده
+                                        @else
+                                            {{ DB::table('fieldchilds')->whereId($value)->value('name') }}
+                                        @endif
+                                    @else
+                                        @if(is_null( $value ))
+                                            مقدار ثبت نشده
+                                        @else
+                                            {{ $value }}
+                                        @endif
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'boolean')
+                                <th scope="col">
+                                    @if($value == 1)
+                                        دارد
+                                    @else
+                                        ندارد
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'bigint')
+                                <th scope="col">
+                                    @if(is_null( $value ))
+                                        مبلغ درج نشده
+                                    @else
+                                        {{ $value }}
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'string')
+                                <th scope="col">
+                                    @if(is_null( $value ))
+                                        خالی
+                                    @else
+                                        @php
+                                            $value = DB::table('files')->whereId($file->id)->value($field->slug);;
+                                            $val = json_decode($value, true);
+                                        @endphp
+                                        @if (is_array( $val ))
+                                            @if($val == [] || $val == [null])
+                                                انتخاب نشده
+                                            @else
+                                                @foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid)
+                                                    {{ $fieldchid->name }}
+                                                @endforeach
+                                            @endif
+                                        @else
+                                            {{ $value }}
+                                        @endif
+                                    @endif
+                                </th>
+                            @endif
+
+                        @else
+                            <th scope="col">
+                                {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}
+                            </th>
+                        @endif
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         @endif
 
         @if($field->form == 'CHECKBOX')
-            <div class="form-check form-switch form-check-inline mt-3">
-                <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="{{ $field->slug }}"
-                    name="{{ $field->slug }}"
-                    {{ DB::table('files')->whereId($file->id)->value($field->slug) == 1 ? 'checked' : '' }}
-                    disabled
-                >
-                <label class="form-check-label" for="{{ $field->slug }}">{{ $field->name }}</label>
+            <div class="table-responsive mt-3">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">{{ $field->name }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        @if ($file->hosCol($field->slug))
+
+                            @php
+                                $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                                $type = $file->type($field->slug);
+                            @endphp
+
+                            @if($type == 'integer')
+                                <th scope="col">
+                                    @if($file->isFK($field->slug))
+                                        @if(is_null( $value ))
+                                            فیلد انتخاب نشده
+                                        @else
+                                            {{ DB::table('fieldchilds')->whereId($value)->value('name') }}
+                                        @endif
+                                    @else
+                                        @if(is_null( $value ))
+                                            مقدار ثبت نشده
+                                        @else
+                                            {{ $value }}
+                                        @endif
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'boolean')
+                                <th scope="col">
+                                    @if($value == 1)
+                                        دارد
+                                    @else
+                                        ندارد
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'bigint')
+                                <th scope="col">
+                                    @if(is_null( $value ))
+                                        مبلغ درج نشده
+                                    @else
+                                        {{ $value }}
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'string')
+                                <th scope="col">
+                                    @if(is_null( $value ))
+                                        خالی
+                                    @else
+                                        @php
+                                            $value = DB::table('files')->whereId($file->id)->value($field->slug);;
+                                            $val = json_decode($value, true);
+                                        @endphp
+                                        @if (is_array( $val ))
+                                            @if($val == [] || $val == [null])
+                                                انتخاب نشده
+                                            @else
+                                                @foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid)
+                                                    {{ $fieldchid->name }}
+                                                @endforeach
+                                            @endif
+                                        @else
+                                            {{ $value }}
+                                        @endif
+                                    @endif
+                                </th>
+                            @endif
+
+                        @else
+                            <th scope="col">
+                                {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}
+                            </th>
+                        @endif
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         @endif
 
         @if($field->form == 'MULTICHECKBOX')
-            <p class="form-check form-check-inline mt-3"> {{ $field->name }}</p>
-            @if($field->optional == 1)
-                <small class="translate-middle-y badge text-success">(اختیاری)</small>
-            @endif
-            <br>
-            @php
-                $value = DB::table('files')->whereId($file->id)->value($field->slug);;
-                $val = json_decode($value, true);
-            @endphp
-            <input type="hidden" value="" name="{{ $field->slug }}[]">
-            @foreach($field->fieldchilds as $fieldchild)
-                <div class="form-check form-check-inline">
-                    @if ($field->field_child_categories == 0)
-                        <input
-                            type="checkbox"
-                            class="form-check-input @error( $field->slug ) is-invalid @enderror"
-                            id="{{ $fieldchild->slug }}"
-                            value="{{ $fieldchild->id }}"
-                            name="{{ $field->slug }}[]"
-                        @if($val != [])
-                            {{ in_array($fieldchild->id, $val)  ? 'checked' : '' }}
-                            @endif
-                        >
-                    @endif
-                    @if ($field->field_child_categories == 1)
-                        @foreach($fieldchild->categories as $category)
-                            @if($category->id == $category_select->id)
-                                <input
-                                    type="checkbox"
-                                    class="form-check-input @error( $field->slug ) is-invalid @enderror"
-                                    id="{{ $fieldchild->slug }}"
-                                    value="{{ $fieldchild->id }}"
-                                    name="{{ $field->slug }}[]"
-                                @if($val != [])
-                                    {{ in_array($fieldchild->id, $val)  ? 'checked' : '' }}
-                                    @endif
-                                >
-                            @endif
-                        @endforeach
-                    @endif
-                    <label class="form-check-label" for="{{ $field->slug }}">{{ $fieldchild->name }}</label>
-                </div>
-            @endforeach
-            <br>
-        @endif
+            <div class="table-responsive mt-3">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">{{ $field->name }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        @if ($file->hosCol($field->slug))
 
-        @if($field->form == 'IMAGE')
-            <div class="input-group mt-3">
-                <label class="input-group-text" for="{{ $field->slug }}">{{ $field->name }}</label>
-                <input
-                    type="file"
-                    class="form-control"
-                    id="{{ $field->slug }}"
-                    name="{{ $field->slug }}"
-                    disabled
-                >
+                            @php
+                                $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                                $type = $file->type($field->slug);
+                            @endphp
+
+                            @if($type == 'integer')
+                                <th scope="col">
+                                    @if($file->isFK($field->slug))
+                                        @if(is_null( $value ))
+                                            فیلد انتخاب نشده
+                                        @else
+                                            {{ DB::table('fieldchilds')->whereId($value)->value('name') }}
+                                        @endif
+                                    @else
+                                        @if(is_null( $value ))
+                                            مقدار ثبت نشده
+                                        @else
+                                            {{ $value }}
+                                        @endif
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'boolean')
+                                <th scope="col">
+                                    @if($value == 1)
+                                        دارد
+                                    @else
+                                        ندارد
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'bigint')
+                                <th scope="col">
+                                    @if(is_null( $value ))
+                                        مبلغ درج نشده
+                                    @else
+                                        {{ $value }}
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'string')
+                                <th scope="col">
+                                    @if(is_null( $value ))
+                                        خالی
+                                    @else
+                                        @php
+                                            $value = DB::table('files')->whereId($file->id)->value($field->slug);;
+                                            $val = json_decode($value, true);
+                                        @endphp
+                                        @if (is_array( $val ))
+                                            @if($val == [] || $val == [null])
+                                                انتخاب نشده
+                                            @else
+                                                @foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid)
+                                                    {{ $fieldchid->name }}
+                                                @endforeach
+                                            @endif
+                                        @else
+                                            {{ $value }}
+                                        @endif
+                                    @endif
+                                </th>
+                            @endif
+
+                        @else
+                            <th scope="col">
+                                {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}
+                            </th>
+                        @endif
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         @endif
 
-        @if($field->form == 'MULTIIMAGE')
-            <div class="input-group mt-3">
-                <label class="input-group-text" for="{{ $field->slug }}">{{ $field->name }}</label>
-                <input
-                    type="file"
-                    class="form-control"
-                    id="{{ $field->slug }}"
-                    name="{{ $field->slug }}[]"
-                    accept="image/*"
-                    disabled
-                >
+        @if($field->form == 'IMAGE')
+            <div class="table-responsive mt-3">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">{{ $field->name }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        @if ($file->hosCol($field->slug))
+
+                            @php
+                                $value = DB::table('files')->whereId($file->id)->value($field->slug);
+                                $type = $file->type($field->slug);
+                            @endphp
+
+                            @if($type == 'integer')
+                                <th scope="col">
+                                    @if($file->isFK($field->slug))
+                                        @if(is_null( $value ))
+                                            فیلد انتخاب نشده
+                                        @else
+                                            {{ DB::table('fieldchilds')->whereId($value)->value('name') }}
+                                        @endif
+                                    @else
+                                        @if(is_null( $value ))
+                                            مقدار ثبت نشده
+                                        @else
+                                            {{ $value }}
+                                        @endif
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'boolean')
+                                <th scope="col">
+                                    @if($value == 1)
+                                        دارد
+                                    @else
+                                        ندارد
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'bigint')
+                                <th scope="col">
+                                    @if(is_null( $value ))
+                                        مبلغ درج نشده
+                                    @else
+                                        {{ $value }}
+                                    @endif
+                                </th>
+                            @endif
+
+                            @if($type == 'string')
+                                <th scope="col">
+                                    @if(is_null( $value ))
+                                        خالی
+                                    @else
+                                        @php
+                                            $value = DB::table('files')->whereId($file->id)->value($field->slug);;
+                                            $val = json_decode($value, true);
+                                        @endphp
+                                        @if (is_array( $val ))
+                                            @if($val == [] || $val == [null])
+                                                انتخاب نشده
+                                            @else
+                                                @foreach (DB::table('fieldchilds')->whereIn('id', $val)->get() as $fieldchid)
+                                                    {{ $fieldchid->name }}
+                                                @endforeach
+                                            @endif
+                                        @else
+                                            {{ $value }}
+                                        @endif
+                                    @endif
+                                </th>
+                            @endif
+
+                        @else
+                            <th scope="col">
+                                {{ $file->takhleyeday }} / {{ $file->takhleyemonth }}
+                            </th>
+                        @endif
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         @endif
 
