@@ -10,7 +10,7 @@
 
     <div class="bg-body-tertiary p-5 rounded mt-3">
         <h1>فایل های موجود</h1>
-        <p> آخرین فایل » {{ $filesLast->created_at->diffForHumans() }} </p>
+{{--        <p> آخرین فایل » {{ $filesLast->created_at->diffForHumans() }} </p>--}}
         <a class="btn btn-lg btn-primary" href="{{ route('file.index') }}" role="button">تعداد » {{ $filesCount }} </a>
     </div>
 
