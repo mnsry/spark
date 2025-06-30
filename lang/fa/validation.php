@@ -220,6 +220,7 @@ return [
         'link' => 'لینک',
         'mobile_number' => 'شماره تماس',
         'work_number' => 'شماره تماس ثابت',
+        'number' => 'عدد',
 
     ],
 

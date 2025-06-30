@@ -49,6 +49,17 @@
             <label for="password-confirm">تکرار گذرواژه</label>
         </div>
 
+        <div class="form-floating mt-1">
+            <input type="number" class="form-control @error('number') is-invalid @enderror" id="number"
+                   name="number" placeholder="number">
+            <label for="number">عدد 6271 را وارد کنید</label>
+            @error('number')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+
         <button class="btn btn-primary w-100 mt-1" type="submit">ثبت نام</button>
 
     </form>
