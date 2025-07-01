@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FileController;
@@ -12,7 +13,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 Route::get('/', function () {return view('welcome');})->name('welcome');
 Route::get('/dev', function () {
-    return random_int(1, 80);
+    return "dev";
 })->name('dev');
 Route::group(['prefix' => 'admin'], function () { Voyager::routes(); });
 Auth::routes();
@@ -41,6 +42,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/user', [HomeController::class, 'user'])->name('user');
 Route::post('/user', [HomeController::class, 'userUpdate'])->name('user.update');
 Route::get('/comision', [HomeController::class, 'comision'])->name('comision');
+Route::get('/search', [HomeController::class, 'search'])->name('search');
+Route::get('/search/select', [HomeController::class, 'searchSelect'])->name('search.select');
+Route::post('/search/find', [HomeController::class, 'searchFind'])->name('search.find');
 /*
 |--------------------------------------------------------------------------
 | File Routes

@@ -2,9 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+
 class Category extends \TCG\Voyager\Models\Category
 {
     protected $perPage = 50;
+
+    public function files()
+    {
+        return $this->hasMany(File::class)
+            ->orderBy('created_at', 'DESC');
+    }
 
     public function fields()
     {

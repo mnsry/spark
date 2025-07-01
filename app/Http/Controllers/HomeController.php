@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\File;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -60,6 +61,29 @@ class HomeController extends Controller
         $user->save();
 
         return back();
+    }
+
+    public function search()
+    {
+        return view('search.index');
+    }
+
+    public function searchSelect()
+    {
+        $category_select = Category::find( request('category_id') );
+
+        return view('search.select', [
+            'category_select' => $category_select,
+        ]);
+    }
+
+    public function searchFind()
+    {
+        $category_select = Category::find( request('category_id') );
+
+        return view('search.find', [
+            'category_select' => $category_select,
+        ]);
     }
 
     public function comision()
