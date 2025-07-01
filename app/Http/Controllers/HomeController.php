@@ -51,6 +51,7 @@ class HomeController extends Controller
         $request->validate([
             'name' => 'required|min:5',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'mobile' => ['digits:11', 'unique:users,mobile,' . auth()->id()],
         ]);
         $user = User::find(auth()->id());
         if($request->hasFile('avatar')){
@@ -58,6 +59,7 @@ class HomeController extends Controller
             $user->avatar = $path;
         }
         $user->name = $request->name;
+        $user->mobile = $request->mobile;
         $user->save();
 
         return back();

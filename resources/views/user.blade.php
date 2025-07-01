@@ -7,9 +7,14 @@
         <div class="mb-3 row">
             <label for="mobile" class="col-sm-2 col-form-label">موبایل</label>
             <div class="col-sm-10">
-                <input type="text" readonly class="form-control-plaintext" id="mobile" value="{{ Auth::user()->mobile }}">
+                <input id="mobile" type="number" class="form-control @error('mobile') is-invalid @enderror"
+                       name="mobile" value="{{ Auth::user()->mobile }}"  placeholder="mobile">
+                @error('mobile')
+                    <p class=""><strong>{{ $message }}</strong></p>
+                @enderror
             </div>
         </div>
+
         <div class="mb-3 row">
             <label for="name" class="col-sm-2 col-form-label">نام و نام خانوادگی</label>
             <div class="col-sm-10">
@@ -17,6 +22,7 @@
                        name="name" value="{{ Auth::user()->name }}"  placeholder="name">
             </div>
         </div>
+
         <div class="mb-3 row">
             <label for="avatar" class="col-sm-2 col-form-label">آواتار</label>
             <div class="col-sm-10">
