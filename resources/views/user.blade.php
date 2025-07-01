@@ -2,9 +2,9 @@
 
 @section('content')
     <h3>ویرایش  من</h3>
-    <form class="mt-4" method="POST" action="{{ route('user.update') }}" enctype="multipart/form-data">
+    <form class="mt-3" method="POST" action="{{ route('user.update') }}" enctype="multipart/form-data">
         @csrf
-        <div class="mb-3 row">
+        <div class="mb-2 row">
             <label for="mobile" class="col-sm-2 col-form-label">موبایل</label>
             <div class="col-sm-10">
                 <input id="mobile" type="number" class="form-control @error('mobile') is-invalid @enderror"
@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class="mb-3 row">
+        <div class="mb-2 row">
             <label for="name" class="col-sm-2 col-form-label">نام و نام خانوادگی</label>
             <div class="col-sm-10">
                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="mb-3 row">
+        <div class="mb-2 row">
             <label for="avatar" class="col-sm-2 col-form-label">آواتار</label>
             <div class="col-sm-10">
                 <input
@@ -35,8 +35,10 @@
                 >
             </div>
         </div>
-        <button class="btn btn-primary w-100 mt-1" type="submit" onclick="this.disabled=true;this.form.submit();">ویرایش من</button>
+        <button class="btn btn-primary w-100 mt-2" type="submit" onclick="this.disabled=true;this.form.submit();">ویرایش من</button>
     </form>
+    <hr>
+
     <h3 class="mt-3">لیست کاربران</h3>
     <div class="table-responsive mt-3">
         <table class="table table-sm">
