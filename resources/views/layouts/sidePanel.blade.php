@@ -8,14 +8,14 @@
             <ul class="nav flex-column">
                 @can('browse_admin')
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{ route('voyager.dashboard') }}" target="_blank">
+                        <a class="nav-link d-flex align-items-center gap-2" aria-current="page" href="{{ route('voyager.dashboard') }}" target="_blank">
                             <svg class="bi"><use xlink:href="#house-fill"/></svg>
                             پنل اصلی
                         </a>
                     </li>
                 @endcan
                 <li class="nav-item">
-                    <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{ route('home') }}">
+                    <a class="nav-link d-flex align-items-center gap-2" aria-current="page" href="{{ route('home') }}">
                         <svg class="bi"><use xlink:href="#house-fill"/></svg>
                         داشبورد
                     </a>
@@ -48,7 +48,7 @@
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2" href="{{ route('comision') }}">
                         <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
-                        محاسبه کمسیون
+                        درباره ما
                     </a>
                 </li>
             </ul>
