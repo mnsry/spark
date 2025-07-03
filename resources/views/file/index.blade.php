@@ -26,10 +26,10 @@
                         توضیحات:
                         <span>
                     @if( $file->aboute == null)
-                                ندارد
-                            @else
-                                {{ $file->aboute }}
-                            @endif
+                        ندارد
+                    @else
+                        {{ $file->aboute }}
+                    @endif
                 </span>
                     </p>
                 </div>

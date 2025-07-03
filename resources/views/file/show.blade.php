@@ -78,10 +78,7 @@
                     <hr>
                 @endforeach
             </div>
-            <ul class="nav nav-pills justify-content-center mt-2">
-                <li class="nav-item">
-                    <a href="{{ route('file.index' )}}" class="btn btn-sm mx-1 btn-primary">برگشت</a>
-                </li>
+            <ul class="nav nav-pills justify-content-center">
                 <li class="nav-item">
                     <a href="{{ route('file.edit', $file )}}" class="btn btn-sm mx-1 btn-primary">ویرایش</a>
                 </li>
@@ -143,5 +140,6 @@
             </ul>
         </div>
     </div>
+    <a href="{{ route('file.index' )}}" class="btn btn-primary w-100 mt-3">برگشت</a>
     <br><br>
 @endsection
