@@ -75,6 +75,7 @@
                             <p class="mb-0 opacity-75">{{ $file->takhleyeday }} / {{ $file->takhleyemonth }}</p>
                         @endif
                     </div>
+                    <hr>
                 @endforeach
             </div>
             <ul class="nav nav-pills justify-content-center mt-2">
