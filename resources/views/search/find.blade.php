@@ -4,7 +4,7 @@
         <h5 class="text-primary">{{ $category_select->parent->name }} | {{ $category_select->name }}</h5>
     </div>
     @foreach ($category_select->files as $file)
-        <div class="card mt-2">
+        <div class="card pt-2">
             <div class="card-header">
                 {{ $file->user->name }}
                 <div class="float-end">
