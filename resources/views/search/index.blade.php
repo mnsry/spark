@@ -5,11 +5,9 @@
         <h2 class="text-primary">شروع جستجو</h2>
         <p class="lead py-2">انتخاب کنید</p>
     </div>
-
     <div class="form-group">
         <form action="{{ route('search.select') }}">
             <div class="form-group">
-
                 <select class="form-select" name="category_id" aria-label="category_id">
                     @php
                         $categories = \App\Models\Category::whereNull('parent_id')->orderBy('order', 'ASC')->get();

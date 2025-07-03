@@ -2,7 +2,7 @@
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-success dropdown-toggle d-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#createModalSearch">
-                نمایش
+                نمایش فایل
             </button>
             <div class="modal fade" id="createModalSearch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
