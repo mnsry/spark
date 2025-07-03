@@ -1,4 +1,4 @@
-<div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+<div class="sidebar border border-right col-md-3 col-lg-2 p-0">
     <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="sidebarMenuLabel">املاک جرقه</h5>
@@ -6,10 +6,19 @@
         </div>
         <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
             <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2" disabled>
+                        <img src="{{ Voyager::image(Auth::user()->avatar) }}" class="rounded" width="40px" alt="{{ Auth::user()->name }}">
+                        {{ Auth::user()->name }}
+                    </a>
+                </li>
+            </ul>
+            <hr>
+            <ul class="nav flex-column">
                 @can('browse_admin')
                     <li class="nav-item">
                         <a class="nav-link d-flex align-items-center gap-2" aria-current="page" href="{{ route('voyager.dashboard') }}" target="_blank">
-                            <svg class="bi"><use xlink:href="#house-fill"/></svg>
+                            <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg>
                             پنل اصلی
                         </a>
                     </li>
@@ -43,8 +52,6 @@
                         جستجو
                     </a>
                 </li>
-            </ul>
-            <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2" href="{{ route('comision') }}">
                         <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
@@ -52,7 +59,7 @@
                     </a>
                 </li>
             </ul>
-            <hr class="my-3">
+            <hr>
             <ul class="nav flex-column mb-auto">
                 <li class="nav-item">
                     <a class="nav-link d-flex align-items-center gap-2" href="#"
@@ -65,6 +72,7 @@
                     </form>
                 </li>
             </ul>
+            <br>
         </div>
     </div>
 </div>

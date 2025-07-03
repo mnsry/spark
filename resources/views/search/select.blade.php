@@ -18,17 +18,16 @@
             <label for="category">انتخاب ملک</label>
         </div>
 
-        <div class="form-floating mt-3">
-            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                   name="name" value="{{ old('name') }}" placeholder="name">
-            <label for="name">قیمت</label>
-            @error('name')
-            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-            @enderror
-        </div>
+{{--        <div class="form-floating mt-3">--}}
+{{--            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"--}}
+{{--                   name="name" value="{{ old('name') }}" placeholder="name">--}}
+{{--            <label for="name">قیمت</label>--}}
+{{--            @error('name')--}}
+{{--            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>--}}
+{{--            @enderror--}}
+{{--        </div>--}}
 
-        <button class="btn btn-primary w-100 mt-4" type="submit" onclick="this.disabled=true;this.form.submit();">بعدی
-        </button>
+        <button class="btn btn-primary w-100 mt-4" type="submit">بعدی</button>
     </form>
     <br><br>
 @endsection

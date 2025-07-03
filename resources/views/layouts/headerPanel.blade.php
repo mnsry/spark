@@ -1,10 +1,8 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <img src="{{ Voyager::image(Auth::user()->avatar) }}" class="rounded" width="50px" alt="{{ Auth::user()->name }}">
-
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-success dropdown-toggle d-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#createModalSearch">
-                جستجو
+                نمایش
             </button>
             <div class="modal fade" id="createModalSearch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -34,7 +32,6 @@
             </div>
         </div>
     </div>
-
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle d-flex align-items-center gap-1" data-bs-toggle="modal" data-bs-target="#createModal">
