@@ -25,13 +25,9 @@
                         placeholder="{{ $field->name }}"
                         name="{{ $field->slug }}"
                         value="{{ old($field->slug) }}"
-                        {{ $field->optional == 0 ? 'required' : '' }}
+                        required
                     >
-                    <label for="{{ $field->slug }}">{{ $field->name }}
-                        @if($field->optional == 1)
-                            <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                        @endif
-                    </label>
+                    <label for="{{ $field->slug }}">{{ $field->name }}</label>
                 </div>
                 <p class="pt-2">عنوان را بنویسید</p>
             @endif
@@ -43,14 +39,10 @@
                     placeholder="{{ $field->name }}"
                     id="{{ $field->slug }}"
                     name="{{ $field->slug }}"
-                    {{ $field->optional == 0 ? 'required' : '' }}
+                    required
                     style="height: 100px"
                 >{{ old($field->slug) }}</textarea>
-                    <label for="{{ $field->slug }}">{{ $field->name }}
-                        @if($field->optional == 1)
-                            <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                        @endif
-                    </label>
+                    <label for="{{ $field->slug }}">{{ $field->name }}</label>
                 </div>
                     <p class="pt-2">توضیحات را بنویسید</p>
             @endif
@@ -64,13 +56,9 @@
                         placeholder="{{ $field->name }}"
                         name="{{ $field->slug }}"
                         value="{{ old($field->slug) }}"
-                        {{ $field->optional == 0 ? 'required' : '' }}
+                        required
                     >
-                    <label for="{{ $field->slug }}">{{ $field->name }}
-                        @if($field->optional == 1)
-                            <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                        @endif
-                    </label>
+                    <label for="{{ $field->slug }}">{{ $field->name }}</label>
                 </div>
                     <p class="pt-2">عدد دلخواه را وارد کنید</p>
             @endif
@@ -81,7 +69,7 @@
                         class="form-select @error( $field->slug ) is-invalid @enderror"
                         id="{{ $field->slug }}"
                         name="{{ $field->slug }}"
-                        {{ $field->optional == 0 ? 'required' : '' }}
+                        required
                     >
                         <option selected disabled value="{{ old($field->slug) }}">انتخاب کنید</option>
                         @foreach($field->fieldchilds as $fieldchild)
@@ -101,11 +89,7 @@
                             @endif
                         @endforeach
                     </select>
-                    <label for="{{ $field->slug }}">{{ $field->name }}
-                        @if($field->optional == 1)
-                            <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                        @endif
-                    </label>
+                    <label for="{{ $field->slug }}">{{ $field->name }}</label>
                 </div>
                     <p class="pt-2">یکی را انتخاب کنید</p>
             @endif
@@ -118,7 +102,7 @@
                         id="{{ $field->slug }}"
                         name="{{ $field->slug }}[]"
                         multiple
-                        {{ $field->optional == 0 ? 'required' : '' }}
+                        required
                     >
                         <option selected disabled value="{{ old($field->slug) }}">انتخاب کنید</option>
                         @foreach($field->fieldchilds as $fieldchild)
@@ -138,20 +122,13 @@
                             @endif
                         @endforeach
                     </select>
-                    <label for="{{ $field->slug }}">{{ $field->name }}
-                        @if($field->optional == 1)
-                            <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                        @endif
-                    </label>
+                    <label for="{{ $field->slug }}">{{ $field->name }}</label>
                 </div>
                     <p class="pt-2">یک یا چند مورد را انتخاب کنید</p>
             @endif
 
             @if($field->form == 'RADIOBUTTON')
                 <p class="form-check form-check-inline mt-3"> {{ $field->name }}</p>
-                @if($field->optional == 1)
-                    <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                @endif
                 <br>
                 @foreach($field->fieldchilds as $fieldchild)
                     <div class="form-check form-check-inline">
@@ -198,20 +175,13 @@
                         name="{{ $field->slug }}"
                         {{ old($field->slug) ? 'checked' : '' }}
                     >
-                    <label class="form-check-label" for="{{ $field->slug }}">{{ $field->name }}
-                        @if($field->optional == 1)
-                            <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                        @endif
-                    </label>
+                    <label class="form-check-label" for="{{ $field->slug }}">{{ $field->name }}</label>
                 </div>
                     <p class="pt-2">با خاموش و روشن میزان صفر و یک را انتخاب کنید</p>
             @endif
 
             @if($field->form == 'MULTICHECKBOX')
                 <p class="form-check form-check-inline mt-3"> {{ $field->name }}</p>
-                @if($field->optional == 1)
-                    <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                @endif
                 <br>
                 @foreach($field->fieldchilds as $fieldchild)
                     <div class="form-check form-check-inline">
