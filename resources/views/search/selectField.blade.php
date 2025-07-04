@@ -1,17 +1,21 @@
 @extends('layouts.panel')
 @section('content')
-
-    <div class="pt-2 text-center">
-        <h2 class="text-primary">{{ $category_select->parent->name }} - {{ $category_select->name }}</h2>
-        <p class="lead py-2"><span> اطلاعات ملک </span> - <span class="text-primary"> {{ $user->name }} </span></p>
+    <div class="py-2 text-center">
+        <h5 class=""> جستجو ... </h5>
+        <h5 class="text-primary">{{ $category_select->parent->name }} > {{ $category_select->name }} > {{ $field->name }}</h5>
     </div>
     <div class="form-group">
-        <form action="{{ route('file.store') }}" method="POST">
-        @csrf
-        <input type="hidden" name="category_id" value="{{ $category_select->id }}" />
-        <input type="hidden" name="user_id" value="{{ $user->id }}" />
-
-        @foreach($category_select->fields as $field)
+        <form action="{{ route('search.find') }}">
+            <input
+                type="hidden"
+                name="category_id"
+                value="{{ $category_select->id }}"
+            >
+            <input
+                type="hidden"
+                name="field_id"
+                value="{{ $field->id }}"
+            >
             @if($field->form == 'TEXT')
                 <div class="form-floating mt-3">
                     <input
@@ -29,24 +33,26 @@
                         @endif
                     </label>
                 </div>
+                <p class="pt-2">عنوان را بنویسید</p>
             @endif
 
             @if($field->form == 'TEXTAREA')
                 <div class="form-floating mt-3">
-                    <textarea
-                        class="form-control @error( $field->slug ) is-invalid @enderror"
-                        placeholder="{{ $field->name }}"
-                        id="{{ $field->slug }}"
-                        name="{{ $field->slug }}"
-                        {{ $field->optional == 0 ? 'required' : '' }}
-                        style="height: 100px"
-                    >{{ old($field->slug) }}</textarea>
+                <textarea
+                    class="form-control @error( $field->slug ) is-invalid @enderror"
+                    placeholder="{{ $field->name }}"
+                    id="{{ $field->slug }}"
+                    name="{{ $field->slug }}"
+                    {{ $field->optional == 0 ? 'required' : '' }}
+                    style="height: 100px"
+                >{{ old($field->slug) }}</textarea>
                     <label for="{{ $field->slug }}">{{ $field->name }}
                         @if($field->optional == 1)
                             <small class="translate-middle-y badge text-success">(اختیاری)</small>
                         @endif
                     </label>
                 </div>
+                    <p class="pt-2">توضیحات را بنویسید</p>
             @endif
 
             @if($field->form == 'NUMBER')
@@ -66,6 +72,7 @@
                         @endif
                     </label>
                 </div>
+                    <p class="pt-2">عدد دلخواه را وارد کنید</p>
             @endif
 
             @if($field->form == 'SELECT')
@@ -100,6 +107,7 @@
                         @endif
                     </label>
                 </div>
+                    <p class="pt-2">یکی را انتخاب کنید</p>
             @endif
 
             @if($field->form == 'MULTISELECT')
@@ -136,6 +144,7 @@
                         @endif
                     </label>
                 </div>
+                    <p class="pt-2">یک یا چند مورد را انتخاب کنید</p>
             @endif
 
             @if($field->form == 'RADIOBUTTON')
@@ -176,6 +185,7 @@
                     </div>
                 @endforeach
                 <br>
+                    <p class="pt-2">یک گزینه را انتخاب کنید</p>
             @endif
 
             @if($field->form == 'CHECKBOX')
@@ -194,6 +204,7 @@
                         @endif
                     </label>
                 </div>
+                    <p class="pt-2">با خاموش و روشن میزان صفر و یک را انتخاب کنید</p>
             @endif
 
             @if($field->form == 'MULTICHECKBOX')
@@ -232,99 +243,11 @@
                     </div>
                 @endforeach
                 <br>
+                    <p class="pt-2">چندتا را انتخاب کنید</p>
             @endif
 
-            @if($field->form == 'IMAGE')
-                <div class="input-group mt-3">
-                    <label class="input-group-text" for="{{ $field->slug }}">{{ $field->name }}
-                        @if($field->optional == 1)
-                            <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                        @endif
-                    </label>
-                    <input
-                        type="file"
-                        class="form-control @error( $field->slug ) is-invalid @enderror"
-                        id="{{ $field->slug }}"
-                        name="{{ $field->slug }}"
-                        accept="image/*"
-                        {{ $field->optional == 0 ? 'required' : '' }}
-                    >
-                </div>
-            @endif
-
-            @if($field->form == 'MULTIIMAGE')
-                    <div class="input-group mt-3">
-                        <label class="input-group-text" for="{{ $field->slug }}">{{ $field->name }}
-                            @if($field->optional == 1)
-                                <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                            @endif
-                        </label>
-                        <input
-                            type="file"
-                            class="form-control @error( $field->slug ) is-invalid @enderror"
-                            id="{{ $field->slug }}"
-                            name="{{ $field->slug }}[]"
-                            accept="image/*"
-                            {{ $field->optional == 0 ? 'required' : '' }}
-                            multiple
-                        >
-                    </div>
-            @endif
-
-            @if($field->form == 'DATE')
-                <div class="d-flex text-center mt-3">
-                    <div class="form-floating w-50 me-1">
-                        <select
-                            class="form-select"
-                            id="{{ $field->slug }}day"
-                            name="{{ $field->slug }}day"
-                            {{ $field->optional == 0 ? 'required' : '' }}
-                        >
-                            <option selected disabled value="{{ old('takhleyeday') }}">انتخاب روز</option>
-                            @php
-$days = collect([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31])->all();
-                            @endphp
-                            @foreach($days as $day)
-                                <option value="{{ $day }}" @selected(old('takhleyeday') == $day)>
-                                    {{ $day }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <label for="{{ $field->slug }}">{{ $field->name }}
-                            @if($field->optional == 1)
-                                <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                            @endif
-                        </label>
-                    </div>
-
-                    <div class="form-floating w-50 ms-1">
-                        <select
-                            class="form-select"
-                            id="{{ $field->slug }}month"
-                            name="{{ $field->slug }}month"
-                            {{ $field->optional == 0 ? 'required' : '' }}
-                        >
-                            <option selected disabled value="{{ old('takhleyemonth') }}">انتخاب ماه</option>
-                            @php
-$months = collect(['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','ابان','آذر','دی','بهمن','اسفند',])->all();
-                            @endphp
-                            @foreach($months as $key=>$month)
-                                <option value="{{ $key+1 }}" @selected(old('takhleyemonth') == $month)>
-                                    {{ $month }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <label for="{{ $field->slug }}">{{ $field->name }}
-                            @if($field->optional == 1)
-                                <small class="translate-middle-y badge text-success">(اختیاری)</small>
-                            @endif
-                        </label>
-                    </div>
-                </div>
-            @endif
-        @endforeach
-        <button class="btn btn-primary w-100 mt-3" type="submit">ثبت</button>
-    </form>
+            <button class="btn btn-primary w-100 pt-2" type="submit">نمایش</button>
+        </form>
     </div>
     <br><br>
 @endsection

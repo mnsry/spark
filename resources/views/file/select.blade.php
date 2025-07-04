@@ -4,8 +4,8 @@
         <h2 class="text-primary">{{ $category_select->name }}</h2>
         <p class="lead py-2">ثبت نوع ملک و نام کاربر</p>
     </div>
-
-    <form action="{{ route('file.create') }}">
+    <div class="form-group">
+        <form action="{{ route('file.create') }}">
 
         <div class="form-floating">
             <select class="form-select" id="category" name="category_id">
@@ -36,5 +36,6 @@
 
         <button class="btn btn-primary w-100 mt-4" type="submit" onclick="this.disabled=true;this.form.submit();">بعدی</button>
     </form>
+    </div>
     <br><br>
 @endsection

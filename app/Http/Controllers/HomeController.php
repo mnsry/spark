@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Field;
 use App\Models\File;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -79,13 +80,38 @@ class HomeController extends Controller
         ]);
     }
 
-    public function searchFind()
+    public function searchShowFields()
     {
         $category_select = Category::find( request('category_id') );
 
-        return view('search.find', [
+        return view('search.showFields', [
             'category_select' => $category_select,
         ]);
+    }
+
+    public function searchSelectField()
+    {
+        $category_select = Category::find( request('category_id') );
+        $field_select = Field::find( request('field_id') );
+
+        return view('search.selectField', [
+            'category_select' => $category_select,
+            'field' => $field_select,
+        ]);
+    }
+
+    public function searchFind(Request $request)
+    {
+        $category_select = Category::find( request('category_id') );
+        $field_select = Field::find( request('field_id') );
+        dd($request);
+
+        // And Select Fields
+
+//        return view('search.find', [
+//            'category_select' => $category_select,
+//            // Select By Fields
+//        ]);
     }
 
     public function comision()

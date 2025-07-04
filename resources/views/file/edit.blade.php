@@ -5,8 +5,8 @@
         <h2 class="text-primary">{{ $file->category->parent->name }} - {{ $file->category->name }}</h2>
         <p class="lead py-2"><span> اطلاعات ملک </span> - <span class="text-primary"> {{ $file->user->name }} </span></p>
     </div>
-
-    <form action="{{ route('file.update', $file) }}" method="POST">
+    <div class="form-group">
+        <form action="{{ route('file.update', $file) }}" method="POST">
         @csrf
         @method('put')
         <input type="hidden" name="category_id" value="{{ $file->category->id }}" />
@@ -415,5 +415,6 @@
         @endforeach
         <button class="btn btn-primary w-100 mt-3" type="submit">ثبت</button>
     </form>
+    </div>
     <br><br>
 @endsection

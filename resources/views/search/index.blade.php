@@ -2,9 +2,10 @@
 
 @section('content')
     <div class="pt-2 text-center">
-        <h2 class="text-primary">شروع جستجو</h2>
-        <p class="lead py-2">انتخاب کنید</p>
+        <h5 class="text-primary">شروع جستجو</h5>
+        <p class="lead py-2">جزییات جستجو...</p>
     </div>
+
     <div class="form-group">
         <form action="{{ route('search.select') }}">
             <div class="form-group">

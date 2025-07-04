@@ -44,7 +44,9 @@ Route::post('/user', [HomeController::class, 'userUpdate'])->name('user.update')
 Route::get('/comision', [HomeController::class, 'comision'])->name('comision');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/search/select', [HomeController::class, 'searchSelect'])->name('search.select');
-Route::post('/search/find', [HomeController::class, 'searchFind'])->name('search.find');
+Route::get('/search/show-fields', [HomeController::class, 'searchShowFields'])->name('search.show.fields');
+Route::get('/search/select-field', [HomeController::class, 'searchSelectField'])->name('search.select.field');
+Route::get('/search/find', [HomeController::class, 'searchFind'])->name('search.find');
 /*
 |--------------------------------------------------------------------------
 | File Routes
