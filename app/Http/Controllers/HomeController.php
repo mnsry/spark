@@ -104,15 +104,6 @@ class HomeController extends Controller
     {
         $category_select = Category::find( request('category_id') );
         $field_select = Field::find( request('field_id') );
-
-        if ($field_select->form == 'TEXT'){
-            $files = File::orderBy('id', 'DESC')->get();
-            return view('search.find', [
-                'category_select' => $category_select,
-                'field' => $field_select,
-                'files' => $files,
-            ]);
-        }
         if ($field_select->form == 'NUMBER'){
             $files = File::orderBy('id', 'DESC')->get();
             return view('search.find', [
@@ -137,24 +128,7 @@ class HomeController extends Controller
                 'files' => $files,
             ]);
         }
-        if ($field_select->form == 'RADIOBUTTON'){
-            $files = File::orderBy('id', 'DESC')->get();
-            return view('search.find', [
-                'category_select' => $category_select,
-                'field' => $field_select,
-                'files' => $files,
-            ]);
-        }
         if ($field_select->form == 'CHECKBOX'){
-            $files = File::orderBy('id', 'DESC')->get();
-            return view('search.find', [
-                'category_select' => $category_select,
-                'field' => $field_select,
-                'files' => $files,
-
-            ]);
-        }
-        if ($field_select->form == 'MULTICHECKBOX'){
             $files = File::orderBy('id', 'DESC')->get();
             return view('search.find', [
                 'category_select' => $category_select,
