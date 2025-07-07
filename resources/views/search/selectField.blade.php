@@ -60,15 +60,30 @@
                     >
                     <label for="{{ $field->slug }}">{{ $field->name }}</label>
                 </div>
-                    <p class="pt-2">عدد دلخواه را وارد کنید</p>
+                    <p class="pt-2">عدد کمتر را وارد کنید</p>
+                <div class="form-floating mt-3">
+                    <input
+                        type="number"
+                        class="form-control @error( $field->slug.'two' ) is-invalid @enderror"
+                        id="{{ $field->slug.'two' }}"
+                        placeholder="{{ $field->name }}"
+                        name="{{ $field->slug.'two' }}"
+                        value="{{ old($field->slug.'two') }}"
+                        required
+                    >
+                    <label for="{{ $field->slug.'two' }}">{{ $field->name }}</label>
+                </div>
+                <p class="pt-2">عدد بیشتر را وارد کنید</p>
             @endif
 
             @if($field->form == 'SELECT')
                 <div class="form-floating mt-3">
                     <select
                         class="form-select @error( $field->slug ) is-invalid @enderror"
+                        style="height: 100px"
                         id="{{ $field->slug }}"
-                        name="{{ $field->slug }}"
+                        name="{{ $field->slug }}[]"
+                        multiple
                         required
                     >
                         <option selected disabled value="{{ old($field->slug) }}">انتخاب کنید</option>
@@ -214,6 +229,51 @@
                 @endforeach
                 <br>
                     <p class="pt-2">چندتا را انتخاب کنید</p>
+            @endif
+
+            @if($field->form == 'DATE')
+                <div class="d-flex text-center mt-3">
+                    <div class="form-floating w-50 me-1">
+                        <select
+                            class="form-select"
+                            id="{{ $field->slug }}day"
+                            name="{{ $field->slug }}day"
+                            {{ $field->optional == 0 ? 'required' : '' }}
+                        >
+                            <option selected disabled value="{{ old('takhleyeday') }}">انتخاب روز</option>
+                            @php
+                                $days = collect([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31])->all();
+                            @endphp
+                            @foreach($days as $day)
+                                <option value="{{ $day }}" @selected(old('takhleyeday') == $day)>
+                                    {{ $day }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <label for="{{ $field->slug }}">{{ $field->name }}</label>
+                    </div>
+
+                    <div class="form-floating w-50 ms-1">
+                        <select
+                            class="form-select"
+                            id="{{ $field->slug }}month"
+                            name="{{ $field->slug }}month"
+                            {{ $field->optional == 0 ? 'required' : '' }}
+                        >
+                            <option selected disabled value="{{ old('takhleyemonth') }}">انتخاب ماه</option>
+                            @php
+                                $months = collect(['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','ابان','آذر','دی','بهمن','اسفند',])->all();
+                            @endphp
+                            @foreach($months as $key=>$month)
+                                <option value="{{ $key+1 }}" @selected(old('takhleyemonth') == $month)>
+                                    {{ $month }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <label for="{{ $field->slug }}">{{ $field->name }}</label>
+                    </div>
+                </div>
+                <p class="pt-2">تاریخ تخلیه را وارد کنید</p>
             @endif
 
             <button class="btn btn-primary w-100 pt-2" type="submit">نمایش</button>

@@ -44,7 +44,6 @@ class LoginController extends Controller
         $request->validate([
             $this->username() => 'required|string',
             'password' => 'required|string',
-            'number' => 'required|integer|size:6271',
         ]);
     }
 }

@@ -28,17 +28,6 @@
             @enderror
         </div>
 
-        <div class="form-floating mt-1">
-            <input type="number" class="form-control @error('number') is-invalid @enderror" id="number"
-                   name="number" placeholder="number">
-            <label for="number">عدد 6271 را وارد کنید</label>
-            @error('number')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-        </div>
-
         <div class="form-check text-start my-3">
             <input class="form-check-input" type="checkbox" name="remember" value="remember-me"
                    id="flexCheckDefault" {{ old('remember') ? 'checked' : '' }} >

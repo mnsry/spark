@@ -105,36 +105,25 @@ class HomeController extends Controller
         $category_select = Category::find( request('category_id') );
         $field_select = Field::find( request('field_id') );
         if ($field_select->form == 'NUMBER'){
-            $files = File::orderBy('id', 'DESC')->get();
-            return view('search.find', [
-                'category_select' => $category_select,
-                'field' => $field_select,
-                'files' => $files,
-            ]);
-        }
-        if ($field_select->form == 'SELECT'){
-            $files = File::orderBy('id', 'DESC')->get();
-            return view('search.find', [
-                'category_select' => $category_select,
-                'field' => $field_select,
-                'files' => $files,
-            ]);
-        }
-        if ($field_select->form == 'MULTISELECT'){
-            $files = File::orderBy('id', 'DESC')->get();
-            return view('search.find', [
-                'category_select' => $category_select,
-                'field' => $field_select,
-                'files' => $files,
-            ]);
-        }
-        if ($field_select->form == 'CHECKBOX'){
-            $files = File::orderBy('id', 'DESC')->get();
-            return view('search.find', [
-                'category_select' => $category_select,
-                'field' => $field_select,
-                'files' => $files,
 
+            $files = File::orderBy('id', 'DESC')->get();
+            return view('search.find', [
+                'category_select' => $category_select,
+                'field' => $field_select,
+                'files' => $files,
+            ]);
+        }
+        if ($field_select->form == 'SELECT' ||
+            $field_select->form == 'MULTISELECT' ||
+            $field_select->form == 'CHECKBOX' ||
+            $field_select->form == 'MULTICHECKBOX')
+        {
+
+            $files = File::orderBy('id', 'DESC')->get();
+            return view('search.find', [
+                'category_select' => $category_select,
+                'field' => $field_select,
+                'files' => $files,
             ]);
         }
         return view('search.error', [
