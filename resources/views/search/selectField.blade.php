@@ -106,7 +106,7 @@
                     </select>
                     <label for="{{ $field->slug }}">{{ $field->name }}</label>
                 </div>
-                    <p class="pt-2">یکی را انتخاب کنید</p>
+                <p class="pt-2">یک یا چند مورد را انتخاب کنید</p>
             @endif
 
             @if($field->form == 'MULTISELECT')
