@@ -106,7 +106,7 @@ class HomeController extends Controller
         $field_select = Field::find( request('field_id') );
         if ($field_select->form == 'NUMBER'){
 
-            $files = File::orderBy('id', 'DESC')->get();
+            $files = $category_select->files()->where($field_select->slug = 2800)->get();
             return view('search.find', [
                 'category_select' => $category_select,
                 'field' => $field_select,
