@@ -21,7 +21,6 @@
     <p class="text-center"> آزمایشگاه زبان های برنامه نویسی</p>
 
     <form method="get" action="{{ route('answer') }}">
-        <input type="hidden" name="old" value="0">
 
         <div class="form-floating">
             <input class="form-control" id="answer" value="0" disabled>

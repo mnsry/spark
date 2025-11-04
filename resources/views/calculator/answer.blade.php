@@ -23,10 +23,18 @@
     <form method="get" action="{{ route('answer') }}">
         <input type="hidden" name="old" value="{{ $number }}">
 
-        <div class="form-floating">
-            <input class="form-control" id="answer" disabled value="{{ $number }} {{ $eq }} ">
-            <label for="answer">جواب</label>
-        </div>
+        @isset($old)
+            <div class="form-floating">
+                <input class="form-control" id="answer" disabled value="{{ $old }} {{ $eq }} {{ $number }} ">
+                <label for="answer">جواب</label>
+            </div>
+
+            @else
+            <div class="form-floating">
+                <input class="form-control" id="answer" disabled value="{{ $number }} {{ $eq }}">
+                <label for="answer">جواب</label>
+            </div>
+        @endisset
 
         <div class="form-floating mt-3">
             <input type="number" class="form-control" name="number" id="number">
