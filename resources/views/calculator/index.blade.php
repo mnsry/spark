@@ -24,7 +24,6 @@
     <a class=" btn w-100" href="{{ route('welcome') }}"> آزمایشگاه زبان های برنامه نویسی</a>
 
     <form class="mt-4" method="get" action="{{ route('calculator') }}">
-        @csrf
 
         <div class="form-floating">
             <input id="number1" type="number" class="form-control @error('number1') is-invalid @enderror"
@@ -50,7 +49,7 @@
 
         <div class="form-check text-start my-3">
             <label class="form-check-label" for="flexCheckDefault">
-                مقدار = 
+                مقدار =
             </label>
         </div>
 
