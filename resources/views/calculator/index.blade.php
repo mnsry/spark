@@ -21,31 +21,34 @@
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 
 <main class="form-signin w-100 m-auto">
-    <a class=" btn w-100" href="{{ route('welcome') }}"> آزمایشگاه زبان های برنامه نویسی</a>
+    <p class="text-center" href=#> آزمایشگاه زبان های برنامه نویسی</p>
 
     <form class="mt-4" method="get" action="{{ route('calculator') }}">
 
         <div class="form-floating">
-            <input id="number1" type="number" class="form-control @error('number1') is-invalid @enderror"
-                   name="number1" value="{{ old('number1') }}" placeholder="1~9">
-            <label for="number1">عدد را وارد کنید</label>
-            @error('number1')
+            <input id="number" type="number" class="form-control @error('number') is-invalid @enderror"
+                   name="number" value="{{ old('number') }}" placeholder="1~9">
+            <label for="number">عدد را وارد کنید</label>
+            @error('number')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
             @enderror
         </div>
 
-        <button class="btn btn-primary w-25 mb-3" type="submit"> ضرب </button>
-        <button class="btn btn-primary w-25 mb-3" type="submit"> تقسیم </button>
-        <button class="btn btn-primary w-25 mb-3" type="submit"> جمع </button>
-        <button class="btn btn-primary w-25 mb-3" type="submit"> تفریق </button>
+        <div class=" mt-4">
+            <input class="btn btn-danger w-100 mb-3" type="submit" value="*">
+            <input class="btn btn-warning w-100 mb-3" type="submit" value="/">
+            <input class="btn btn-success w-100 mb-3" type="submit" value="+">
+            <input class="btn btn-primary w-100 mb-3" type="submit" value="-">
+        </div>
+
 
 
         <div class="form-floating mt-1">
-            <input type="number" class="form-control @error('number2') is-invalid @enderror" id="number2"
-                   name="number2" placeholder="Answer" disabled>
-            <label for="number2">جواب</label>
+            <input type="number" class="form-control" id="answer"
+                   name="answer" placeholder="Answer" disabled>
+            <label for="answer">جواب</label>
         </div>
 
     </form>
