@@ -12,9 +12,9 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 |--------------------------------------------------------------------------
 */
 Route::get('/', function () {return view('welcome');})->name('welcome');
-Route::get('/dev', function () {
-    return "test";
-})->name('dev');
+Route::get('/cal', function () {
+    return view('calculator.index');
+})->name('cal');
 Route::group(['prefix' => 'admin'], function () { Voyager::routes(); });
 Auth::routes();
 /*
