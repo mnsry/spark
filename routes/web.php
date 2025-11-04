@@ -13,7 +13,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 Route::get('/', function () {return view('welcome');})->name('welcome');
 Route::get('/dev', function () {
-    return "dev";
+    return "hi";
 })->name('dev');
 Route::group(['prefix' => 'admin'], function () { Voyager::routes(); });
 Auth::routes();
