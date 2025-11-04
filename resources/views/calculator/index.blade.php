@@ -21,16 +21,16 @@
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 
 <main class="form-signin w-100 m-auto">
-    <a class=" btn w-100" href="{{ route('welcome') }}">کارگزاری املاک جرقه</a>
+    <a class=" btn w-100" href="{{ route('welcome') }}"> آزمایشگاه زبان های برنامه نویسی</a>
 
-    <form class="mt-4" method="POST" action="{{ route('login') }}">
+    <form class="mt-4" method="get" action="{{ route('calculator') }}">
         @csrf
 
         <div class="form-floating">
-            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                   name="email" value="{{ old('email') }}" placeholder="name@example.com">
-            <label for="email">آدرس ایمیل</label>
-            @error('email')
+            <input id="number1" type="number" class="form-control @error('number1') is-invalid @enderror"
+                   name="number1" value="{{ old('number1') }}" placeholder="name@example.com">
+            <label for="number1">number 1</label>
+            @error('number1')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
@@ -38,10 +38,10 @@
         </div>
 
         <div class="form-floating mt-1">
-            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
-                   name="password" placeholder="Password">
-            <label for="password">گذرواژه</label>
-            @error('password')
+            <input type="number" class="form-control @error('number2') is-invalid @enderror" id="number2"
+                   name="number2" placeholder="Password">
+            <label for="number2">number 2</label>
+            @error('number2')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
@@ -49,19 +49,14 @@
         </div>
 
         <div class="form-check text-start my-3">
-            <input class="form-check-input" type="checkbox" name="remember" value="remember-me"
-                   id="flexCheckDefault" {{ old('remember') ? 'checked' : '' }} >
             <label class="form-check-label" for="flexCheckDefault">
-                مرا بیاد داشته باش
+                مقدار = 
             </label>
         </div>
 
-        <button class="btn btn-primary w-100 mb-3" type="submit" onclick="this.disabled=true;this.form.submit();">ورود</button>
+        <button class="btn btn-primary w-100 mb-3" type="submit">">حساب</button>
 
     </form>
-
-    <a class="btn w-100" href="{{ route('password.request') }}">گذرواژه ام را فراموش کردم</a>
-    <a class="btn w-100" href="{{ route('register') }}">ایجاد یک حساب جدید</a>
 
 </main>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
