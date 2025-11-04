@@ -27,8 +27,8 @@
 
         <div class="form-floating">
             <input id="number1" type="number" class="form-control @error('number1') is-invalid @enderror"
-                   name="number1" value="{{ old('number1') }}" placeholder="name@example.com">
-            <label for="number1">number 1</label>
+                   name="number1" value="{{ old('number1') }}" placeholder="1~9">
+            <label for="number1">عدد را وارد کنید</label>
             @error('number1')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
@@ -36,24 +36,17 @@
             @enderror
         </div>
 
+        <button class="btn btn-primary w-25 mb-3" type="submit"> ضرب </button>
+        <button class="btn btn-primary w-25 mb-3" type="submit"> تقسیم </button>
+        <button class="btn btn-primary w-25 mb-3" type="submit"> جمع </button>
+        <button class="btn btn-primary w-25 mb-3" type="submit"> تفریق </button>
+
+
         <div class="form-floating mt-1">
             <input type="number" class="form-control @error('number2') is-invalid @enderror" id="number2"
-                   name="number2" placeholder="Password">
-            <label for="number2">number 2</label>
-            @error('number2')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
+                   name="number2" placeholder="Answer" disabled>
+            <label for="number2">جواب</label>
         </div>
-
-        <div class="form-check text-start my-3">
-            <label class="form-check-label" for="flexCheckDefault">
-                مقدار =
-            </label>
-        </div>
-
-        <button class="btn btn-primary w-100 mb-3" type="submit">">حساب</button>
 
     </form>
 
