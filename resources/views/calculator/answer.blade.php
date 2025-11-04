@@ -21,10 +21,10 @@
     <p class="text-center"> آزمایشگاه زبان های برنامه نویسی</p>
 
     <form method="get" action="{{ route('answer') }}">
-        <input type="hidden" name="old" value="0">
+        <input type="hidden" name="old" value="{{ $number }}">
 
         <div class="form-floating">
-            <input class="form-control" id="answer" value="0" disabled>
+            <input class="form-control" id="answer" disabled value="{{ $number }} {{ $eq }} ">
             <label for="answer">جواب</label>
         </div>
 

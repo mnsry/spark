@@ -4,6 +4,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\CalculatorController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
@@ -14,6 +15,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 Route::get('/', function () {return view('welcome');})->name('welcome');
 
 Route::get('/cal', function () {return view('calculator.index');})->name('calculator');
+Route::get('/answer', [CalculatorController::class, 'answer'])->name('answer');
 
 Route::group(['prefix' => 'admin'], function () { Voyager::routes(); });
 Auth::routes();
