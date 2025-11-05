@@ -25,7 +25,7 @@
 
         @isset($old)
             <div class="form-floating">
-                <input class="form-control" id="answer" disabled value="{{ $old }} {{ $eq }} {{ $number }} ">
+                <input class="form-control" id="answer" disabled value="{{ $old }} {{ $eq }} {{ $number }} = {{ $out }} ">
                 <label for="answer">جواب</label>
             </div>
 
@@ -34,19 +34,30 @@
                 <input class="form-control" id="answer" disabled value="{{ $number }} {{ $eq }}">
                 <label for="answer">جواب</label>
             </div>
+
+            <div class="form-floating mt-3">
+                <input type="number" class="form-control" name="number" id="number">
+                <label for="number">عدد را وارد کنید</label>
+            </div>
         @endisset
 
-        <div class="form-floating mt-3">
-            <input type="number" class="form-control" name="number" id="number">
-            <label for="number">عدد را وارد کنید</label>
-        </div>
-
-        <div class=" mt-4">
-            <input class="btn btn-danger w-100 mb-2" type="submit" name="mul" value="ضرب">
-            <input class="btn btn-warning w-100 mb-2" type="submit" name="div" value="تقسیم">
-            <input class="btn btn-success w-100 mb-2" type="submit" name="add" value="جمع">
-            <input class="btn btn-primary w-100 mb-2" type="submit" name="sub" value="تفریق">
-        </div>
+        @if ($eq === "*" && $old === null)
+            <div class=" mt-4">
+                <input class="btn btn-danger w-100 mb-2" type="submit" name="mul" value="مساوی">
+            </div>
+        @elseif($eq === "/" && $old === null)
+            <div class=" mt-4">
+                <input class="btn btn-warning w-100 mb-2" type="submit" name="div" value="مساوی">
+            </div>
+        @elseif($eq === "+" && $old === null)
+            <div class=" mt-4">
+                <input class="btn btn-success w-100 mb-2" type="submit" name="add" value="مساوی">
+            </div>
+        @elseif($eq === "-" && $old === null)
+            <div class=" mt-4">
+                <input class="btn btn-primary w-100 mb-2" type="submit" name="sub" value="مساوی">
+            </div>
+        @endif
 
     </form>
 

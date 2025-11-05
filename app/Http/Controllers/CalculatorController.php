@@ -12,34 +12,42 @@ class CalculatorController extends Controller
             'number' => 'required|min:1|max:12',
         ]);
 
+        $old = $request->old;
+        $number = $request->number;
+
         if ($request->has('mul')) {
+
             return view('calculator.answer', [
-                'old' => $request->old,
-                'number' => $request->number,
+                'old' => $old,
+                'number' => $number,
+                'out' => $old*$number,
                 'eq' => '*',
             ]);
         }
 
         if ($request->has('div')) {
             return view('calculator.answer', [
-                'old' => $request->old,
-                'number' => $request->number,
+                'old' => $old,
+                'number' => $number,
+                'out' => $old/$number,
                 'eq' => '/',
             ]);
         }
 
         if ($request->has('add')) {
             return view('calculator.answer', [
-                'old' => $request->old,
-                'number' => $request->number,
+                'old' => $old,
+                'number' => $number,
+                'out' => $old+$number,
                 'eq' => '+',
             ]);
         }
 
         if ($request->has('sub')) {
             return view('calculator.answer', [
-                'old' => $request->old,
-                'number' => $request->number,
+                'old' => $old,
+                'number' => $number,
+                'out' => $old-$number,
                 'eq' => '-',
             ]);
         }
